@@ -1,3 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .text-title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    @apply text-white;
+  }
+  .text-body {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    @apply text-white-dimmed;
+  }
+  .text-primary {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    @apply text-white-dimmed;
+  }
+  .text-secondary {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    @apply text-white-dimmed;
+  }
+  .text-description {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    @apply text-white-dimmed;
+  }
+}
