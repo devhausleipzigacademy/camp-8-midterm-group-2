@@ -36,3 +36,37 @@
     @apply text-white-dimmed;
   }
 }
+
+@layer utilities {
+  #input-login {
+    position: absolute;
+    width: 335px;
+    height: 48px;
+    left: 20px;
+    top: 20px;
+    border-radius: 6px;
+    @apply bg-dark-light text-white-dimmed text-body;
+  }
+  #input-login:focused {
+    border: 2px solid;
+    @apply border-white-dimmed-heavy text-white-dimmed text-body;
+  }
+  #input-login:filled {
+    border: 2px solid;
+    @apply border-white-dimmed-heavy text-white text-body;
+  }
+
+  #search_bar {
+    position: absolute;
+    width: 335px;
+    height: 48px;
+    left: 20px;
+    top: 100px;
+    border-radius: 100px;
+    @apply bg-dark-light;
+  }
+  #search_bar:active {
+    border: 2px solid;
+    @apply border-white-dimmed-heavy;
+  }
+}
