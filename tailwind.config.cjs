@@ -6,10 +6,12 @@ module.exports = {
       default: ["Inter"],
     },
     colors: {
-      dark: "#1C1C27",
-      "dark-light": "#363740",
+      dark: {
+        DEFAULT: "#1C1C27",
+        light: "#363740",
+      },
       white: {
-        default: "#FFFFFF",
+        DEFAULT: "#FFFFFF",
         dimmed: "rgba(255, 255, 255, 0.4)",
         "dimmed-heavy": "rgba(255, 255, 255, 0.2)",
       },
