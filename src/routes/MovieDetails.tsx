@@ -5,6 +5,7 @@ type props = {
     movieId: string;
   };
 };
+
 export async function loadMovieDetails({ params }: props): Promise<string> {
   return params.movieId;
 }

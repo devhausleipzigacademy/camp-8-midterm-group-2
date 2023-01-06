@@ -6,10 +6,14 @@ import { MovieLayout } from "./layouts/MoviesLayout";
 import { RootLayout } from "./layouts/RootLayout";
 import {
   CastCrew,
+  Genres,
   Home,
   loadMovieDetails,
+  Login,
   MovieDetails,
+  SelectSeats,
   SelectTime,
+  Ticket,
 } from "./routes";
 import { Movies } from "./routes/Movies";
 
@@ -26,10 +30,26 @@ const movieDetailChildren = [
   {
     path: "selecttime",
     element: <SelectTime />,
+    children: [
+      {
+        path: "selectseats",
+        element: <SelectSeats />,
+        children: [
+          {
+            path: "ticket",
+            element: <Ticket />,
+          },
+        ],
+      },
+    ],
   },
 ];
 
 const router = createBrowserRouter([
+  {
+    path: "login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <RootLayout />,
@@ -37,6 +57,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "genres",
+        element: <Genres />,
       },
       {
         path: "movies",
