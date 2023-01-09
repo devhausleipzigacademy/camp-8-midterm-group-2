@@ -21,4 +21,4 @@ const Template: ComponentStory<typeof GenreButton> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { genre: "romance" };
