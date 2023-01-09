@@ -3,8 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { MovieLayout } from "./layouts/MoviesLayout";
-import { RootLayout } from "./layouts/RootLayout";
-import { NavBar } from "./layouts/NavBarLayout";
 import {
   CastCrew,
   Genres,
@@ -16,8 +14,9 @@ import {
   SelectTime,
   Ticket,
 } from "./routes";
-import { BookingLayout } from "./routes/BookingLayout";
+import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
+import { NavBarLayout } from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
   {
@@ -58,7 +57,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <RootLayout />,
+    element: <NavBarLayout />,
     children: [
       {
         index: true,
