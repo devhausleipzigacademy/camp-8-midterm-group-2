@@ -15,6 +15,7 @@ import {
   SelectTime,
   Ticket,
 } from "./routes";
+import { Booking, BookingLayout } from "./routes/BookingLayout";
 import { Movies } from "./routes/Movies";
 
 const movieDetailChildren = [
@@ -28,18 +29,22 @@ const movieDetailChildren = [
     element: <CastCrew />,
   },
   {
-    path: "selecttime",
-    element: <SelectTime />,
+    path: "booking",
+    element: <BookingLayout />,
     children: [
+      {
+        // index ?, asking for confirmation
+        index: true,
+        path: "selecttime",
+        element: <SelectTime />,
+      },
       {
         path: "selectseats",
         element: <SelectSeats />,
-        children: [
-          {
-            path: "ticket",
-            element: <Ticket />,
-          },
-        ],
+      },
+      {
+        path: "ticket",
+        element: <Ticket />,
       },
     ],
   },
