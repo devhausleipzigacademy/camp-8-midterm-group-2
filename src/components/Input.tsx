@@ -3,9 +3,11 @@ import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 
 type props = {
   type: string;
+  state?: string;
+  setState?: any;
 };
 
-export function Input({ type }: props) {
+export function Input({ state, setState, type }: props) {
   let placeholder: string;
   if (type === "email") {
     placeholder = "your@email.com";
@@ -21,6 +23,9 @@ export function Input({ type }: props) {
         <LockClosedIcon className="w-6 aspect-square text-white-dimmed" />
       )}
       <input
+        onChange={(event) => {
+          setState(event.target.value);
+        }}
         type={type}
         className="bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full"
         placeholder={placeholder}

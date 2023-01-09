@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Input } from "../components/Input";
 
 function testAPI(email: string, password: string) {
-  const exampleUser = { email, password };
+  const exampleUser = { email: "kike@hotmail.com", password: "1234" };
   if (email === exampleUser.email)
     if (password === exampleUser.password) {
       return true;
@@ -9,8 +10,18 @@ function testAPI(email: string, password: string) {
 }
 
 export function Login({}) {
+  const [emailState, setEmailState] = useState("");
+  const [passwordState, setPasswordState] = useState("");
+
   return (
-    <form className="flex flex-col gap-8">
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        const result = testAPI(emailState, passwordState);
+        console.log(result);
+      }}
+      className="flex flex-col gap-8"
+    >
       <div className="flex flex-col gap-3">
         <h1 className="text-title">Welcome to Cine-Scape</h1>
         <p className="text-description">
@@ -19,10 +30,16 @@ export function Login({}) {
         </p>
       </div>
       <div className="flex flex-col gap-3">
-        <Input type="email" />
-        <Input type="password" />
+        <Input type="email" state={emailState} setState={setEmailState} />
+        <Input
+          type="password"
+          state={passwordState}
+          setState={setPasswordState}
+        />
       </div>
-      <button className="bg-yellow">Click Here</button>
+      <button type="submit" className="bg-yellow">
+        Click Here
+      </button>
     </form>
   );
 }
