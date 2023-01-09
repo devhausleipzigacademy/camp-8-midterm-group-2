@@ -1,10 +1,10 @@
 import react from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import "../index.css";
-import { Login } from "../components/login";
+import { Login } from "../routes/Login";
 
 export default {
-  title: "Movie/Login",
+  title: "Movie/LoginCom",
   component: Login,
 } as ComponentMeta<typeof Login>;
 

@@ -4,6 +4,7 @@ import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 type props = {
   type: string;
 };
+
 export function Input({ type }: props) {
   let placeholder: string;
   if (type === "email") {
