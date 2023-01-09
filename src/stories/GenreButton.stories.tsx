@@ -1,11 +1,12 @@
 import react from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import "../index.css";
+import { Meta, StoryObj } from "@storybook/react";
 import { GenreButton } from "../components/GenreButton";
 import { genres } from "../utils/genres";
+import "../index.css";
 
 const buttonOptions = Object.keys(genres);
-export default {
+
+const meta: Meta<typeof GenreButton> = {
   title: "Movie/GenreButton",
   component: GenreButton,
   argTypes: {
@@ -14,11 +15,11 @@ export default {
       control: { type: "radio" },
     },
   },
-} as ComponentMeta<typeof GenreButton>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof GenreButton> = (args) => (
-  <GenreButton {...args} />
-);
+type Story = StoryObj<typeof GenreButton>;
 
-export const Default = Template.bind({});
-Default.args = { genre: "romance" };
+export const Default: Story = {
+  args: { genre: "romance" },
+};
