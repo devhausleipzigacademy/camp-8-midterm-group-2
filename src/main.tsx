@@ -63,25 +63,20 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      // {
+      //   path: "genres",
+      //   element: <Genres />,
+      // },
       {
-        path: "genres",
-        element: <Genres />,
+        path: "movies",
+        element: <Movies />,
       },
     ],
   },
   {
-    path: "movies",
-    children: [
-      {
-        index: true,
-        element: <Movies />,
-      },
-      {
-        path: ":movieId",
-        element: <MovieLayout />,
-        children: movieDetailChildren,
-      },
-    ],
+    path: ":movieId",
+    element: <MovieLayout />,
+    children: movieDetailChildren,
   },
 ]);
 
