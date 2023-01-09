@@ -1,4 +1,4 @@
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../layouts/NavBarLayout";
 
 export function Movies(): JSX.Element {
   return (

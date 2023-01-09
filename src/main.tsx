@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { MovieLayout } from "./layouts/MoviesLayout";
 import { RootLayout } from "./layouts/RootLayout";
+import { NavBar } from "./layouts/NavBarLayout";
 import {
   CastCrew,
   Genres,
@@ -15,7 +16,7 @@ import {
   SelectTime,
   Ticket,
 } from "./routes";
-import { Booking, BookingLayout } from "./routes/BookingLayout";
+import { BookingLayout } from "./routes/BookingLayout";
 import { Movies } from "./routes/Movies";
 
 const movieDetailChildren = [
