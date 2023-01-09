@@ -1,7 +1,16 @@
 import { useRef } from "react";
-
-export function Input() {
+type props = {
+  type: string;
+};
+export function Input({ type }: props) {
   const inputRef = useRef();
+
+  let placeholder: string;
+  if (type === "email") {
+    placeholder = "your@email.com";
+  } else {
+    placeholder = "enter your password";
+  }
 
   return (
     <div
@@ -13,10 +22,10 @@ export function Input() {
         className="w-6 aspect-square bg-white-dimmed"
       ></div>
       <input
-        type="email"
+        type={type}
         ref={inputRef}
         className="bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full"
-        placeholder="your@email.com"
+        placeholder={placeholder}
       />
     </div>
   );
