@@ -9,7 +9,7 @@ export default {
   title: "Movie/GenreButton",
   component: GenreButton,
   argTypes: {
-    variant: {
+    genre: {
       options: buttonOptions,
       control: { type: "radio" },
     },

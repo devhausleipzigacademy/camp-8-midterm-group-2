@@ -1,15 +1,12 @@
 import { genres, GenreType } from "../utils/genres";
 
 type props = {
-  variant: keyof GenreType;
+  genre: keyof GenreType;
 };
-export function GenreButton({ variant }: props) {
+export function GenreButton({ genre }: props) {
   return (
-    <>
-      <button className="bg-yellow flex justify-center items-center p-8 text-black">
-        {genres[variant].symbol}
-      </button>
-      ;
-    </>
+    <button className="bg-dark-light rounded-xl p-3 text-3xl">
+      {genres[genre].symbol}
+    </button>
   );
 }
