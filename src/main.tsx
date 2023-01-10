@@ -16,7 +16,7 @@ import {
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
-import { NavBarLayout } from "./layouts/NavBarLayout";
+import NavBarLayout from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
   {
