@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import { MovieCard, props as MovieCardProp } from "./MovieCard";
 
 interface MovieProps extends MovieCardProp {
-  // url: string;
+  url: string;
 }
 
 type props = {
@@ -13,7 +14,9 @@ export function MovieCarussel({ movies }: props) {
       <h2 className="text-white font-bold">Upcoming Movies</h2>
       <section>
         {movies.map((movie) => (
-          <MovieCard imageUrl={movie.imageUrl} title={movie.title} />
+          <Link to={movie.url}>
+            <MovieCard imageUrl={movie.imageUrl} title={movie.title} />
+          </Link>
         ))}
       </section>
     </div>
