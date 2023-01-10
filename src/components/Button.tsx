@@ -1,32 +1,34 @@
+import clsx from "clsx";
 import React from "react";
 import "../index.css";
-import { Primary } from "../stores/Button.stories";
 
 
 
 interface ButtonProps {
-  primary: boolean;
-  height : "default" | "small"
+
+  type?: "primary" | "secondary";
+  height?: "default" | "small"
   label: string;
   onClick: (event: React.FormEvent<any>) => void;
   disabled: boolean; //state
 }
 
 function Button({
-  primary, height, disabled, label
+  type, height, label, disabled
 }:
 ButtonProps){
   const button = (
     <button
       type="button"
-      className={
-        `text-center rounded-lg w-full text-primary
-        ${(primary)?'bg-yellow text-dark-light':'bg-dark-light text-white'}
-        ${(primary&&disabled)? 'bg-yellow-dimmed':''}
-        ${(height==="default")? 'p-[16px]':'pt-[12px] pb-[11px]'}`
-      }
-      //LINK my props to css Classes -> we will use it in Button.stories.tsx
-      // style={{}}
+      className=
+
+
+      {clsx(
+        'text-center rounded-lg w-full text-primary',
+        (type === "primary" && disabled === false)? 'bg-yellow text-dark-light' : '',
+        (type ==="primary" && disabled === true)? 'bg-yellow-dimmed text-dark-light' : '',
+        (height === "default")? 'py-[16px]':'pt-[12px] pb-[11px]',
+        (type === "secondary")? 'bg-dark-light text-white':'')}
     >
       {label}
     </button>
@@ -35,3 +37,10 @@ ButtonProps){
 };
 
 export default Button;
+
+
+////EXAMPLE HOW TO USE CLSX
+{/* <button className={clsx(classNameOne, { [classNameTwo]: number > 5 })}>
+A sample button
+//LINK my props to css Classes -> we will use it in Button.stories.tsx
+// style={{}} */}
