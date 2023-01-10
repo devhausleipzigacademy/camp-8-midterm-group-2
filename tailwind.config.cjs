@@ -15,7 +15,10 @@ module.exports = {
         dimmed: "rgba(255, 255, 255, 0.4)",
         "dimmed-heavy": "rgba(255, 255, 255, 0.2)",
       },
-      yellow: "#FFB43A",
+      yellow: {
+        DEFAULT: "#FFB43A",
+        dimmed: "rgba(255, 180, 58, 0.5)",
+      },
       red: "#EF4444",
       green: "#22C55E",
     },
