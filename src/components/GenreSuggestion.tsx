@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { GenreButton } from "./GenreButton";
 
 export function GenreSuggestion() {
+  const defaultSuggestions = ["romance", "comedy", "horror", "drama"];
   return (
     <section className="space-y-4">
       <div className="flex justify-between items-center">
@@ -15,22 +16,14 @@ export function GenreSuggestion() {
         </Link>
       </div>
       <div className="flex justify-between">
-        <div className="flex flex-col gap-2">
-          <GenreButton genre="romance" />
-          <p className="font-bold text-white-dimmed text-sm">Romance</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          <GenreButton genre="comedy" />
-          <p className="font-bold text-white-dimmed text-sm">Comedy</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          <GenreButton genre="horror" />
-          <p className="font-bold text-white-dimmed text-sm">Horror</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          <GenreButton genre="drama" />
-          <p className="font-bold text-white-dimmed text-sm">Drama</p>
-        </div>
+        {defaultSuggestions.map((genre) => (
+          <div className="flex flex-col gap-2 items-center">
+            <GenreButton genre={genre} />
+            <p className="font-bold text-white-dimmed text-sm capitalize">
+              {genre}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
