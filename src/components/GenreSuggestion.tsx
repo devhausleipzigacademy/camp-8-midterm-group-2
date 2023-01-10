@@ -14,10 +14,14 @@ export function GenreSuggestion() {
     <section className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-white-dimmed">Genre</h2>
-        <Link to="#" className="text-yellow-dimmed flex">
-          See All
-          <ChevronRightIcon className="h-full inline" />
-        </Link>
+        <div>
+          <Link to="#" className="text-yellow-dimmed flex gap-4">
+            <p>See All</p>
+            <div>
+              <ChevronRightIcon className="h-6" />
+            </div>
+          </Link>
+        </div>
       </div>
       <div className="flex justify-between">
         {defaultSuggestions.map((genre) => (
