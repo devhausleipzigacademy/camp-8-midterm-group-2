@@ -17,7 +17,7 @@ module.exports = {
       },
       yellow: {
         DEFAULT: "#FFB43A",
-        dimmed: rgba(255, 180, 58, 0.5)
+        dimmed: "rgba(255, 180, 58, 0.5)"
       },
       red: "#EF4444",
       green: "#22C55E",
