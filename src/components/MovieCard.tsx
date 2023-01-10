@@ -4,12 +4,12 @@ export type props = {
 };
 export function MovieCard({ imageUrl, title }: props) {
   return (
-    <img
-      src={imageUrl}
-      width="178"
-      height="224"
-      className="object-contain rounded-lg"
-      alt={`movie poster for ${title}`}
-    />
+    <div className="w-44 h-56 snap-center">
+      <img
+        src={imageUrl}
+        className="w-full h-full object-fill rounded-lg"
+        alt={`movie poster for ${title}`}
+      />
+    </div>
   );
 }

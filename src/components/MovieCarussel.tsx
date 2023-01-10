@@ -8,11 +8,12 @@ interface MovieProps extends MovieCardProp {
 type props = {
   movies: MovieProps[];
 };
+
 export function MovieCarussel({ movies }: props) {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 w-full">
       <h2 className="text-white font-bold">Upcoming Movies</h2>
-      <section className="flex gap-8">
+      <section className="overflow-x-scroll overscroll-contain snap-x flex space-x-12">
         {movies.map((movie) => (
           <Link to={movie.url}>
             <MovieCard imageUrl={movie.imageUrl} title={movie.title} />
