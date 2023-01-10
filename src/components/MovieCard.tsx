@@ -1,4 +1,4 @@
-type props = {
+export type props = {
   url: string;
   title: string;
 };
