@@ -1,5 +1,6 @@
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { GenreKeys, GenreType } from "../utils/genres";
+import { GenreKeys } from "../utils/genres";
 import { GenreButton } from "./GenreButton";
 
 export function GenreSuggestion() {
@@ -13,12 +14,9 @@ export function GenreSuggestion() {
     <section className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-white-dimmed">Genre</h2>
-        <Link to="#" className="text-yellow-dimmed justify-center">
+        <Link to="#" className="text-yellow-dimmed flex">
           See All
-          <img
-            src="/src/assets/chevron.svg"
-            className="opacity-50 inline-block ml-4"
-          />
+          <ChevronRightIcon className="h-full inline" />
         </Link>
       </div>
       <div className="flex justify-between">
