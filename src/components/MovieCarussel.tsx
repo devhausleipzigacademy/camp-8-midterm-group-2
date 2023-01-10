@@ -1,4 +1,8 @@
-import { MovieCard, props as MovieProps } from "./MovieCard";
+import { MovieCard, props as MovieCardProp } from "./MovieCard";
+
+interface MovieProps extends MovieCardProp {
+  // url: string;
+}
 
 type props = {
   movies: MovieProps[];
@@ -9,7 +13,7 @@ export function MovieCarussel({ movies }: props) {
       <h2 className="text-white font-bold">Upcoming Movies</h2>
       <section>
         {movies.map((movie) => (
-          <MovieCard url={movie.url} title={movie.title} />
+          <MovieCard imageUrl={movie.imageUrl} title={movie.title} />
         ))}
       </section>
     </div>

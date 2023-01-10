@@ -1,11 +1,11 @@
 export type props = {
-  url: string;
+  imageUrl: string;
   title: string;
 };
-export function MovieCard({ url, title }: props) {
+export function MovieCard({ imageUrl, title }: props) {
   return (
     <img
-      src={url}
+      src={imageUrl}
       width="178"
       height="224"
       className="object-contain rounded-lg"
