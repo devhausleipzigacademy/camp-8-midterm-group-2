@@ -6,8 +6,8 @@ import "../index.css";
 
 interface ButtonProps {
 
-  type?: "primary" | "secondary";
-  height?: "default" | "small"
+  type: "primary" | "secondary";
+  height: "default" | "small"
   label: string;
   onClick: (event: React.FormEvent<any>) => void;
   disabled: boolean; //state
