@@ -5,12 +5,11 @@ type userInfoProps = {
 export function UserInfo({ userName }: userInfoProps) {
   return (
     <div>
-      <div>
-        <h1 className="text-title">Home</h1>
+      <div className="flex flex-col gap-3">
         <h1 className="text-body">Welcome {userName}!</h1>
-        <p className="text-primary">Let’s relax and watch a movie!</p>
+        <p className="text-title">Let’s relax and watch a movie!</p>
       </div>
-      <div> </div>
+      <div>{userImg}</div>
     </div>
   );
 }
