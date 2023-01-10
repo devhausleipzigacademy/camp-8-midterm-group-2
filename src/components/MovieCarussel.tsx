@@ -10,9 +10,9 @@ type props = {
 };
 export function MovieCarussel({ movies }: props) {
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <h2 className="text-white font-bold">Upcoming Movies</h2>
-      <section>
+      <section className="flex gap-8">
         {movies.map((movie) => (
           <Link to={movie.url}>
             <MovieCard imageUrl={movie.imageUrl} title={movie.title} />
