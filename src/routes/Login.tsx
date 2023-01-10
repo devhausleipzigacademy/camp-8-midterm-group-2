@@ -6,7 +6,9 @@ function testAPI(email: string, password: string) {
   if (email === exampleUser.email)
     if (password === exampleUser.password) {
       return true;
-    } else return false;
+    }
+
+  return false;
 }
 
 export function Login({}) {
