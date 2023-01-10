@@ -1,72 +1,30 @@
 import { useState } from "react";
-import {
-  Form,
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import { Form, useSubmit } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-
-interface SearchInputProps {
-  isFocused: boolean;
-  type: "primary" | "secondary";
-  onFocus: (event: React.FormEvent<any>) => void;
-  label: string;
-}
-
-export function SearchInput(props: SearchInputProps) {
-  return (
-    <Form>
-      <div className="flex justify-center">
-        <MagnifyingGlassIcon />
-        <input
-          type="text"
-          name=""
-          placeholder="Search"
-          className={clsx(
-            "text-center rounded-lg w-full text-primary",
-            props.type === "primary" ? "border-2" : ""
-          )}
-        />
-      </div>
-    </Form>
-  );
-}
-
 import clsx from "clsx";
 import React from "react";
 import "../index.css";
-import { Primary } from "../stories/SearchInput.stories";
+import { InputProps } from "./Input";
 
-// interface ButtonProps {
-//   type: "primary" | "secondary";
-//   height: "default" | "small";
-//   label: string;
-//   onClick: (event: React.FormEvent<any>) => void;
-//   disabled: boolean; //state
-// }
+// ! For later Use
+// Link below helps with filling in suggestions to the search input field
+// https://5d9774839a6eff00203f5cbf-przshcqifp.chromatic.com/?path=/story/input-textinput-default-suggestion--default-suggestion
 
-// function Button({ type, height, label, disabled }: ButtonProps) {
-//   const button = (
-//     <button
-//       type="button"
-//       className={clsx(
-//         "text-center rounded-lg w-full text-primary",
-//         type === "primary" && disabled === false
-//           ? "bg-yellow text-dark-light"
-//           : "",
-//         type === "primary" && disabled === true
-//           ? "bg-yellow-dimmed text-dark-light"
-//           : "",
-//         height === "default" ? "py-[16px]" : "pt-[12px] pb-[11px]",
-//         type === "secondary" ? "bg-dark-light text-white" : ""
-//       )}
-//     >
-//       {label}
-//     </button>
-//   );
-//   return button;
-// }
+export const SearchInput = () => {
+  const [value, setValue] = React.useState("");
+  const onChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => setValue(event.target.value);
 
-// export default Button;
+  return (
+    //     id="searchinput"
+    <label className="focus-within:border-white-dimmed-heavy flex items-center gap-3 bg-dark-light border-2 rounded-full border-dark-light py-3 px-5 w-full">
+      <MagnifyingGlassIcon className="w-6 aspect-square text-white-dimmed" />
+      <input
+        className="bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full"
+        placeholder={"Search"}
+        onChange={onChange}
+      />
+    </label>
+  );
+};
