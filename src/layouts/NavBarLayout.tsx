@@ -11,7 +11,7 @@ type IsActive = {
 };
 
 let isActive: IsActive = {
-  home: false,
+  home: true,
   movies: false,
   wallet: false,
   account: false,
@@ -26,25 +26,25 @@ function NavBarLayout() {
         className="w-[24px] h-[24px]">
           <HomeIcon
             key="Home"
-            className={clsx(isActive ? "text-white" : "text-white-dimmed")}
+            className={clsx(isActive.home ? "text-white" : "text-white-dimmed")}
           />
         </NavLink>
         <NavLink to="/movies" className="w-[24px] h-[24px]">
           <FilmIcon
-            key="Home"
-            className={clsx(isActive ? "text-white" : "text-white-dimmed")}
+            key="Movies"
+            className={clsx(isActive.movies ? "text-white" : "text-white-dimmed")}
           />
         </NavLink>
         <NavLink to="/#" className="w-[24px] h-[24px]">
           <CircleStackIcon
-            key="Home"
-            className={clsx(isActive ? "text-white" : "text-white-dimmed")}
+            key="Wallet"
+            className={clsx(isActive.wallet ? "text-white" : "text-white-dimmed")}
           />
         </NavLink>
         <NavLink to="/#" className="w-[24px] h-[24px]">
           <UserIcon
-            key="Home"
-            className={clsx(isActive ? "text-white" : "text-white-dimmed")}
+            key="Account"
+            className={clsx(isActive.account ? "text-white" : "text-white-dimmed")}
           />
         </NavLink>
 
