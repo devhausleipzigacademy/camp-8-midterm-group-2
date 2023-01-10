@@ -6,7 +6,9 @@ export function MovieCard({ url, title }: props) {
   return (
     <img
       src={url}
-      className="object-contain w-full aspect-[3/4] rounded-lg"
+      width="178"
+      height="224"
+      className="object-contain rounded-lg"
       alt={`movie poster for ${title}`}
     />
   );
