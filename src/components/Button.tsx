@@ -2,16 +2,18 @@ import React from "react";
 import "../index.css";
 import { Primary } from "../stores/Button.stories";
 
+
+
 interface ButtonProps {
   primary: boolean;
-  default_height: boolean;
+  height : "default" | "small"
   label: string;
   onClick: (event: React.FormEvent<any>) => void;
   disabled: boolean; //state
 }
 
 function Button({
-  primary, default_height, disabled, label
+  primary, height, disabled, label
 }:
 ButtonProps){
   const button = (
@@ -21,7 +23,7 @@ ButtonProps){
         `text-center rounded-lg w-full text-primary
         ${(primary)?'bg-yellow text-dark-light':'bg-dark-light text-white'}
         ${(primary&&disabled)? 'bg-yellow-dimmed':''}
-        ${(default_height)? 'h-[49px]':'h-[38px]'}`
+        ${(height==="default")? 'p-[16px]':'pt-[12px] pb-[11px]'}`
       }
       //LINK my props to css Classes -> we will use it in Button.stories.tsx
       // style={{}}
