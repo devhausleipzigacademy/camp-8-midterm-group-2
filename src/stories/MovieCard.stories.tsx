@@ -24,5 +24,5 @@ export default meta;
 type Story = StoryObj<typeof MovieCard>;
 
 export const Default: Story = {
-  args: { url: "/src/assets/dev/exampleMovie1.png" },
+  args: { url: "/src/assets/dev/exampleMovie1.png", title: "Epic movie" },
 };
