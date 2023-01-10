@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { GenreKeys, GenreType } from "../utils/genres";
 import { GenreButton } from "./GenreButton";
 
 export function GenreSuggestion() {
-  const defaultSuggestions = ["romance", "comedy", "horror", "drama"];
+  const defaultSuggestions: GenreKeys[] = [
+    "romance",
+    "comedy",
+    "horror",
+    "drama",
+  ];
   return (
     <section className="space-y-4">
       <div className="flex justify-between items-center">
