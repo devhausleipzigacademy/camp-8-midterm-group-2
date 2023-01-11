@@ -22,7 +22,7 @@ import {
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
-import { NavBar } from "./layouts/NavBarLayout";
+import NavBar from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
   {

@@ -7,7 +7,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid";
 
-export function NavBar() {
+export default function NavBar() {
   return (
     <div>
       <Outlet />
