@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import "../index.css";
 
 // ! For later Use
 // Link below helps with filling in suggestions to the search input field
