@@ -16,8 +16,7 @@ import {
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
-import { NavBarLayout } from "./layouts/NavBarLayout";
-
+import { NavBar } from "./layouts/NavBarLayout";
 const movieDetailChildren = [
   {
     index: true,
@@ -57,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <NavBarLayout />,
+    element: <NavBar />,
     children: [
       {
         index: true,
