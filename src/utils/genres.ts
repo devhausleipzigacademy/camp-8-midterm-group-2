@@ -1,6 +1,8 @@
 export type GenreItem = {
   symbol: string
 }
+export type GenreKeys = "romance" | "crime" | "history" | "action" | "documentary" | "horror" | "adventure" | "drama" | "music" | "animation" | "family" | "mystery" | "comedy" | "fantasy" | "sciene fiction" | "thriller"
+
 export type GenreType = {
   romance: GenreItem,
   crime: GenreItem,
