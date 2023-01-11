@@ -7,3 +7,5 @@ export * from "./Movies";
 export * from "./SelectSeats";
 export * from "./SelectTime";
 export * from "./Ticket";
+export * from "./Queue";
+export * from "./User";

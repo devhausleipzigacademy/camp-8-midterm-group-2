@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useRouteLoaderData,
+} from "react-router-dom";
 import "./index.css";
 import { MovieLayout } from "./layouts/MoviesLayout";
 import {
@@ -10,13 +14,15 @@ import {
   loadMovieDetails,
   Login,
   MovieDetails,
+  Queue,
   SelectSeats,
   SelectTime,
   Ticket,
+  User,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
-import NavBarLayout from "./layouts/NavBarLayout";
+import { NavBar } from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
   {
@@ -57,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <NavBarLayout />,
+    element: <NavBar />,
     children: [
       {
         index: true,
@@ -70,6 +76,14 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+      },
+      {
+        path: "user",
+        element: <User />,
+      },
+      {
+        path: "queue",
+        element: <Queue />,
       },
     ],
   },
