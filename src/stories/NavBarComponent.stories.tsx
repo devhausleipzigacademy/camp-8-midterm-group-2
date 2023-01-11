@@ -1,25 +1,14 @@
-import react from "react";
-import { Meta, StoryObj } from "@storybook/react";
-import { GenreButton } from "../components/GenreButton";
-import { genres } from "../utils/genres";
-import "../index.css";
+import React from "react";
+import NavBar from "../layouts/NavBarLayout";
 
-const buttonOptions = Object.keys(genres);
-
-const meta: Meta<typeof GenreButton> = {
-  title: "Movie/GenreButton",
-  component: GenreButton,
-  argTypes: {
-    genre: {
-      options: buttonOptions,
-      control: { type: "radio" },
-    },
-  },
+export default {
+  title: "NavBar",
+  component: NavBar,
+  // argTypes: {
+  //   primary: { control: "boolean" },
+  // },
 };
-export default meta;
 
-type Story = StoryObj<typeof GenreButton>;
-
-export const Default: Story = {
-  args: { genre: "romance" },
+export const Home = {
+  args: {},
 };
