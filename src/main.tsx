@@ -15,7 +15,7 @@ import {
   Ticket,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
-import { Movies } from "./routes/Movies";
+import { Movies, MoviesLoader } from "./routes/Movies";
 import { NavBarLayout } from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
@@ -70,6 +70,7 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+        loader: MoviesLoader,
       },
     ],
   },
