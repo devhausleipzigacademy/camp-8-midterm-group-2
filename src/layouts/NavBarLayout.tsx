@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-export function NavBarLayout() {
+export function NavBar() {
   return (
     <div>
       <Outlet />

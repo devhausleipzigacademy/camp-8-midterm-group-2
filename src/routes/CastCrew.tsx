@@ -3,7 +3,7 @@ import { Tabs } from "../components/TabsCastCrew";
 
 export function CastCrew(): JSX.Element {
   return (
-    <div className="bg-dark h-screen w-screen px-5">
+    <div className="bg-dark h-full w-screen px-5 scrollbar-hide scrollbar-hide::-webkit-scrollbar">
       <div>
         <h1 className="text-title text-center py-5">Cast & Crew</h1>
       </div>
@@ -12,6 +12,36 @@ export function CastCrew(): JSX.Element {
         <Tabs type={"Available"} label={"Crew"} {...Tabs} />
       </div>
       <div className="flex flex-col gap-3">
+        <CastAndCrew
+          image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+          name="Juanito"
+          character="blabla"
+        />
+        <CastAndCrew
+          image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+          name="Juanito"
+          character="blabla"
+        />
+        <CastAndCrew
+          image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+          name="Juanito"
+          character="blabla"
+        />
+        <CastAndCrew
+          image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+          name="Juanito"
+          character="blabla"
+        />
+        <CastAndCrew
+          image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+          name="Juanito"
+          character="blabla"
+        />
+        <CastAndCrew
+          image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+          name="Juanito"
+          character="blabla"
+        />
         <CastAndCrew
           image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
           name="Juanito"
