@@ -1,7 +1,9 @@
+import NavBarLayout from "../layouts/NavBarLayout";
+
 export function Home(): JSX.Element {
   return (
     <div>
-      <h1>HOME</h1>
+      <h1>Home</h1>
     </div>
   );
 }
