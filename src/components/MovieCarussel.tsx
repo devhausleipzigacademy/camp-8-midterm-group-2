@@ -16,7 +16,7 @@ export function MovieCarussel({ movies }: props) {
       <section className="overflow-x-scroll overscroll-contain snap-x flex space-x-10 scrollbar-hide">
         {movies.map((movie) => (
           <Link to={movie.url}>
-            <MovieCard imageUrl={movie.imageUrl} title={movie.title} />
+            <MovieCard poster_path={movie.poster_path} title={movie.title} />
           </Link>
         ))}
       </section>
