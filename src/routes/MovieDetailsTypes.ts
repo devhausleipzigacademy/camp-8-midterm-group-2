@@ -63,7 +63,6 @@ export interface CurrentMoviePeople {
 //look in CurrentMovieCast.cast for someone with role "writer"
 
 
-
 export interface Cast {
     adult:                boolean;
     gender:               number;
