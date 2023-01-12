@@ -37,7 +37,7 @@ type Story = StoryObj<typeof MovieCard>;
 
 export const Default: Story = {
   args: {
-    poster_path: "/src/assets/dev/exampleMovie1.png",
+    poster_path: "/S99eCSnRFfeZJmDaIGIZF58H7w.jpg",
     title: "Epic movie",
   },
 };

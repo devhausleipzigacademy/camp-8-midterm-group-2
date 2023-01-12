@@ -17,23 +17,23 @@ export const Default: Story = {
       {
         poster_path: "/v8Ze2BUan0iMAReijoFcNAe4IIX.jpg",
         title: "Epic movie",
-        url: "#",
+        id: 123,
       },
       {
         poster_path: "/bGlTTHAhLJXIXb1a0zyBEPqtxV9.jpg",
         title: "Super nice movie",
-        url: "#",
+        id: 123,
       },
       {
         poster_path: "/wDed9MJgcRNs34ncGuegjr7ik42.jpg",
         title: "Not so great movie",
-        url: "#",
+        id: 123,
       },
       {
         poster_path: "/wjOHjWCUE0YzDiEzKv8AfqHj3ir.jpg",
         title:
           "Just some movie about moviemakers which like to make movies about movies",
-        url: "#",
+        id: 123,
       },
     ],
   },
