@@ -1,27 +1,49 @@
 import axios from "axios";
 import { useLoaderData } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
-import { MovieDetailsType } from "./MovieDetailsType";
-
-type props = {
-    MovieId: string;
-};
-
+import { CurrentData, CurrentMoviePeople, Genre, MovieDetailsType } from "./MovieDetailsTypes";
 
 export async function loadMovieDetails(MovieId: string): Promise<MovieDetailsType> {
-  const result: MovieDetailsType = (await axios.get(`https://api.themoviedb.org/3/movie/${MovieId}?api_key=039ceb136bde381a9652fedddb79e1f1`)).data as MovieDetailsType;
-  return result;
+  const details: MovieDetailsType = (await axios.get(`https://api.themoviedb.org/3/movie/${MovieId}?api_key=039ceb136bde381a9652fedddb79e1f1`)).data as MovieDetailsType;
+  const people: CurrentMoviePeople = (await axios.get(`https://api.themoviedb.org/3/movie/${MovieId}/credits?api_key=039ceb136bde381a9652fedddb79e1f1`)).data as CurrentMoviePeople;
+
+  //this may be not right
+  const currentData: CurrentData = {
+    details,
+    people, //people contains ID, Crew, Cast. Crew and Cast are an Array with objects of Type Cast
+  };
+
+  return currentData
 }
 
-const CurrentMovie: MovieDetailsType = useLoaderData() as MovieDetailsType; //can this be outside the Component?
+const currentData = useLoaderData() as CurrentData;
 
-const movie_name: string = CurrentMovie.original_title;
+function findDirector (){
+  (currentData.people.cast).forEach(key => {
+    Object.keys(key).forEach(key => {
+
+    if(key.department && (currentData.people.cast.department = "Director")){
+    const director = currentData.people.cast.name
+    return director}})})}
+
+function findWriter (){
+  (currentData.people.cast).forEach(key => {
+    Object.keys(key).forEach(key => {
+
+    if(key.department && (currentData.people.cast.department = "Writer")){
+    const director = currentData.people.cast.name
+    return director}})})}
+
+
+
+
+const movie_name: string = currentData.details.title;
 const movie_category: unknown = [""]
-const movie_year = CurrentMovie.genres;
-const movie_movie_score = CurrentMovie.popularity
-const movie_length = CurrentMovie.runtime
-const director = ""
-const writer = "";
+const movie_year: Genre[]= currentData.details.genres;
+const movie_movie_score: number = currentData.details.popularity
+const movie_length: number = currentData.details.runtime
+const director = findDirector()
+const writer = findWriter()
 const movie_synopsis = "";
 
 
