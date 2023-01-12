@@ -1,56 +1,71 @@
 import axios from "axios";
-import { useLoaderData } from "react-router-dom"; //what for Outlet
+import { ReactNode } from "react";
+import { useLoaderData, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
-import { CurrentData, CurrentMoviePeople, Genre, MovieDetailsType } from "./MovieDetailsTypes";
+import {
+  CurrentData,
+  CurrentMoviePeople,
+  Genre,
+  MovieDetailsType,
+  props,
+} from "./MovieDetailsTypes";
 
-export async function loadMovieDetails(MovieId: string): Promise<MovieDetailsType> {
-  const details: MovieDetailsType = (await axios.get(`https://api.themoviedb.org/3/movie/${MovieId}?api_key=039ceb136bde381a9652fedddb79e1f1`)).data as MovieDetailsType;
-  const people: CurrentMoviePeople = (await axios.get(`https://api.themoviedb.org/3/movie/${MovieId}/credits?api_key=039ceb136bde381a9652fedddb79e1f1`)).data as CurrentMoviePeople;
+export async function loadMovieDetails(
+  loaderObj: any
+): Promise<CurrentData | undefined> {
+  const movieId = loaderObj.params.movieId;
 
-  //this may be not right
-  const currentData: CurrentData = {
-    details,
-    people, //people contains ID, Crew, Cast. Crew and Cast are an Array with objects of Type Cast
-  };
+  try {
+    const details: MovieDetailsType = (
+      await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=039ceb136bde381a9652fedddb79e1f1`
+      )
+    ).data;
+    const people: CurrentMoviePeople = (
+      await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
+      )
+    ).data;
 
-  return currentData
+    //this may be not right
+    const currentData: CurrentData = {
+      details: details,
+      people: people, //people contains ID, Crew, Cast. Crew and Cast are an Array with objects of Type Cast
+    };
+
+    return currentData;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-const currentData = useLoaderData() as CurrentData;
+function MovieDetails(): JSX.Element {
+  let { movieId } = useParams(); //what is this?
+  const currentData = useLoaderData() as CurrentData;
 
-function findDirector (){
-  (currentData.people.cast).forEach(key => {
-    Object.keys(key).forEach(key => {
+  function find(role: string) {
+    //we are looking through an array
+    //currentData.people.cast is an array of objects
+    for (const element of currentData.people.cast) {
+      //now we are looking in every object (element <-> current Object)
+      for (const [key, value] of Object.entries(element)) {
+        if (key === role) {
+          return value;
+        } else {
+          return "";
+        }
+      }
+    }
+  }
 
-    if(key.department && (currentData.people.cast.department = "Director")){
-    const director = currentData.people.cast.name
-    return director}})})}
-
-function findWriter (){
-  (currentData.people.cast).forEach(key => {
-    Object.keys(key).forEach(key => {
-
-    if(key.department && (currentData.people.cast.department = "Writer")){
-    const director = currentData.people.cast.name
-    return director}})})}
-
-
-
-
-const movie_name: string = currentData.details.title;
-const movie_category: unknown = [""]
-const movie_year: Genre[]= currentData.details.genres;
-const movie_movie_score: number = currentData.details.popularity
-const movie_length: number = currentData.details.runtime
-const director = findDirector()
-const writer = findWriter()
-const movie_synopsis = "";
-
-
-function MovieDetails({
-  MovieId, //may not need it a second time
-}: props): JSX.Element {
-
+  const movie_name: string = currentData.details.title;
+  const movie_category: Genre[] = currentData.details.genres;
+  const movie_year: number = currentData.details.release_date.getFullYear();
+  const movie_score: number = currentData.details.popularity;
+  const movie_length: number = currentData.details.runtime;
+  const director: string | "" = find("director");
+  const writer: string | "" = find("writer");
+  const movie_synopsis = "";
 
   const MovieDetails = (
     <div>
@@ -58,19 +73,19 @@ function MovieDetails({
 
       <img className="pt-[24px] w-[100%] h-[211px]"></img>
       <h2 className="text-xl leading-[24.2px] text-white font-bold">
-        movie_name
+        {movie_name}
       </h2>
       <div id="general_details" className="flex flex-col">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row gap-6">
-            <p className="text-white text-description">movie_year</p>
+            <p className="text-white text-description">{movie_year}</p>
             <p className="text-white-dimmed text-description">
-              movie_category
+              {movie_category[0] + "," + movie_category[1]}
             </p>
-            <p className="text-white-dimmed text-description">movie_length</p>
+            <p className="text-white-dimmed text-description">{movie_length}</p>
           </div>
           <p className="text-white-dimmed text-description">
-            <span className="text-[rgba(34, 197, 94, 1)]">movie_score</span>
+            <span className="text-[rgba(34, 197, 94, 1)]">{movie_score}</span>
             "movie_score"
           </p>
         </div>
@@ -79,10 +94,10 @@ function MovieDetails({
         <div>
           <div id="director"></div>
           <p>director: </p>
-          <p>director</p>
+          <p>{director}</p>
           <div id="writer"></div>
           <p>writer: </p>
-          <p>writer</p>
+          <p>{writer}</p>
         </div>
         <Button
           type="primary"
@@ -92,8 +107,8 @@ function MovieDetails({
         />
       </div>
       <div className="bg-white-dimmed-heavy min-h-[1px]"></div>
-      <h3 className="text-white font-primary">"movie_synopsis"</h3>
-      <p className="text-white-dimmed font-body">movie_synopsis</p>
+      <h3 className="text-white font-primary">{movie_synopsis}"</h3>
+      <p className="text-white-dimmed font-body">{movie_synopsis}</p>
       <a href="url" className="text-yellow font-body underline">
         Read more
       </a>
@@ -105,15 +120,8 @@ function MovieDetails({
       />
     </div>
   );
+
   return MovieDetails;
 }
 
 export default MovieDetails;
-
-
-
-
-
-
-
-
