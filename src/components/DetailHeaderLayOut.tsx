@@ -8,12 +8,16 @@ type props = {
 
 export function DetailHeader({ title, toAddress }: props): JSX.Element {
   return (
-    <header className="flex items-start bg-dark">
+    <header
+      className="flex items-center justify-between
+     bg-dark"
+    >
       <Link to={`${toAddress}`}>
-        <ChevronLeftIcon className="h-6 fill-white" />
+        <ChevronLeftIcon className="self-center h-6 fill-white" />
       </Link>
 
       <h1 className="text-title">{title}</h1>
+      <div></div>
     </header>
   );
 }
