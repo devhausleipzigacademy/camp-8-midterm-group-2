@@ -9,9 +9,9 @@ import {
 
 export default function NavBar() {
   return (
-    <div className="bg-dark w-screen h-screen">
+    <div>
       <Outlet />
-      <nav className="flex content-center justify-evenly text-dark-light">
+      <nav className="flex content-center justify-evenly text-dark-light bg-dark w-screen">
         <NavLink
           to="/"
           className={({ isActive }) => clsx(isActive && "text-white")}
