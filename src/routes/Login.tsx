@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import Button from "../components/Button";
 import { Input } from "../components/Input";
 
 function testAPI(email: string, password: string) {
@@ -22,7 +23,7 @@ export function Login({}) {
         const result = testAPI(emailState, passwordState);
         console.log(result);
       }}
-      className="flex flex-col gap-8"
+      className="flex flex-col justify-between gap-8 bg-dark h-screen px-5 py-8"
     >
       <div className="flex flex-col gap-3">
         <h1 className="text-title">Welcome to Cine-Scape</h1>
@@ -30,8 +31,6 @@ export function Login({}) {
           You need to login to be able to make reservations <br /> and add
           movies to your watchlist.
         </p>
-      </div>
-      <div className="flex flex-col gap-3">
         <Input type="email" state={emailState} setState={setEmailState} />
         <Input
           type="password"
@@ -39,7 +38,15 @@ export function Login({}) {
           setState={setPasswordState}
         />
       </div>
-      <button></button>
+      <div className="flex ">
+        <Button
+          type="primary"
+          height="small"
+          label="Login"
+          onClick={(event) => {}}
+          disabled={false}
+        />
+      </div>
     </form>
   );
 }
