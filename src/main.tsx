@@ -18,6 +18,7 @@ import {
   SelectSeats,
   SelectTime,
   Ticket,
+  upcomingMovieLoader,
   User,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: upcomingMovieLoader,
       },
       // {
       //   path: "genres",
