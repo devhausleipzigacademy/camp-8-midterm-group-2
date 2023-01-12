@@ -13,11 +13,10 @@ const routes = [
   {
     name: "Movies",
     path: "/movies",
-    children: [],
   },
   {
     name: "MovieDetails",
-    path: "/movies/details",
+    path: "/movieid/details",
   },
   {
     name: "CastCrew",

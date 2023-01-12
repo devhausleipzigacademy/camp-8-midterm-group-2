@@ -6,13 +6,20 @@ const meta: Meta<typeof DetailHeader> = {
   title: "detailHeaderLayout",
   component: DetailHeader,
   argTypes: {
-    /* here put different route options? */
+    title: {
+      options: ["Select Time", "Select Seats", "Crap"],
+      control: { type: "radio" },
+    },
   },
 };
+
 export default meta;
 
 type Story = StoryObj<typeof DetailHeader>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    title: "Select Time",
+    toAddress: "",
+  },
 };

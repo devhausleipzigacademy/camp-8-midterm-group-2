@@ -1,22 +1,19 @@
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 type props = {
-  state: string;
+  title?: string;
+  toAddress?: string;
 };
 
-export function DetailHeader(props: string) {
-  let location = useLocation();
-  let navigate = useNavigate();
-
-  console.log(location);
+export function DetailHeader({ title, toAddress }: props): JSX.Element {
   return (
-    <header className="flex items-start">
-      {/* Will this not lead us back to crew if we go to movie details? */}
-      <div className="h-6" onClick={() => navigate(-1)}>
-        <ChevronLeftIcon className="h-6 fill-black" />
-      </div>
-      <h1 className="text-title text-white">{location.state}</h1>
+    <header className="flex items-start bg-dark">
+      <Link to={`${toAddress}`}>
+        <ChevronLeftIcon className="h-6 fill-white" />
+      </Link>
+
+      <h1 className="text-title">{title}</h1>
     </header>
   );
 }
