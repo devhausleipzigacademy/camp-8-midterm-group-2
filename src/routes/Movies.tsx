@@ -1,9 +1,7 @@
-import { MoviePagination } from "../components/MoviePagination";
-
 export function Movies(): JSX.Element {
   return (
     <>
-      <MoviePagination />
+      <section>MOVIE PAGINATION</section>
     </>
   );
 }
