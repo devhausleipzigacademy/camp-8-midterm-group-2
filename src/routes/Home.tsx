@@ -19,17 +19,16 @@ export function Home(): JSX.Element {
   const upcomingMovies = useLoaderData();
 
   return (
-    <div className="bg-dark">
-      <h1>HOME</h1>
-      <UserInfo userName="" userImg="" {...UserInfo} />
-      <SearchInput
-        type="primary"
-        isFocused
-        onFocus={event}
-        label="search"
-        {...SearchInput}
-      />
-      <GenreSuggestion />
+    <div className="bg-dark flex-1 flex flex-col justify-evenly gap-4 pt-8 overflow-y-scroll scrollbar-hide">
+      <div className="px-5">
+        <UserInfo userName="USER" userImg="" />
+      </div>
+      <div className="px-5">
+        <SearchInput type="primary" isFocused label="search" />
+      </div>
+      <div className="px-5">
+        <GenreSuggestion />
+      </div>
       <MovieCarussel movies={upcomingMovies} />
     </div>
   );
