@@ -4,16 +4,15 @@ import { MovieCarussel } from "../components/MovieCarussel";
 import { SearchInput } from "../components/SearchInput";
 import { UserInfo } from "../components/userInfo";
 import axios from "axios";
-import { Movie, UpcomingMovies } from "../types/api";
+import { UpcomingMovies } from "../types/api";
+import { upcomingMoviesUrl } from "../utils/movies";
 
 export async function upcomingMovieLoader() {
   try {
-    const response = await axios.get<UpcomingMovies>(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=039ceb136bde381a9652fedddb79e1f1"
-    );
+    const response = await axios.get<UpcomingMovies>(upcomingMoviesUrl);
     return response.data.results;
   } catch (error) {
-    return "WRONG";
+    throw new Error("connection Issues");
   }
 }
 export function Home(): JSX.Element {
