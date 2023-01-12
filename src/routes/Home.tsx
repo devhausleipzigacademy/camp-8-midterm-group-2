@@ -13,13 +13,11 @@ export async function upcomingMovieLoader() {
     );
     return response.data.results;
   } catch (error) {
-    return [null];
+    return "WRONG";
   }
 }
-
 export function Home(): JSX.Element {
-  const upcomingMovies: Movie[] = useLoaderData();
-  console.log(upcomingMovies);
+  const upcomingMovies = useLoaderData();
 
   return (
     <div className="bg-dark">

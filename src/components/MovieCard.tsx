@@ -1,7 +1,7 @@
 import { posterUrl } from "../utils/movies";
 
 export type props = {
-  poster_path: string;
+  poster_path: string | null;
   title: string;
 };
 export function MovieCard({ poster_path, title }: props) {
