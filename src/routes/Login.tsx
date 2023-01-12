@@ -39,9 +39,7 @@ export function Login({}) {
           setState={setPasswordState}
         />
       </div>
-      <button type="submit" className="bg-yellow">
-        Click Here
-      </button>
+      <button></button>
     </form>
   );
 }
