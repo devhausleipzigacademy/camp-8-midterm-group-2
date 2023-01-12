@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 import "../index.css";
-import { MoviePagination } from "../components/MoviePagination";
+import { Movies } from "../routes";
 
-const meta: Meta<typeof MoviePagination> = {
-  title: "Movie/MoviePagination",
-  component: MoviePagination,
+const meta: Meta<typeof Movies> = {
+  title: "Movie/MoviePage",
+  component: Movies,
 };
 export default meta;
 
-type Story = StoryObj<typeof MoviePagination>;
+type Story = StoryObj<typeof Movies>;
 
 export const Default: Story = {
   args: {},
