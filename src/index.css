@@ -21,7 +21,7 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
-    @apply text-white-dimmed;
+    /* @apply text-white-dimmed; */
   }
   .text-secondary {
     font-weight: 700;
@@ -34,5 +34,12 @@
     font-size: 12px;
     line-height: 15px;
     @apply text-white-dimmed;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
