@@ -3,34 +3,24 @@ import { GenreSuggestion } from "../components/GenreSuggestion";
 import { MovieCarussel } from "../components/MovieCarussel";
 import { SearchInput } from "../components/SearchInput";
 import { UserInfo } from "../components/userInfo";
+import axios from "axios";
+import { Movie, UpcomingMovies } from "../types/api";
 
 export async function upcomingMovieLoader() {
-  return [
-    {
-      imageUrl: "/src/assets/dev/exampleMovie1.png",
-      title: "Epic movie",
-      url: "/",
-    },
-    {
-      imageUrl: "/src/assets/dev/exampleMovie2.png",
-      title: "Super nice movie",
-      url: "/",
-    },
-    {
-      imageUrl: "/src/assets/dev/exampleMovie3.png",
-      title: "Not so great movie",
-      url: "/",
-    },
-    {
-      imageUrl: "/src/assets/dev/exampleMovie4.png",
-      title:
-        "Just some movie about moviemakers which like to make movies about movies",
-      url: "/",
-    },
-  ];
+  try {
+    const response = await axios.get<UpcomingMovies>(
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=039ceb136bde381a9652fedddb79e1f1"
+    );
+    return response.data.results;
+  } catch (error) {
+    return [null];
+  }
 }
+
 export function Home(): JSX.Element {
-  const movies = useLoaderData();
+  const upcomingMovies: Movie[] = useLoaderData();
+  console.log(upcomingMovies);
+
   return (
     <div className="bg-dark">
       <h1>HOME</h1>
@@ -43,7 +33,7 @@ export function Home(): JSX.Element {
         {...SearchInput}
       />
       <GenreSuggestion />
-      <MovieCarussel movies={movies} />
+      <MovieCarussel movies={upcomingMovies} />
     </div>
   );
 }
