@@ -1,49 +1,34 @@
+import axios from "axios";
 import { useLoaderData } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
+import { MovieDetailsType } from "./MovieDetailsType";
 
 type props = {
-  params: {
-    movieId: string;
-  };
+    MovieId: string;
 };
 
-type MovieDetailsProps = {
-  MovieId: string;
-  MovieName: string;
-  MovieCategory: string;
-  MovieYear: number;
-  MovieScore: number;
-  MovieLength: string;
-  Director: string;
-  Writer: string;
-  Synopsis: string;
-};
 
-const movie_id = "";
-const movie_name = "";
-const movie_category = "";
-const movie_year = "";
-const movie_MovieScore = "";
-const movie_length = "";
-const director = "";
+export async function loadMovieDetails(MovieId: string): Promise<MovieDetailsType> {
+  const result: MovieDetailsType = (await axios.get(`https://api.themoviedb.org/3/movie/${MovieId}?api_key=039ceb136bde381a9652fedddb79e1f1`)).data as MovieDetailsType;
+  return result;
+}
+
+const CurrentMovie: MovieDetailsType = useLoaderData() as MovieDetailsType; //can this be outside the Component?
+
+const movie_name: string = CurrentMovie.original_title;
+const movie_category: unknown = [""]
+const movie_year = CurrentMovie.genres;
+const movie_movie_score = CurrentMovie.popularity
+const movie_length = CurrentMovie.runtime
+const director = ""
 const writer = "";
 const movie_synopsis = "";
 
-export async function loadMovieDetails({ params }: props): Promise<string> {
-  return params.movieId;
-}
 
 function MovieDetails({
-  MovieName,
-  MovieYear,
-  MovieCategory,
-  MovieLength,
-  MovieScore,
-  Director,
-  Writer,
-  Synopsis,
-}: MovieDetailsProps): JSX.Element {
-  const CurrentMovie: Object = useLoaderData() as Object;
+  MovieId, //may not need it a second time
+}: props): JSX.Element {
+
 
   const MovieDetails = (
     <div>
@@ -51,31 +36,31 @@ function MovieDetails({
 
       <img className="pt-[24px] w-[100%] h-[211px]"></img>
       <h2 className="text-xl leading-[24.2px] text-white font-bold">
-        {MovieName}
+        movie_name
       </h2>
       <div id="general_details" className="flex flex-col">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row gap-6">
-            <p className="text-white text-description">{MovieYear}</p>
+            <p className="text-white text-description">movie_year</p>
             <p className="text-white-dimmed text-description">
-              {MovieCategory}
+              movie_category
             </p>
-            <p className="text-white-dimmed text-description">{MovieLength}</p>
+            <p className="text-white-dimmed text-description">movie_length</p>
           </div>
           <p className="text-white-dimmed text-description">
-            <span className="text-[rgba(34, 197, 94, 1)]">{MovieScore}</span>
-            "MovieScore"
+            <span className="text-[rgba(34, 197, 94, 1)]">movie_score</span>
+            "movie_score"
           </p>
         </div>
       </div>
       <div id="people" className="flex flex-row-2 gap-[22px]">
         <div>
           <div id="director"></div>
-          <p>Director: </p>
-          <p>{Director}</p>
+          <p>director: </p>
+          <p>director</p>
           <div id="writer"></div>
-          <p>Writer: </p>
-          <p>{Writer}</p>
+          <p>writer: </p>
+          <p>writer</p>
         </div>
         <Button
           type="primary"
@@ -85,8 +70,8 @@ function MovieDetails({
         />
       </div>
       <div className="bg-white-dimmed-heavy min-h-[1px]"></div>
-      <h3 className="text-white font-primary">"Synopsis"</h3>
-      <p className="text-white-dimmed font-body">{Synopsis}</p>
+      <h3 className="text-white font-primary">"movie_synopsis"</h3>
+      <p className="text-white-dimmed font-body">movie_synopsis</p>
       <a href="url" className="text-yellow font-body underline">
         Read more
       </a>
@@ -102,3 +87,11 @@ function MovieDetails({
 }
 
 export default MovieDetails;
+
+
+
+
+
+
+
+
