@@ -3,7 +3,7 @@ import { DetailHeader } from "../components/DetailHeaderLayOut";
 export function SelectTime(): JSX.Element {
   const detailHeaderProps = {
     title: "Select Time",
-    toAddress: "../../details",
+    toAddress: "../..",
   };
   return <DetailHeader {...detailHeaderProps}></DetailHeader>;
   return (

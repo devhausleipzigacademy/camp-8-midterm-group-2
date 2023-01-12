@@ -74,7 +74,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "movieid",
+    path: ":movieid",
     element: <MovieLayout />,
     children: movieDetailChildren,
   },

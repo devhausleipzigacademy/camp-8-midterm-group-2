@@ -16,7 +16,7 @@ export function MovieDetails(): JSX.Element {
 
   const detailHeaderProps = {
     title: "Movie Details",
-    toAddress: "/",
+    toAddress: "../",
   };
   return <DetailHeader {...detailHeaderProps}></DetailHeader>;
   return (
