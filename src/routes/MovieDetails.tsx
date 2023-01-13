@@ -2,19 +2,15 @@ import axios from "axios";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
 import { Credits, MovieDetail } from "../types/api";
-import { useState } from 'react';
+import { useState } from "react";
 
-
-type CurrentData =
-{
+type CurrentData = {
   details: MovieDetail;
   director: string;
   writer: string;
-}
+};
 
-export async function loadMovieDetails(
-  loaderObj: any
-) {
+export async function loadMovieDetails(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
 
   try {
@@ -30,15 +26,15 @@ export async function loadMovieDetails(
       )
     ).data;
 
-    const director_name = (people.crew.find((member)=>
-      member.job === "Director"))?.name //returned member, if 39 === true
+    const director_name = people.crew.find(
+      (member) => member.job === "Director"
+    )?.name; //returned member, if 39 === true
 
+    const writer_name = people.crew.find(
+      (member) => member.job === "Writer"
+    )?.name;
 
-    const writer_name = (people.crew.find((member)=>
-      member.job ==="Writer"))?.name
-
-
-    const currentData  = {
+    const currentData = {
       details: details,
       director_name,
       writer_name,
@@ -50,17 +46,13 @@ export async function loadMovieDetails(
   }
 }
 
-const [state, setState] = useState('start')
-
 function MovieDetails(): JSX.Element {
-
   let { movieId } = useParams();
 
-  const currentData = useLoaderData() as CurrentData;
   const navigate = useNavigate();
+  const [state, setState] = useState("start");
 
-
-
+  const currentData = useLoaderData() as CurrentData;
 
   const movie_name: string = currentData.details.title;
   const movie_category: string = currentData.details.genres[0].name;
@@ -101,15 +93,17 @@ function MovieDetails(): JSX.Element {
             <p>{director}</p>
           </div>
           <div id="writer"></div>
-            <p className="text-secondary text-white-dimmed">writer: </p>
-            <p>{writer}</p>
-          </div>
+          <p className="text-secondary text-white-dimmed">writer: </p>
+          <p>{writer}</p>
+        </div>
         <Button
           type="primary"
           height="small"
           label="Cast&Crew"
-          onClick={
-            ()=>{(movieId: string) =>navigate('castcrew')}}/>
+          onClick={() => {
+            (movieId: string) => navigate("castcrew");
+          }}
+        />
       </div>
       <div className="bg-white-dimmed-heavy min-h-[1px]"></div>
       <h3 className="text-white font-primary">{movie_synopsis}"</h3>
@@ -131,7 +125,6 @@ function MovieDetails(): JSX.Element {
 }
 
 export default MovieDetails;
-
 
 //http://localhost:5173/315162 EXAMPLE URL TO TEST
 //https://api.themoviedb.org/3/movie/315162/credits?api_key=039ceb136bde381a9652fedddb79e1f1
