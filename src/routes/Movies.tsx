@@ -5,8 +5,7 @@ export function Movies(): JSX.Element {
   const upcomingMovies = useLoaderData() as Movie[];
 
   return (
-    <section className="flex-1">
-      {/* // Here to develop as I cant handle storybook with a loader function */}
+    <section className="flex-1 pt-3 px-2">
       <MoviePagination upcomingMovies={upcomingMovies} />
     </section>
   );
