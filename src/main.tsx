@@ -78,7 +78,7 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
-        loader: MoviesLoader,
+        loader: upcomingMovieLoader,
       },
       {
         path: "user",
