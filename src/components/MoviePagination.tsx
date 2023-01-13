@@ -21,7 +21,15 @@ export function MoviePagination({
     <>
       <div className="text-white text-3xl">
         {movies.map((movie) => {
-          return <div>{movie.title}</div>;
+          return (
+            <Link to={movie.id.toString()}>
+              <MovieCard
+                poster_path={movie.poster_path}
+                title={movie.title}
+                key={movie.title}
+              />
+            </Link>
+          );
         })}
       </div>
       <div className="flex justify-around">
