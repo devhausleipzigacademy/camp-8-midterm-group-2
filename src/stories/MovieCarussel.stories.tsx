@@ -14,19 +14,26 @@ type Story = StoryObj<typeof MovieCarussel>;
 export const Default: Story = {
   args: {
     movies: [
-      { imageUrl: "/src/assets/dev/exampleMovie1.png", title: "Epic movie" },
       {
-        imageUrl: "/src/assets/dev/exampleMovie2.png",
+        poster_path: "/v8Ze2BUan0iMAReijoFcNAe4IIX.jpg",
+        title: "Epic movie",
+        id: 123,
+      },
+      {
+        poster_path: "/bGlTTHAhLJXIXb1a0zyBEPqtxV9.jpg",
         title: "Super nice movie",
+        id: 123,
       },
       {
-        imageUrl: "/src/assets/dev/exampleMovie3.png",
+        poster_path: "/wDed9MJgcRNs34ncGuegjr7ik42.jpg",
         title: "Not so great movie",
+        id: 123,
       },
       {
-        imageUrl: "/src/assets/dev/exampleMovie4.png",
+        poster_path: "/wjOHjWCUE0YzDiEzKv8AfqHj3ir.jpg",
         title:
           "Just some movie about moviemakers which like to make movies about movies",
+        id: 123,
       },
     ],
   },
