@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import { Cast } from "../types/api";
 
 type props = {
   image: string;
@@ -6,28 +7,22 @@ type props = {
   character: string;
 };
 
+const apiKey = "039ceb136bde381a9652fedddb79e1f1";
+const baseUrl = "https://api.themoviedb.org/3/";
+const castUrl = "/movie/{movie_id}/credits";
+
 export async function castLoader() {
   try {
-    const response = await axios.get<Cast>()
-    
+    const response = await axios.get<Cast>(baseUrl + castUrl + apiKey);
+    return response.data;
+  } catch (error) {
+    throw new Error("connection Issues");
   }
 }
 
-const cast = [
-  {
-    image: "",
-    name: "Leonardo diCaprio",
-    character: "Elodin",
-  },
-  {
-    image:
-      "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg",
-    name: "Gandalf",
-    character: "Bilbo",
-  },
-];
-
 export function Cast() {
+  const cast = castLoader();
+  console.log(cast);
   return (
     <div>
       {cast.map((actor) => (
