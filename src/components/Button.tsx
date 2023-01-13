@@ -23,7 +23,7 @@ ButtonProps){
 
       {clsx(
         'text-center rounded-lg w-full text-primary',
-        (type === "primary" && disabled)? 'bg-yellow text-dark-light' : '',
+        (type === "primary" && !disabled)? 'bg-yellow text-dark-light' : '',
         (type === "primary" && disabled)? 'bg-yellow-dimmed text-dark-light' : '',
         (height === "default")? 'py-[16px]':'pt-[12px] pb-[11px]',
         (type === "secondary")? 'bg-dark-light text-white':'')}
