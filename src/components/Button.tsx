@@ -8,7 +8,7 @@ interface ButtonProps {
   height: "default" | "small"
   label: string;
   onClick: (event: React.FormEvent<any>) => void;
-  disabled: boolean; //state
+  disabled?: true; //state
 }
 
 function Button({
@@ -23,8 +23,8 @@ ButtonProps){
 
       {clsx(
         'text-center rounded-lg w-full text-primary',
-        (type === "primary" && disabled === false)? 'bg-yellow text-dark-light' : '',
-        (type ==="primary" && disabled === true)? 'bg-yellow-dimmed text-dark-light' : '',
+        (type === "primary" && !disabled)? 'bg-yellow text-dark-light' : '',
+        (type ==="primary" && disabled)? 'bg-yellow-dimmed text-dark-light' : '',
         (height === "default")? 'py-[16px]':'pt-[12px] pb-[11px]',
         (type === "secondary")? 'bg-dark-light text-white':'')}
     >
