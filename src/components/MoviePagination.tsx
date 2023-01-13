@@ -3,12 +3,16 @@ import { useState } from "react";
 
 type MoviePaginationProps = {
   upcomingMovies: Movie[];
+  itemsPerPage: number;
 };
-export function MoviePagination({ upcomingMovies }: MoviePaginationProps) {
+export function MoviePagination({
+  upcomingMovies,
+  itemsPerPage,
+}: MoviePaginationProps) {
   const [movies, setMovies] = useState(upcomingMovies.slice(0, 4));
 
-  const pages = 5;
-  const itemsPerPage = 4;
+  console.log(upcomingMovies.length);
+  const pages = Math.floor(upcomingMovies.length / itemsPerPage);
   const pageArray = Array.from({ length: pages }, (_, i) => i + 1);
 
   return (
