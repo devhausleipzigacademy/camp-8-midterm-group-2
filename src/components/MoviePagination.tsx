@@ -1,13 +1,15 @@
 import { Movie } from "../types/api";
 import { useState } from "react";
+import { MovieCard } from "./MovieCard";
+import { Link } from "react-router-dom";
 
 type MoviePaginationProps = {
   upcomingMovies: Movie[];
-  itemsPerPage: number;
+  itemsPerPage?: number;
 };
 export function MoviePagination({
   upcomingMovies,
-  itemsPerPage,
+  itemsPerPage = 4,
 }: MoviePaginationProps) {
   const [movies, setMovies] = useState(upcomingMovies.slice(0, 4));
 

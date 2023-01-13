@@ -7,7 +7,7 @@ export function Movies(): JSX.Element {
   return (
     <section className="flex-1">
       {/* // Here to develop as I cant handle storybook with a loader function */}
-      <MoviePagination itemsPerPage={4} upcomingMovies={upcomingMovies} />
+      <MoviePagination upcomingMovies={upcomingMovies} />
     </section>
   );
 }
