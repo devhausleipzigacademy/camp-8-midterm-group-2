@@ -5,7 +5,10 @@ type TabsProps = {
   type: string;
   label: string;
 };
+
 export function Tabs({ type, label }: TabsProps) {
+  const status = ["Selected", "Available"];
+  const [active, setActive] = useState(status[0]);
   return (
     <div className="flex justify-center items-center">
       <button

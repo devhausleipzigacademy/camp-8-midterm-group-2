@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CastAndCrew } from "../components/CastAndCrew";
+import { CastAndCrew } from "../components/Cast";
 
 export default {
   title: "Movie/CastAndCrew",
