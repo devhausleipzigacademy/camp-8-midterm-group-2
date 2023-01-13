@@ -1,37 +1,45 @@
 import axios from "axios";
-import { ReactNode } from "react";
 import { useLoaderData, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
-import {
-  CurrentData,
-  CurrentMoviePeople,
-  Genre,
-  MovieDetailsType,
-} from "./MovieDetailsTypes";
+import { Credits, MovieDetail } from "../types/api";
 
-//what is this again?
+type CurrentData =
+{
+  details: MovieDetail;
+  director: string;
+  writer: string;
+}
+
 export async function loadMovieDetails(
   loaderObj: any
-): Promise<CurrentData | undefined> {
+) {
   const movieId = loaderObj.params.movieId;
 
   try {
-    const details: MovieDetailsType = (
+    const details: MovieDetail = (
       await axios.get(
         `https://api.themoviedb.org/3/movie/${movieId}?api_key=039ceb136bde381a9652fedddb79e1f1`
       )
     ).data;
 
-    const people: CurrentMoviePeople = (
+    const people: Credits = (
       await axios.get(
         `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
       )
     ).data;
 
-    //this may be not right
-    const currentData: CurrentData = {
+    const director_name = (people.crew.find((member)=>
+      member.job === "Director"))?.name //returned member, if 39 === true
+
+
+    const writer_name = (people.crew.find((member)=>
+      member.job ==="Writer"))?.name
+
+
+    const currentData  = {
       details: details,
-      people: people, //people contains ID, Crew, Cast. Crew and Cast are an Array with objects of Type Cast
+      director_name,
+      writer_name,
     };
 
     return currentData;
@@ -42,36 +50,17 @@ export async function loadMovieDetails(
 
 function MovieDetails(): JSX.Element {
 
-  let { movieId } = useParams(); //what is this?
+
+  let { movieId } = useParams();
   const currentData = useLoaderData() as CurrentData;
 
-  function find(job: string): string {
-    //we are looking through an array
-    //currentData.people.cast is an array of objects
-    let Name = ""
-    for (const element of currentData.people.cast) {
-      console.log("line 54, element" + element)
-      //now we are looking in every object (element <-> current Object)
-      for (const [key] of Object.entries(key)) {
-        if (element.department && (key == job)) {
-          Name = element.department
-          console.log("Line 58 : Name = " + Name)
-          return Name}
-        return Name
-      }
-    }
-    Name = Name
-    console.log("line 64 , Name" + Name)
-    return Name
-  }
-
   const movie_name: string = currentData.details.title;
-  const movie_category: Genre[] = currentData.details.genres;
-  // const movie_year: string = (currentData.details.release_date); //getFullYear()
+  const movie_category: string = currentData.details.genres[0].name;
+  const movie_year: string = currentData.details.release_date;
   const movie_score: number = currentData.details.popularity;
-  const movie_length: number = currentData.details.runtime;
-  const director: string = find("director");
-  const writer: string = find("writer");
+  const movie_length: number | null = currentData.details.runtime;
+  const director: string = currentData.director;
+  const writer: string = currentData.writer;
   const movie_synopsis = "";
 
   const MovieDetails = (
@@ -85,9 +74,9 @@ function MovieDetails(): JSX.Element {
       <div id="general_details" className="flex flex-col">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row gap-6">
-            {/* <p className="text-white text-description">{(movie_year.getFullYear).toString}</p> */}
+            <p className="text-white text-description">{movie_year}</p>
             <p className="text-white-dimmed text-description">
-              {movie_category[0] + "," + movie_category[1]}
+              {movie_category}
             </p>
             <p className="text-white-dimmed text-description">{movie_length}</p>
           </div>
