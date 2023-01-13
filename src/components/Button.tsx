@@ -33,10 +33,3 @@ ButtonProps){
 };
 
 export default Button;
-
-
-////EXAMPLE HOW TO USE CLSX
-{/* <button className={clsx(classNameOne, { [classNameTwo]: number > 5 })}>
-A sample button
-//LINK my props to css Classes -> we will use it in Button.stories.tsx
-// style={{}} */}
