@@ -9,7 +9,6 @@ import {
   Home,
   loadMovieDetails,
   Login,
-  MovieDetails,
   SelectSeats,
   SelectTime,
   Ticket,
@@ -17,6 +16,7 @@ import {
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
 import { NavBarLayout } from "./layouts/NavBarLayout";
+import MovieDetails from "./routes/MovieDetails";
 
 const movieDetailChildren = [
   {
