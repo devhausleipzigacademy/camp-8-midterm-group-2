@@ -50,7 +50,6 @@ export async function loadMovieDetails(
 
 function MovieDetails(): JSX.Element {
 
-
   let { movieId } = useParams();
   const currentData = useLoaderData() as CurrentData;
 
@@ -64,7 +63,7 @@ function MovieDetails(): JSX.Element {
   const movie_synopsis = "";
 
   const MovieDetails = (
-    <div>
+    <div className="bg-dark">
       {/* <DetailHeaderLayout /> //not in main branch yet*/}
 
       <img className="pt-[24px] w-[100%] h-[211px]"></img>
@@ -88,18 +87,19 @@ function MovieDetails(): JSX.Element {
       </div>
       <div id="people" className="flex flex-row-2 gap-[22px]">
         <div>
-          <div id="director"></div>
-          <p>director: </p>
-          <p>{director}</p>
+          <div id="director">
+            <p className="text-secondary text-white-dimmed">director: </p>
+            <p>{director}</p>
+          </div>
           <div id="writer"></div>
-          <p>writer: </p>
-          <p>{writer}</p>
-        </div>
+            <p className="text-secondary text-white-dimmed">writer: </p>
+            <p>{writer}</p>
+          </div>
         <Button
           type="primary"
           height="small"
           label="Cast&Crew"
-          onClick={() => {}}
+          onClick={()=>{}}
         />
       </div>
       <div className="bg-white-dimmed-heavy min-h-[1px]"></div>
