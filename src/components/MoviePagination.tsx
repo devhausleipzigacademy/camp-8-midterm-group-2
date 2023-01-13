@@ -6,6 +6,11 @@ type MoviePaginationProps = {
 };
 export function MoviePagination({ upcomingMovies }: MoviePaginationProps) {
   const [movies, setMovies] = useState(upcomingMovies.slice(0, 4));
+
+  const pages = 5;
+  const itemsPerPage = 4;
+  const pageArray = Array.from({ length: pages }, (_, i) => i + 1);
+
   return (
     <>
       <div className="text-white text-3xl">
@@ -14,19 +19,22 @@ export function MoviePagination({ upcomingMovies }: MoviePaginationProps) {
         })}
       </div>
       <div className="flex justify-around">
-        <button className="bg-yellow p-3" id="1">
-          1
-        </button>
-        <button
-          className="bg-yellow p-3"
-          id="2"
-          onClick={(event) => {
-            event.currentTarget.id;
-            setMovies(upcomingMovies.slice(4, 8));
-          }}
-        >
-          2
-        </button>
+        {pageArray.map((pageNr) => {
+          const endPagination = pageNr * itemsPerPage;
+          const startPagination = endPagination - itemsPerPage;
+
+          return (
+            <button
+              className="bg-yellow p-3 rounded"
+              key={pageNr}
+              onClick={(event) => {
+                setMovies(upcomingMovies.slice(startPagination, endPagination));
+              }}
+            >
+              {pageNr}
+            </button>
+          );
+        })}
       </div>
     </>
   );
