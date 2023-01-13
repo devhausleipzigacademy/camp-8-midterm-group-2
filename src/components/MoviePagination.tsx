@@ -3,6 +3,7 @@ import { useState } from "react";
 import { MovieCard } from "./MovieCard";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { movieLink } from "../utils/movies";
 
 type MoviePaginationProps = {
   upcomingMovies: Movie[];
@@ -25,7 +26,7 @@ export function MoviePagination({
         {movies.map((movie) => {
           return (
             <Link
-              to={movie.id.toString()}
+              to={movieLink(movie)}
               className="flex justify-center items-center w-full h-full"
             >
               <MovieCard
