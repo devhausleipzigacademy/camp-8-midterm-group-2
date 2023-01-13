@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useLoaderData, useParams } from "react-router-dom"; //what for Outlet
+import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
 import { Credits, MovieDetail } from "../types/api";
+import { useState } from 'react';
+
 
 type CurrentData =
 {
@@ -48,10 +50,17 @@ export async function loadMovieDetails(
   }
 }
 
+const [state, setState] = useState('start')
+
 function MovieDetails(): JSX.Element {
 
   let { movieId } = useParams();
+
   const currentData = useLoaderData() as CurrentData;
+  const navigate = useNavigate();
+
+
+
 
   const movie_name: string = currentData.details.title;
   const movie_category: string = currentData.details.genres[0].name;
@@ -64,7 +73,7 @@ function MovieDetails(): JSX.Element {
 
   const MovieDetails = (
     <div className="bg-dark">
-      {/* <DetailHeaderLayout /> //not in main branch yet*/}
+      {/* <DetailHeaderLayout /> */}
 
       <img className="pt-[24px] w-[100%] h-[211px]"></img>
       <h2 className="text-xl leading-[24.2px] text-white font-bold">
@@ -99,8 +108,8 @@ function MovieDetails(): JSX.Element {
           type="primary"
           height="small"
           label="Cast&Crew"
-          onClick={()=>{}}
-        />
+          onClick={
+            ()=>{(movieId: string) =>navigate('castcrew')}}/>
       </div>
       <div className="bg-white-dimmed-heavy min-h-[1px]"></div>
       <h3 className="text-white font-primary">{movie_synopsis}"</h3>
@@ -108,6 +117,7 @@ function MovieDetails(): JSX.Element {
       <a href="url" className="text-yellow font-body underline">
         Read more
       </a>
+
       <Button
         type="primary"
         height="default"
