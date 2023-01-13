@@ -4,10 +4,10 @@ import { MovieCarussel } from "../components/MovieCarussel";
 import { SearchInput } from "../components/SearchInput";
 import { UserInfo } from "../components/userInfo";
 import axios from "axios";
-import { UpcomingMovies } from "../types/api";
+import { Movie, UpcomingMovies } from "../types/api";
 import { upcomingMoviesUrl } from "../utils/movies";
 
-export async function upcomingMovieLoader() {
+export async function upcomingMovieLoader(): Promise<Movie[]> {
   try {
     const response = await axios.get<UpcomingMovies>(upcomingMoviesUrl);
     return response.data.results;
@@ -16,7 +16,7 @@ export async function upcomingMovieLoader() {
   }
 }
 export function Home(): JSX.Element {
-  const upcomingMovies = useLoaderData();
+  const upcomingMovies = useLoaderData() as Movie[];
 
   return (
     <div className="bg-dark flex-1 flex flex-col justify-evenly gap-4 pt-8 overflow-y-scroll scrollbar-hide">
