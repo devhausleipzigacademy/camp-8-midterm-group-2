@@ -17,6 +17,7 @@ import {
   Queue,
   SelectSeats,
   SelectTime,
+  selectTimeLoader,
   Ticket,
   upcomingMovieLoader,
   User,
@@ -40,10 +41,9 @@ const movieDetailChildren = [
     element: <BookingLayout />,
     children: [
       {
-        // index ?, asking for confirmation
         index: true,
-        path: "selecttime",
         element: <SelectTime />,
+        loader: selectTimeLoader,
       },
       {
         path: "selectseats",
