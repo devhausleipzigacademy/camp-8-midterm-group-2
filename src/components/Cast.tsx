@@ -6,9 +6,9 @@ import {
   ReactPortal,
 } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Credits, MovieDetail } from "../types/api";
+import { Credits } from "../types/api";
 
-export async function loadCast(res: any) {
+export async function loadCast(res: any): Promise<Credits | undefined> {
   const movieId = res.params.movieId;
 
   try {
