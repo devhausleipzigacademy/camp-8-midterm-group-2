@@ -71,6 +71,7 @@ function MovieDetails(): JSX.Element {
   const writer: string = currentData.writer;
   const movie_synopsis = currentData.details.overview
   const poster_path: string = posterUrl + currentData.details.poster_path;
+
   //content wrapper contains: img, details-wrapper, button
   //page_wrapper will contain Navigation and Content Wrapper
   //pt-[75px] goes away when Nav gets integrated
