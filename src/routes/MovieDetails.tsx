@@ -40,8 +40,8 @@ export async function loadMovieDetails(loaderObj: any) {
 
     const currentData = {
       details: details,
-      director_name,
-      writer_name,
+      director: director_name,
+      writer: writer_name,
     };
 
     return currentData;
@@ -67,22 +67,28 @@ function MovieDetails(): JSX.Element {
   const movie_length: number | null = currentData.details.runtime;
   const director: string = currentData.director;
   const writer: string = currentData.writer;
-  const movie_synopsis = "";
+  const movie_synopsis = currentData.details.overview
   const poster_path: string = posterUrl + currentData.details.poster_path;
   console.log("LINE /! " + posterUrl + currentData.details.poster_path);
 
   //content wrapper contains: img, details-wrapper, button
   //page_wrapper will contain Navigation and Content Wrapper
   //pt-[75px] goes away when Nav gets integrated
+  //bg-dark h-[667px] w-[375px] goes in Home Componente oder in tailwind-theme für #root
+  //mb-[50px] for details_wrapper SHPOULD NO BE THERE
+  //absolute / fixed positioning does NOT work for buttom (??!!??)
 
   const MovieDetails = (
     <div
       id="page_wrapper"
-      className="bg-dark h-[667px] w-[375px] pt-[75px] pb-6 px-[18px] fixed m-0 top-0"
+      className="bg-dark h-[667px] w-[375px] pb-6 fixed m-0 top-0"
     >
       {/* <DetailHeaderLayout /> */}
 
-      <div id="content_wrapper" className="h-[568px] pt-0">
+      <div
+        id="content_wrapper"
+        className="h-[469px] fixed top-[75px] mx-[18px] pt-0 mb-6"
+      >
         <div
           id="image_wrapper"
           className="h-[211px] pt-0 mb-6 p-0 w-[100%] overflow-hidden rounded-lg"
@@ -96,7 +102,7 @@ function MovieDetails(): JSX.Element {
 
         <div
           id="details_wrapper"
-          className="h-[233px] pt-0 mb-4 p-0 flex-row justify-between"
+          className="h-[233px] pt-0 mb-[50px] p-0 flex-row justify-between"
         >
           <h2 className="mt-0 mb-3 text-xl leading-[24.2px] text-white font-bold">
             {movie_name}
@@ -106,7 +112,7 @@ function MovieDetails(): JSX.Element {
             id="section_one"
             className="pt-0 mb-4 h-[65px] flex-col justify-between"
           >
-            <div id="general_details" className="pt-0">
+            <div id="general_details" className="pt-0 flex justify-between">
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row gap-6">
                   <p className="text-white text-description">{movie_year}</p>
@@ -130,16 +136,20 @@ function MovieDetails(): JSX.Element {
               <div id="left" className="flex flex-col flex-1">
                 <div id="director" className="">
                   <span className="text-secondary text-white-dimmed">
-                    director:{" "}
+                    director:
                   </span>
-                  <span>{director}</span>
+                  <span className="text-secondary text-white">
+                    {" " + director}
+                  </span>
                 </div>
 
                 <div id="writer"></div>
                 <span className="text-secondary text-white-dimmed">
-                  writer:{" "}
+                  writer:
                 </span>
-                <span>{writer}</span>
+                <span className="text-secondary text-white">
+                  {" " + writer}
+                </span>
               </div>
 
               <div id="right" className="flex-1">
@@ -157,7 +167,7 @@ function MovieDetails(): JSX.Element {
 
           <div className="w-[100%] h-[1px] mb-4 bg-white-dimmed-heavy "></div>
 
-          <div id="section_two" className="h-[100px] mb-[51px]">
+          <div id="section_two" className="h-[100px]">
             <h3 className="text-white text-primary mb-3">Synopsis</h3>
 
             <p className="text-white-dimmed font-body mb-1 h-[50px]">
@@ -170,8 +180,8 @@ function MovieDetails(): JSX.Element {
             </a>
           </div>
         </div>
-      </div>
-      <div id="button_wrapper">
+
+        <div id="button_wrapper">
           <Button
             type="primary"
             height="default"
@@ -179,6 +189,7 @@ function MovieDetails(): JSX.Element {
             onClick={() => {}}
           />
         </div>
+      </div>
     </div>
   );
 
