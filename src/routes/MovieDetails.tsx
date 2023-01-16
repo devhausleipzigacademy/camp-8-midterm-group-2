@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
-import { Credits, MovieDetail, UpcomingMovies } from "../types/api";
-import { ReactNode, useState } from "react";
-import { posterUrl, upcomingMoviesUrl } from "../utils/movies";
+import { Credits, MovieDetail } from "../types/api";
+import { useState } from "react";
+import { posterUrl } from "../utils/movies";
 
 type CurrentData = {
   details: MovieDetail;
@@ -47,6 +47,7 @@ export async function loadMovieDetails(loaderObj: any) {
     return currentData;
   } catch (err) {
     console.error(err);
+    return null;
   }
 }
 
@@ -54,6 +55,7 @@ function MovieDetails(): JSX.Element {
   let { movieId } = useParams();
 
   const navigate = useNavigate();
+
   const [state, setState] = useState("start");
 
   const currentData = useLoaderData() as CurrentData;
@@ -69,18 +71,24 @@ function MovieDetails(): JSX.Element {
   const poster_path: string = posterUrl + currentData.details.poster_path;
   console.log("LINE /! " + posterUrl + currentData.details.poster_path);
 
+  //content wrapper contains: img, details-wrapper, button
+  //page_wrapper will contain Navigation and Content Wrapper
+  //pt-[75px] goes away when Nav gets integrated
+
   const MovieDetails = (
     <div
       id="page_wrapper"
-      className="bg-dark min-h-[667px] pb-[24px] py-[18px]"
+      className="bg-dark h-[667px] w-[375px] pt-[75px] pb-6 px-[18px] fixed m-0 top-0"
     >
       {/* <DetailHeaderLayout /> */}
 
-
-      <div id="content_wrapper" className="h-[568px] absolute top-[75px] mx-[18px]">
-
-        <div id="image_wrapper"
-          className="mt-0 w-[100%] max-h-[211px] overflow-hidden rounded-lg"
+      <div
+        id="content_wrapper"
+        className="h-[568px] p-0" //why is py-[18px] not applied?
+      >
+        <div
+          id="image_wrapper"
+          className="mt-0 h-[211px] mb-6 p-0 w-[100%] overflow-hidden rounded-lg"
         >
           <img
             alt={`movie poster for ${movie_name}`}
@@ -89,54 +97,52 @@ function MovieDetails(): JSX.Element {
           ></img>
         </div>
 
-        <div id="details_wrapper" className="pt-6 h-[233px] flex-row gap-4">
-
-          <h2 className="pt-6 text-xl leading-[24.2px] text-white font-bold">
+        <div id="details_wrapper" className="mt-0 h-[233px] mb-4 p-0 flex-row">
+          <h2 className="mt-0 mb-3 text-xl leading-[24.2px] text-white font-bold">
             {movie_name}
           </h2>
 
-          <div id="section_one" className="pt-3 h-[65px]">
+          <div id="section_one" className="mt-0 mb-4 h-[65px] flex justify-between">
 
-            <div id="general_details" className="flex flex-col">
+            <div id="general_details" className="">
 
               <div className="flex flex-row justify-between">
 
                 <div className="flex flex-row gap-6">
-
                   <p className="text-white text-description">{movie_year}</p>
-
                   <p className="text-white-dimmed text-description">
                     {movie_category}
                   </p>
-
                   <p className="text-white-dimmed text-description">
                     {movie_length}
                   </p>
                 </div>
 
                 <p className="text-white-dimmed text-description">
-
                   <span className="text-[rgba(34, 197, 94, 1)]">
                     {movie_score}
                   </span>
                 </p>
+
               </div>
+
             </div>
 
-            <div id="cast_&_crew" className="pt-3 flex">
-
+            <div id="cast_&_crew" className="mt-3 flex">
               <div id="left" className="flex flex-col flex-1">
-
                 <div id="director" className="">
-                  <span className="text-secondary text-white-dimmed">director: </span>
+                  <span className="text-secondary text-white-dimmed">
+                    director:{" "}
+                  </span>
                   <span>{director}</span>
                 </div>
 
-                <div id="writer" className="pt-2"></div>
-                  <span className="text-secondary text-white-dimmed">writer: </span>
-                  <span>{writer}</span>
-                </div>
-
+                <div id="writer" className="mt-2"></div>
+                <span className="text-secondary text-white-dimmed">
+                  writer:{" "}
+                </span>
+                <span>{writer}</span>
+              </div>
 
               <div id="right" className="flex-1">
                 <Button
@@ -150,24 +156,24 @@ function MovieDetails(): JSX.Element {
               </div>
             </div>
           </div>
-          </div>
+        </div>
 
-          <div id="section_two" className="pt-4 h-[100px]">
+        <div className="w-[100%] h-[1px] mb-4 bg-white-dimmed-heavy "></div>
 
-            <h3 className="text-white text-primary">Synopsis</h3>
+        <div id="section_two" className="h-[100px] mb-[51px]">
+          <h3 className="text-white text-primary mb-3">Synopsis</h3>
 
-            <p className="text-white-dimmed font-body h-[50px]">
-              After being resurrected by a sinister entity, Art the Clown returns
-              to Miles County where .... {movie_synopsis}
-            </p>
+          <p className="text-white-dimmed font-body mb-1 h-[50px]">
+            After being resurrected by a sinister entity, Art the Clown returns
+            to Miles County where .... {movie_synopsis}
+          </p>
 
-            <a href="url" className="text-yellow font-body underline">
-              Read more
-            </a>
-          </div>
+          <a href="url" className="text-yellow font-body underline">
+            Read more
+          </a>
+        </div>
 
-
-        <div id="button_wrapper" className="pt-[51px]">
+        <div id="button_wrapper">
           <Button
             type="primary"
             height="default"
@@ -177,7 +183,6 @@ function MovieDetails(): JSX.Element {
         </div>
       </div>
     </div>
-
   );
 
   return MovieDetails;
