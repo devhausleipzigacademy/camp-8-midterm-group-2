@@ -131,7 +131,6 @@ function MovieDetails(): JSX.Element {
                 </p>
               </div>
             </div>
-            {/* */}
             <div id="cast_&_crew" className="h-[38px] flex">
               <div id="left" className="flex flex-col flex-1">
                 <div id="director" className="">
@@ -153,8 +152,13 @@ function MovieDetails(): JSX.Element {
               </div>
 
               <div id="right" className="flex-1">
-                <Button className="p-5 bg-yellow"
-                onClick={event => navigate("/")} variant={"primary"} height={"small"} label={"Cast & Crew"}/>
+                <Button
+                  variant={"primary"}
+                  height={"small"}
+                  label={"Cast & Crew"}
+                  onClick={()=>{console.log("CLICK!!!!!")}}
+                  //navigate(`${movieId}/castcrew`)
+                  />
               </div>
             </div>
           </div>
