@@ -1,4 +1,6 @@
 const path = require("path");
+import "./src/index.css"
+
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
