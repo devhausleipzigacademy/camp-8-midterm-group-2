@@ -111,7 +111,7 @@ function MovieDetails(): JSX.Element {
 
           <div
             id="section_one"
-            className="pt-0 mb-4 h-[65px] flex-col justify-between"
+            className="pt-0 mb-4 h-[65px]"
           >
             <div id="general_details" className="pt-0 flex justify-between">
               <div className="flex flex-row justify-between">
