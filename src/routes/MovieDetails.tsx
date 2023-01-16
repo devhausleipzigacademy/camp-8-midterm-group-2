@@ -12,6 +12,7 @@ type CurrentData = {
   poster_path: string;
 };
 
+
 export async function loadMovieDetails(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
 
@@ -52,6 +53,7 @@ export async function loadMovieDetails(loaderObj: any) {
 }
 
 function MovieDetails(): JSX.Element {
+
   let { movieId } = useParams();
 
   const navigate = useNavigate();
@@ -141,7 +143,7 @@ function MovieDetails(): JSX.Element {
                   </span>
                 </div>
 
-                <div id="writer"></div>
+                <div id="writer" className=""></div>
                 <span className="text-secondary text-white-dimmed">
                   writer:
                 </span>
@@ -151,14 +153,8 @@ function MovieDetails(): JSX.Element {
               </div>
 
               <div id="right" className="flex-1">
-                <Button
-                  type="primary"
-                  height="small"
-                  label="Cast&Crew"
-                  onClick={() => {
-                    (movieId: string) => navigate("castcrew");
-                  }}
-                />
+                <Button className="p-5 bg-yellow"
+                onClick={event => navigate("/")} variant={"primary"} height={"small"} label={"Cast & Crew"}/>
               </div>
             </div>
           </div>
@@ -181,13 +177,17 @@ function MovieDetails(): JSX.Element {
 
         <div id="button_wrapper">
           <Button
-            type="primary"
+            variant="primary"
             height="default"
             label="Get reservation"
-            onClick={() => {}}
+            onClick={()=>{console.log("CLICKED")}}
+            //navigate(`${movieId}/booking`)
+
           />
         </div>
       </div>
+
+
     </div>
   );
 
