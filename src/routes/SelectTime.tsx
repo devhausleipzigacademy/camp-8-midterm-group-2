@@ -1,19 +1,45 @@
-import { DatesType } from "../types/times";
+import { DatesType, TimeType } from "../types/times";
+import { add } from "date-fns";
+import { useLoaderData } from "react-router-dom";
+import { availableTimes } from "../utils/times";
 
-export function selectTimeLoader(): DatesType {
-  return {
-    "0000T0000": {
-      "00000T1234": { bookable: true },
-      "00000T1235": { bookable: true },
-    },
-    "0001T0000": {
-      "00000T1234": { bookable: true },
-      "00000T1235": { bookable: false },
-    },
-  };
+export async function selectTimeLoader(): Promise<DatesType> {
+  const today = new Date();
+  today.setHours(0);
+  today.setMinutes(0);
+  today.setSeconds(0);
+  today.setMilliseconds(0);
+
+  const dates: DatesType = {};
+
+  for (let i = 0; i < 14; i++) {
+    const newDay = add(today, { days: i });
+    const times = createTimes(newDay);
+    dates[newDay.toISOString()] = times;
+  }
+
+  function createTimes(day: Date): TimeType {
+    const times: TimeType = {};
+
+    availableTimes.map((time) => {
+      const newDate = new Date(day.valueOf());
+
+      const [hour, minute] = time.split(":");
+      newDate.setHours(Number(hour));
+      newDate.setMinutes(Number(minute));
+
+      const newDateString = newDate.toISOString();
+      times[newDateString] = { bookable: Math.random() < 0.5 };
+    });
+
+    return times;
+  }
+  console.log(dates);
+  return dates;
 }
 
 export function SelectTime(): JSX.Element {
+  const dates = useLoaderData() as DatesType;
   return (
     <div>
       <h1>Time</h1>
