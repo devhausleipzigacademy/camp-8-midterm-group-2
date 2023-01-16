@@ -1,6 +1,5 @@
 import react from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import "../index.css";
 import { MovieCard } from "../components/MovieCard";
 
 const poster_paths = [
