@@ -69,8 +69,6 @@ function MovieDetails(): JSX.Element {
   const writer: string = currentData.writer;
   const movie_synopsis = currentData.details.overview
   const poster_path: string = posterUrl + currentData.details.poster_path;
-  console.log("LINE /! " + posterUrl + currentData.details.poster_path);
-
   //content wrapper contains: img, details-wrapper, button
   //page_wrapper will contain Navigation and Content Wrapper
   //pt-[75px] goes away when Nav gets integrated
@@ -91,7 +89,7 @@ function MovieDetails(): JSX.Element {
       >
         <div
           id="image_wrapper"
-          className="h-[211px] pt-0 mb-6 p-0 w-[100%] overflow-hidden rounded-lg"
+          className="h-[211px] pt-0 mb-6 p-0 w-full overflow-hidden rounded-lg"
         >
           <img
             alt={`movie poster for ${movie_name}`}
@@ -165,7 +163,7 @@ function MovieDetails(): JSX.Element {
             </div>
           </div>
 
-          <div className="w-[100%] h-[1px] mb-4 bg-white-dimmed-heavy "></div>
+          <div className="w-full h-[1px] mb-4 bg-white-dimmed-heavy "></div>
 
           <div id="section_two" className="h-[100px]">
             <h3 className="text-white text-primary mb-3">Synopsis</h3>
