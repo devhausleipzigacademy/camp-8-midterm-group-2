@@ -1,3 +1,7 @@
+export function selectTimeLoader() {
+  return null;
+}
+
 export function SelectTime(): JSX.Element {
   return (
     <div>
