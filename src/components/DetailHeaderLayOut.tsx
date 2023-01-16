@@ -15,8 +15,8 @@ export function DetailHeader({ title }: props): JSX.Element {
       <div onClick={() => navigate(-1)}>
         <ChevronLeftIcon className="self-center h-6 fill-white" />
       </div>
-
       <h1 className="text-title">{title}</h1>
+      <div />
     </header>
   );
 }

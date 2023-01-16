@@ -4,7 +4,6 @@ import { DetailHeader } from "../components/DetailHeaderLayOut";
 export function MovieLayout() {
   return (
     <div>
-      <DetailHeader></DetailHeader>
       <Outlet />
     </div>
   );
