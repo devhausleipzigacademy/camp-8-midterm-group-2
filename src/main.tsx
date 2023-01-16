@@ -18,10 +18,11 @@ import {
   SelectSeats,
   SelectTime,
   Ticket,
+  upcomingMovieLoader,
   User,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
-import { Movies } from "./routes/Movies";
+import { Movies, MoviesLoader } from "./routes/Movies";
 import NavBar from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: upcomingMovieLoader,
       },
       // {
       //   path: "genres",
@@ -76,6 +78,7 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+        loader: upcomingMovieLoader,
       },
       {
         path: "user",
