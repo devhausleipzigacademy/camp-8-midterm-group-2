@@ -1,3 +1,5 @@
+//for issues see gitHub comment
+
 import axios from "axios";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
