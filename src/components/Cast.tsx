@@ -5,8 +5,26 @@ import {
   ReactFragment,
   ReactPortal,
 } from "react";
+import { useLoaderData } from "react-router-dom";
+import { Credits, MovieDetail } from "../types/api";
+
+export async function loadCast(res: any) {
+  const movieId = res.params.movieId;
+
+  try {
+    const credits: Credits = (
+      await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
+      )
+    ).data;
+
+    return credits;
+  } catch (error) {}
+}
+console.log(loadCast);
 
 export function Cast() {
+  const data = useLoaderData();
   return <div>hi</div>;
 }
 
