@@ -11,7 +11,7 @@ export function Tabs({ type, label }: TabsProps) {
   const [active, setActive] = useState(status[0]);
   return (
     <div className="flex justify-center items-center">
-      <button
+      {/* <button
         type="button"
         className={clsx(
           "text-center text-primary rounded-md w-40 h-6 ",
@@ -22,7 +22,7 @@ export function Tabs({ type, label }: TabsProps) {
         )}
       >
         {label}
-      </button>
+      </button> */}
     </div>
   );
 }

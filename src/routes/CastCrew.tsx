@@ -1,8 +1,10 @@
-import { Cast } from "../components/Cast";
 import { Tab } from "@headlessui/react";
 import { Crew } from "../components/Crew";
 import clsx from "clsx";
 import { useState } from "react";
+import axios from "axios";
+import { Credits } from "../types/api";
+import { Cast } from "../components/Cast";
 
 // export function CastCrew(): JSX.Element {
 //   return (
@@ -24,6 +26,18 @@ import { useState } from "react";
 //     </div>
 //   );
 // }
+
+export async function castLoader() {
+  try {
+    const response = await axios.get<Credits>(
+      "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("connection Issues");
+  }
+}
+
 type ButtonProps = {};
 
 export function CastCrew(): JSX.Element {
