@@ -10,5 +10,5 @@ export const upcomingMoviesUrl = `${baseUrl}/movie/upcoming?api_key=${SECRETKEY}
 
 
 export function movieLink(movie: Movie) {
-  return `/${movie.id.toString()}`
+  return `/${String(movie.id)}`
 }
