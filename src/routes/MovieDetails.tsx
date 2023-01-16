@@ -82,13 +82,10 @@ function MovieDetails(): JSX.Element {
     >
       {/* <DetailHeaderLayout /> */}
 
-      <div
-        id="content_wrapper"
-        className="h-[568px] p-0" //why is py-[18px] not applied?
-      >
+      <div id="content_wrapper" className="h-[568px] pt-0">
         <div
           id="image_wrapper"
-          className="mt-0 h-[211px] mb-6 p-0 w-[100%] overflow-hidden rounded-lg"
+          className="h-[211px] pt-0 mb-6 p-0 w-[100%] overflow-hidden rounded-lg"
         >
           <img
             alt={`movie poster for ${movie_name}`}
@@ -97,17 +94,20 @@ function MovieDetails(): JSX.Element {
           ></img>
         </div>
 
-        <div id="details_wrapper" className="mt-0 h-[233px] mb-4 p-0 flex-row">
+        <div
+          id="details_wrapper"
+          className="h-[233px] pt-0 mb-4 p-0 flex-row justify-between"
+        >
           <h2 className="mt-0 mb-3 text-xl leading-[24.2px] text-white font-bold">
             {movie_name}
           </h2>
 
-          <div id="section_one" className="mt-0 mb-4 h-[65px] flex justify-between">
-
-            <div id="general_details" className="">
-
+          <div
+            id="section_one"
+            className="pt-0 mb-4 h-[65px] flex-col justify-between"
+          >
+            <div id="general_details" className="pt-0">
               <div className="flex flex-row justify-between">
-
                 <div className="flex flex-row gap-6">
                   <p className="text-white text-description">{movie_year}</p>
                   <p className="text-white-dimmed text-description">
@@ -123,12 +123,10 @@ function MovieDetails(): JSX.Element {
                     {movie_score}
                   </span>
                 </p>
-
               </div>
-
             </div>
-
-            <div id="cast_&_crew" className="mt-3 flex">
+            {/* */}
+            <div id="cast_&_crew" className="h-[38px] flex">
               <div id="left" className="flex flex-col flex-1">
                 <div id="director" className="">
                   <span className="text-secondary text-white-dimmed">
@@ -137,7 +135,7 @@ function MovieDetails(): JSX.Element {
                   <span>{director}</span>
                 </div>
 
-                <div id="writer" className="mt-2"></div>
+                <div id="writer"></div>
                 <span className="text-secondary text-white-dimmed">
                   writer:{" "}
                 </span>
@@ -156,24 +154,24 @@ function MovieDetails(): JSX.Element {
               </div>
             </div>
           </div>
+
+          <div className="w-[100%] h-[1px] mb-4 bg-white-dimmed-heavy "></div>
+
+          <div id="section_two" className="h-[100px] mb-[51px]">
+            <h3 className="text-white text-primary mb-3">Synopsis</h3>
+
+            <p className="text-white-dimmed font-body mb-1 h-[50px]">
+              After being resurrected by a sinister entity, Art the Clown
+              returns to Miles County where .... {movie_synopsis}
+            </p>
+
+            <a href="url" className="text-yellow font-body underline">
+              Read more
+            </a>
+          </div>
         </div>
-
-        <div className="w-[100%] h-[1px] mb-4 bg-white-dimmed-heavy "></div>
-
-        <div id="section_two" className="h-[100px] mb-[51px]">
-          <h3 className="text-white text-primary mb-3">Synopsis</h3>
-
-          <p className="text-white-dimmed font-body mb-1 h-[50px]">
-            After being resurrected by a sinister entity, Art the Clown returns
-            to Miles County where .... {movie_synopsis}
-          </p>
-
-          <a href="url" className="text-yellow font-body underline">
-            Read more
-          </a>
-        </div>
-
-        <div id="button_wrapper">
+      </div>
+      <div id="button_wrapper">
           <Button
             type="primary"
             height="default"
@@ -181,7 +179,6 @@ function MovieDetails(): JSX.Element {
             onClick={() => {}}
           />
         </div>
-      </div>
     </div>
   );
 
