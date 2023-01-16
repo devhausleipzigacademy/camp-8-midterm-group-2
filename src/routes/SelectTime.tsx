@@ -31,10 +31,8 @@ export async function selectTimeLoader(): Promise<DatesType> {
       const newDateString = newDate.toISOString();
       times[newDateString] = { bookable: Math.random() < 0.5 };
     });
-
     return times;
   }
-  console.log(dates);
   return dates;
 }
 
