@@ -22,7 +22,7 @@ const movieDetailChildren = [
   {
     index: true,
     element: <MovieDetails />,
-    loader: loadMovieDetails,
+    // loader: loadMovieDetails,
   },
   {
     path: "castcrew",

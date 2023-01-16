@@ -14,11 +14,6 @@ export async function loadMovieDetails({ params }: props): Promise<string> {
 export function MovieDetails(): JSX.Element {
   /* const movie: string = useLoaderData(); */
 
-  const detailHeaderProps = {
-    title: "Movie Details",
-    toAddress: "../",
-  };
-  return <DetailHeader {...detailHeaderProps}></DetailHeader>;
   return (
     <div>
       <h1>Movie ID</h1>

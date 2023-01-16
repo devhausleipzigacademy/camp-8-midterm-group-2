@@ -16,7 +16,7 @@ const routes = [
   },
   {
     name: "MovieDetails",
-    path: "/movieid/details",
+    path: "/:movieid",
   },
   {
     name: "CastCrew",
