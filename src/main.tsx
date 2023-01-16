@@ -24,6 +24,7 @@ import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
 
 import NavBar from "./layouts/NavBarLayout";
+import { loadCastAndCrew } from "./components/Cast";
 
 const movieDetailChildren = [
   {
@@ -34,6 +35,7 @@ const movieDetailChildren = [
   {
     path: "castcrew",
     element: <CastCrew />,
+    loader: loadCastAndCrew,
   },
   {
     path: "booking",
