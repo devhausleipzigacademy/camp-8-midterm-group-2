@@ -64,7 +64,7 @@ export function SelectTime(): JSX.Element {
         console.log(chosenDate);
       }}
     >
-      <div className="divide-y divide-white-dimmed-heavy flex flex-col gap-6">
+      <div className="flex flex-col gap-6">
         <div className="space-y-5">
           <h3 className="font-bold text-sm text-white-dimmed">DATE</h3>
           <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-1">
@@ -106,6 +106,7 @@ export function SelectTime(): JSX.Element {
             })}
           </div>
         </div>
+        <div className="bg-white-dimmed-heavy h-[1px]"></div>
         {chosenDate && (
           <div className="space-y-5">
             <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
