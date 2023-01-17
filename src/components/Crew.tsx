@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 type props = {
   image: string;
@@ -6,12 +7,23 @@ type props = {
   character: string;
 };
 
+export async function crewLoader(res: props) {
+  try {
+    const res = await axios.get(
+      "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
+    );
+    console.log(res.data);
+  } catch (error) {
+    console.error("Couldn't reach the API");
+  }
+}
+
 const crew = [
   {
     image:
       "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg",
-    name: "Sebi",
-    character: "Frontend-Developer",
+    name: "Sebi", // {data.name}
+    character: "Frontend-Developer", // {data.job}
   },
   {
     image:
@@ -27,7 +39,7 @@ const crew = [
   },
 ];
 
-export function Crew() {
+export function Crew(crewLoader: props) {
   return (
     <div>
       {crew.map((actor) => (
