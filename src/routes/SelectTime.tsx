@@ -1,7 +1,9 @@
 import { DatesType, TimeType } from "../types/times";
-import { add } from "date-fns";
+import { add, setDate } from "date-fns";
 import { useLoaderData } from "react-router-dom";
 import { availableTimes } from "../utils/times";
+import { useState } from "react";
+import clsx from "clsx";
 
 export async function selectTimeLoader(): Promise<DatesType> {
   const today = new Date();
@@ -37,9 +39,16 @@ export async function selectTimeLoader(): Promise<DatesType> {
 }
 
 export function SelectTime(): JSX.Element {
+  const [chosenDate, setChosenDate] = useState("");
   const dates = useLoaderData() as DatesType;
   return (
-    <div className="flex flex-col justify-between h-full">
+    <form
+      className="flex flex-col justify-between h-full"
+      onSubmit={(event) => {
+        event.preventDefault();
+        console.log(chosenDate);
+      }}
+    >
       <div className="divide-y divide-white-dimmed-heavy flex flex-col gap-6">
         <div className="space-y-4">
           <h3 className="font-bold text-sm text-white-dimmed">DATE</h3>
@@ -59,7 +68,18 @@ export function SelectTime(): JSX.Element {
               "01 Jan",
             ].map((date) => {
               return (
-                <button className="text-white-dimmed px-3 py-1">{date}</button>
+                <label
+                  className={clsx("text-white-dimmed px-3 py-1")}
+                  onClick={(event) => setChosenDate(date)}
+                >
+                  {date}
+                  <input
+                    type="radio"
+                    name="dateInput"
+                    value={date}
+                    className="invisible"
+                  />
+                </label>
               );
             })}
           </div>
@@ -73,9 +93,12 @@ export function SelectTime(): JSX.Element {
           </div>
         </div>
       </div>
-      <button className="bg-yellow rounded-lg w-full h-12 py-4 text-dark-light text-sm font-bold">
+      <button
+        type="submit"
+        className="bg-yellow rounded-lg w-full h-12 py-4 text-dark-light text-sm font-bold"
+      >
         Select Seat
       </button>
-    </div>
+    </form>
   );
 }
