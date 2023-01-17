@@ -99,39 +99,41 @@ export function SelectTime(): JSX.Element {
             })}
           </div>
         </div>
-        <div className="bg-white-dimmed-heavy h-[1px]"></div>
         {chosenDate && (
-          <div className="space-y-5">
-            <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
-            <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-2">
-              {Object.entries(dates[chosenDate]).map((timeSlot) => {
-                const [ISOTime, bookable] = timeSlot;
-                const dateObj = parseISO(ISOTime);
-                const time = format(dateObj, "HH:mm", { locale: de });
-                return (
-                  <label
-                    key={time}
-                    className={clsx(
-                      "px-2 py-1 rounded text-center",
-                      !bookable ? "text-dark-light" : "text-white-dimmed",
-                      chosenTime === ISOTime && "bg-yellow text-dark"
-                    )}
-                    onClick={(event) => {
-                      if (bookable) setChosenTime(ISOTime);
-                    }}
-                  >
-                    {time}
-                    <input
-                      type="radio"
-                      name="timeInput"
-                      value={ISOTime}
-                      className="hidden"
-                    />
-                  </label>
-                );
-              })}
+          <>
+            <div className="bg-white-dimmed-heavy h-[1px]"></div>
+            <div className="space-y-5">
+              <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
+              <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-2">
+                {Object.entries(dates[chosenDate]).map((timeSlot) => {
+                  const [ISOTime, bookable] = timeSlot;
+                  const dateObj = parseISO(ISOTime);
+                  const time = format(dateObj, "HH:mm", { locale: de });
+                  return (
+                    <label
+                      key={time}
+                      className={clsx(
+                        "px-2 py-1 rounded text-center",
+                        !bookable ? "text-dark-light" : "text-white-dimmed",
+                        chosenTime === ISOTime && "bg-yellow text-dark"
+                      )}
+                      onClick={(event) => {
+                        if (bookable) setChosenTime(ISOTime);
+                      }}
+                    >
+                      {time}
+                      <input
+                        type="radio"
+                        name="timeInput"
+                        value={ISOTime}
+                        className="hidden"
+                      />
+                    </label>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
       <button
