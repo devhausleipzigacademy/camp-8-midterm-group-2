@@ -13,7 +13,7 @@ export interface ButtonProps
 }
 
 function Button({
-  variant, height, label, disabled}:
+  variant, height, label, disabled, ...props}:
 ButtonProps){
   return (
     <button
@@ -25,6 +25,7 @@ ButtonProps){
         (variant ==="primary" && (disabled))? 'bg-yellow-dimmed text-dark-light' : '',
         (height === "default")? 'py-[16px]':'pt-[12px] pb-[11px]',
         (variant === "secondary")? 'bg-dark-light text-white':'')}
+        {...props}
     >
       {label}
     </button>
