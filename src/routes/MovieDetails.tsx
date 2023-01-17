@@ -83,7 +83,7 @@ function MovieDetails(): JSX.Element {
   const MovieDetails = (
     <div
       id="page_wrapper"
-      className="bg-dark h-[667px] w-[375px] pb-6 fixed m-0 top-0"
+      className="screen-default pb-6 fixed m-0 top-0"
     >
       {/* <DetailHeaderLayout /> */}
 
