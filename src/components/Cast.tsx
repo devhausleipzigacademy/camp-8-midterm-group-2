@@ -8,28 +8,36 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { Credits } from "../types/api";
 
-await axios
-  .get(
+// await axios
+//   .get(
+//     "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
+//   )
+//   .then(function getCredits(res) {
+//     // handle success
+//     console.log(res);
+//   })
+//   .catch(function (error) {
+//     // handle error
+//     console.log(error);
+//   })
+//   .finally(function () {});
+
+axios
+  .get<Credits>(
     "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
   )
-  .then(function getCredits(res) {
-    // handle success
-    console.log(res);
-    return res;
+  .then((res) => {
+    console.log(res.data);
+    console.log(res.data.crew);
+    console.log(res.data.cast);
   })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
+  .catch((error) => {
+    console.error("Couldn't reach the API");
   });
 
 export function Cast(loadCast: Credits) {
   const data = useLoaderData();
-  return (
-    <div>
-      hi
-      <div></div>
-    </div>
-  );
+  return <div>hi</div>;
 }
 
 //   const cast = castLoader();
