@@ -54,7 +54,6 @@ export async function loadMovieDetails(loaderObj: any) {
 }
 
 function MovieDetails(): JSX.Element {
-
   let { movieId } = useParams();
 
   const navigate = useNavigate();
@@ -67,11 +66,18 @@ function MovieDetails(): JSX.Element {
   const movie_category: string = currentData.details.genres[0].name;
   const movie_year: string = currentData.details.release_date;
   const movie_score: number = currentData.details.popularity;
-  const movie_length: number | null = currentData.details.runtime;
+  const movie_length: {hours: number, minutes: number} | null = {
+    hours: Math.floor(currentData.details.runtime / 60),
+    minutes: currentData.details.runtime % 60,
+  };
+
   const director: string = currentData.director;
   const writer: string = currentData.writer;
-  const movie_synopsis = currentData.details.overview
+  const movie_synopsis = currentData.details.overview;
   const poster_path: string = posterUrl + currentData.details.poster_path;
+
+  console.log("movie lenght" + movie_length);
+  console.log("movie score" + movie_score);
 
   //content wrapper contains: img, details-wrapper, button
   //page_wrapper will contain Navigation and Content Wrapper
@@ -81,10 +87,7 @@ function MovieDetails(): JSX.Element {
   //absolute / fixed positioning does NOT work for buttom (??!!??)
 
   const MovieDetails = (
-    <div
-      id="page_wrapper"
-      className="screen-default pb-6 fixed m-0 top-0"
-    >
+    <div id="page_wrapper" className="screen-default pb-6 fixed m-0 top-0">
       {/* <DetailHeaderLayout /> */}
 
       <div
@@ -93,7 +96,7 @@ function MovieDetails(): JSX.Element {
       >
         <div
           id="image_wrapper"
-          className="h-[211px] pt-0 mb-6 p-0 w-full overflow-hidden rounded-lg"
+          className="h-[210px] pt-0 mb-6 p-0 w-full overflow-hidden rounded-lg"
         >
           <img
             alt={`movie poster for ${movie_name}`}
@@ -104,51 +107,58 @@ function MovieDetails(): JSX.Element {
 
         <div
           id="details_wrapper"
-          className="h-[233px] pt-0 mb-[50px] p-0 flex-row justify-between"
+          className="h-[233px] pt-0 mb-12 p-0 flex-row justify-between"
         >
-          <h2 className="mt-0 mb-3 text-xl leading-[24.2px] text-white font-bold">
+          <h2 className="mt-0 mb-3 text-xl leading-6 text-white font-bold">
             {movie_name}
           </h2>
 
           <div
             id="section_one"
-            className="pt-0 mb-4 h-16 flex flex-col justify-between">
-            <div id="general_details" className="h-[12px] flex justify-between">
+            className="pt-0 mb-4 h-16 flex flex-col justify-between"
+          >
+            <div id="general_details" className="h-3 flex justify-between">
               <div className="flex flex-row justify-between">
-                <div className="flex flex-row gap-6">
-                  <p className="text-white text-description">{movie_year}</p>
-                  <p className="text-white-dimmed text-description">
+                <div className="flex flex-row">
+                  <p className="text-white text-description flex-none mr-6">
+                    {movie_year}
+                  </p>
+                  <p className="text-white-dimmed text-description flex-none mr-6">
                     {movie_category}
                   </p>
-                  <p className="text-white-dimmed text-description">
-                    {movie_length}
+                  <p className="text-white-dimmed text-description flex-none">
+                  {movie_length.hours + "h "}{movie_length.minutes+"min"}
+                  </p>
+                  <div className="flex grow bg-red"></div>
+                  <p className="text-white-dimmed text-description flex-grow justify-self-end text-right">
+                    <span className="text-green text-right">
+                      {movie_score * 100 + "%  "}
+                    </span>
+                    Score
                   </p>
                 </div>
-
-                <p className="text-white-dimmed text-description">
-                  <span className="text-[rgba(34, 197, 94, 1)]">
-                    {movie_score}
-                  </span>
-                </p>
               </div>
             </div>
             <div id="cast_&_crew" className="h-10 flex">
-              <div id="left" className="h-9 flex flex-col justify-between flex-1">
+              <div
+                id="left"
+                className="h-9 flex flex-col justify-between flex-1"
+              >
                 <div id="director" className="flex items-start mt-0">
                   <span className="text-secondary text-white-dimmed mr-1">
                     director:
                   </span>
                   <span className="text-secondary text-white whitespace-nowrap">
-                    {director}
+                    {" " + director}
                   </span>
                 </div>
 
-                <div id="writer  " className="flex items-end mb-0 relative top-1">
+                <div id="writer" className="flex items-end mb-0 relative top-1">
                   <span className="text-secondary text-white-dimmed mr-1">
                     writer:
                   </span>
-                  <span className="text-secondary text-white whitespace-nowrap">
-                    {writer}
+                  <span className="text-secondary text-white">
+                    {"    " + writer}
                   </span>
                 </div>
               </div>
@@ -159,19 +169,20 @@ function MovieDetails(): JSX.Element {
                   height={"small"}
                   label={"Cast & Crew"}
                   onClick={() => {
-                    () => navigate(`castcrew`)}}
+                    () => navigate(`castcrew`);
+                  }}
                   //navigate(`${movieId}/castcrew`)
-                  />
+                />
               </div>
             </div>
           </div>
 
           <div className="w-full h-[1px] mb-4 bg-white-dimmed-heavy "></div>
 
-          <div id="section_two" className="h-[100px]">
+          <div id="section_two" className="h-25">
             <h3 className="text-white text-primary mb-3">Synopsis</h3>
 
-            <p className="text-white-dimmed font-body mb-1 h-[50px] synopsis-preview">
+            <p className="text-white-dimmed font-body mb-1 h-13 synopsis-preview">
               {movie_synopsis}
             </p>
 
@@ -188,11 +199,9 @@ function MovieDetails(): JSX.Element {
             label="Get reservation"
             onClick={() => navigate(`booking`)}
             //navigate(`${movieId}/booking`)
-
           />
         </div>
       </div>
-
     </div>
   );
 
