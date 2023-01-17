@@ -53,7 +53,7 @@ export async function selectTimeLoader(): Promise<DatesType> {
 }
 
 export function SelectTime(): JSX.Element {
-  const [chosenDate, setChosenDate] = useState();
+  const [chosenDate, setChosenDate] = useState("");
   const dates = useLoaderData() as DatesType;
   return (
     <form
@@ -66,25 +66,35 @@ export function SelectTime(): JSX.Element {
       <div className="divide-y divide-white-dimmed-heavy flex flex-col gap-6">
         <div className="space-y-4">
           <h3 className="font-bold text-sm text-white-dimmed">DATE</h3>
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-1">
             {Object.keys(dates).map((ISODate) => {
+              //
               const dateObj = parseISO(ISODate);
               const date = format(dateObj, "dd LLL", { locale: de });
+
+              // the following unreadable code checks if some date entries are bookable
+              // because if they are all not the date is unavailable
+              const available = Object.values(dates[ISODate]).some(
+                (time) => time.bookable
+              );
 
               return (
                 <label
                   key={date}
                   className={clsx(
-                    "text-white-dimmed px-3 py-1 rounded",
-                    chosenDate === dateObj ? "bg-yellow" : ""
+                    "px-2 py-1 rounded text-center",
+                    !available ? "text-dark-light" : "text-white-dimmed",
+                    chosenDate === ISODate && "bg-yellow text-dark"
                   )}
-                  onClick={(event) => setChosenDate(dateObj)}
+                  onClick={(event) => {
+                    if (available) setChosenDate(ISODate);
+                  }}
                 >
                   {date}
                   <input
                     type="radio"
                     name="dateInput"
-                    value={date}
+                    value={ISODate}
                     className="invisible"
                   />
                 </label>
