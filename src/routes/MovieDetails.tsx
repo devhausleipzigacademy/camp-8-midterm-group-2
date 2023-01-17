@@ -112,9 +112,8 @@ function MovieDetails(): JSX.Element {
 
           <div
             id="section_one"
-            className="pt-0 mb-4 h-[65px]"
-          >
-            <div id="general_details" className="pt-0 flex justify-between">
+            className="pt-0 mb-4 h-16 flex flex-col justify-between">
+            <div id="general_details" className="h-[12px] flex justify-between">
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row gap-6">
                   <p className="text-white text-description">{movie_year}</p>
@@ -133,27 +132,28 @@ function MovieDetails(): JSX.Element {
                 </p>
               </div>
             </div>
-            <div id="cast_&_crew" className="h-[38px] flex">
-              <div id="left" className="flex flex-col flex-1 overflow-hidden">
-                <div id="director" className="">
-                  <span className="text-secondary text-white-dimmed">
+            <div id="cast_&_crew" className="h-10 flex">
+              <div id="left" className="h-9 flex flex-col justify-between flex-1">
+                <div id="director" className="flex items-start mt-0">
+                  <span className="text-secondary text-white-dimmed mr-1">
                     director:
                   </span>
                   <span className="text-secondary text-white whitespace-nowrap">
-                    {" " + director}
+                    {director}
                   </span>
                 </div>
 
-                <div id="writer" className=""></div>
-                <span className="text-secondary text-white-dimmed">
-                  writer:
-                </span>
-                <span className="text-secondary text-white whitespace-nowrap">
-                  {" " + writer}
-                </span>
+                <div id="writer  " className="flex items-end mb-0 relative top-1">
+                  <span className="text-secondary text-white-dimmed mr-1">
+                    writer:
+                  </span>
+                  <span className="text-secondary text-white whitespace-nowrap">
+                    {writer}
+                  </span>
+                </div>
               </div>
 
-              <div id="right" className="flex-1">
+              <div id="right" className="h-10 flex-1">
                 <Button
                   variant={"primary"}
                   height={"small"}
