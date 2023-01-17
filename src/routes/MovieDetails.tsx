@@ -12,7 +12,6 @@ type CurrentData = {
   poster_path: string;
 };
 
-
 export async function loadMovieDetails(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
 
@@ -157,7 +156,8 @@ function MovieDetails(): JSX.Element {
                   variant={"primary"}
                   height={"small"}
                   label={"Cast & Crew"}
-                  onClick={()=>{console.log("CLICK!!!!!")}}
+                  onClick={() => {
+                    () => navigate(`castcrew`)}}
                   //navigate(`${movieId}/castcrew`)
                   />
               </div>
@@ -185,13 +185,12 @@ function MovieDetails(): JSX.Element {
             variant="primary"
             height="default"
             label="Get reservation"
-            onClick={()=>{console.log("CLICKED")}}
+            onClick={() => navigate(`booking`)}
             //navigate(`${movieId}/booking`)
 
           />
         </div>
       </div>
-
 
     </div>
   );
