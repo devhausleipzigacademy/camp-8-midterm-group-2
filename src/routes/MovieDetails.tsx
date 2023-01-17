@@ -81,10 +81,6 @@ function MovieDetails(): JSX.Element {
 
   //content wrapper contains: img, details-wrapper, button
   //page_wrapper will contain Navigation and Content Wrapper
-  //pt-[75px] goes away when Nav gets integrated
-  //bg-dark h-[667px] w-[375px] goes in Home Componente oder in tailwind-theme für #root
-  //mb-[50px] for details_wrapper SHPOULD NO BE THERE
-  //absolute / fixed positioning does NOT work for buttom (??!!??)
 
   const MovieDetails = (
     <div id="page_wrapper" className="screen-default pb-6 fixed m-0 top-0">
@@ -171,7 +167,6 @@ function MovieDetails(): JSX.Element {
                   onClick={() => {
                     () => navigate(`castcrew`);
                   }}
-                  //navigate(`${movieId}/castcrew`)
                 />
               </div>
             </div>
@@ -191,16 +186,16 @@ function MovieDetails(): JSX.Element {
             </a>
           </div>
         </div>
+      </div>
 
-        <div id="button_wrapper">
+      <div id="button_wrapper"
+        className="absolute bottom-6 left-5 right-5">
           <Button
             variant="primary"
             height="default"
             label="Get reservation"
             onClick={() => navigate(`booking`)}
-            //navigate(`${movieId}/booking`)
           />
-        </div>
       </div>
     </div>
   );
