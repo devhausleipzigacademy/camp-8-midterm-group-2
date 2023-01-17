@@ -8,7 +8,7 @@ type props = {
 export function MovieCarussel({ movies }: props) {
   return (
     <div className="flex flex-col gap-5 w-full">
-      <h2 className="text-white font-bold">Upcoming Movies</h2>
+      <h2 className="text-white font-bold px-5">Upcoming Movies</h2>
       <section className="overflow-x-scroll overscroll-contain snap-x flex space-x-10 scrollbar-hide">
         {movies.map((movie) => (
           <Link to={String(movie.id)}>
