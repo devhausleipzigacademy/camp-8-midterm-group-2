@@ -31,6 +31,12 @@ export async function selectTimeLoader(): Promise<DatesType> {
       const newDateString = newDate.toISOString();
       times[newDateString] = { bookable: Math.random() < 0.5 };
     });
+    // make times for a whole day completely unbookable
+    if (Math.random() < 0.25) {
+      for (const time in times) {
+        times[time].bookable = false;
+      }
+    }
     return times;
   }
   return dates;
