@@ -134,12 +134,12 @@ function MovieDetails(): JSX.Element {
               </div>
             </div>
             <div id="cast_&_crew" className="h-[38px] flex">
-              <div id="left" className="flex flex-col flex-1">
+              <div id="left" className="flex flex-col flex-1 overflow-hidden">
                 <div id="director" className="">
                   <span className="text-secondary text-white-dimmed">
                     director:
                   </span>
-                  <span className="text-secondary text-white">
+                  <span className="text-secondary text-white whitespace-nowrap">
                     {" " + director}
                   </span>
                 </div>
@@ -148,7 +148,7 @@ function MovieDetails(): JSX.Element {
                 <span className="text-secondary text-white-dimmed">
                   writer:
                 </span>
-                <span className="text-secondary text-white">
+                <span className="text-secondary text-white whitespace-nowrap">
                   {" " + writer}
                 </span>
               </div>
@@ -171,9 +171,8 @@ function MovieDetails(): JSX.Element {
           <div id="section_two" className="h-[100px]">
             <h3 className="text-white text-primary mb-3">Synopsis</h3>
 
-            <p className="text-white-dimmed font-body mb-1 h-[50px]">
-              After being resurrected by a sinister entity, Art the Clown
-              returns to Miles County where .... {movie_synopsis}
+            <p className="text-white-dimmed font-body mb-1 h-[50px] synopsis-preview">
+              {movie_synopsis}
             </p>
 
             <a href="url" className="text-yellow font-body underline">
