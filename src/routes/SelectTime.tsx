@@ -1,12 +1,5 @@
 import { DatesType, TimeType } from "../types/times";
-import {
-  add,
-  format,
-  getDaysInMonth,
-  getMonth,
-  parseISO,
-  setDate,
-} from "date-fns";
+import { add, format, parseISO } from "date-fns";
 import { useLoaderData } from "react-router-dom";
 import { availableTimes } from "../utils/times";
 import { useState } from "react";
@@ -61,7 +54,7 @@ export function SelectTime(): JSX.Element {
       className="flex flex-col justify-between h-full"
       onSubmit={(event) => {
         event.preventDefault();
-        console.log(chosenDate);
+        // Navigate to seats selection when it is done
       }}
     >
       <div className="flex flex-col gap-6">
