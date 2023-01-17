@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer components {
+  .screen-default {
+    @apply bg-dark h-[667px] w-[375px] m-0 p-0 fixed;
+  }
   .text-title {
     font-weight: 700;
     font-size: 16px;
