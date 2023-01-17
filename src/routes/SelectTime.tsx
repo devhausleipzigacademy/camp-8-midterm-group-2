@@ -1,9 +1,17 @@
 import { DatesType, TimeType } from "../types/times";
-import { add, setDate } from "date-fns";
+import {
+  add,
+  format,
+  getDaysInMonth,
+  getMonth,
+  parseISO,
+  setDate,
+} from "date-fns";
 import { useLoaderData } from "react-router-dom";
 import { availableTimes } from "../utils/times";
 import { useState } from "react";
 import clsx from "clsx";
+import { de } from "date-fns/locale";
 
 export async function selectTimeLoader(): Promise<DatesType> {
   const today = new Date();
@@ -39,7 +47,7 @@ export async function selectTimeLoader(): Promise<DatesType> {
 }
 
 export function SelectTime(): JSX.Element {
-  const [chosenDate, setChosenDate] = useState("");
+  const [chosenDate, setChosenDate] = useState();
   const dates = useLoaderData() as DatesType;
   return (
     <form
@@ -53,24 +61,18 @@ export function SelectTime(): JSX.Element {
         <div className="space-y-4">
           <h3 className="font-bold text-sm text-white-dimmed">DATE</h3>
           <div className="grid grid-cols-4">
-            {[
-              "21 Dec",
-              "22 Dec",
-              "23 Dec",
-              "24 Dec",
-              "25 Dec",
-              "26 Dec",
-              "27 Dec",
-              "28 Dec",
-              "29 Dec",
-              "30 Dec",
-              "31 Dec",
-              "01 Jan",
-            ].map((date) => {
+            {Object.keys(dates).map((ISODate) => {
+              const dateObj = parseISO(ISODate);
+              const date = format(dateObj, "dd LLL", { locale: de });
+
               return (
                 <label
-                  className={clsx("text-white-dimmed px-3 py-1")}
-                  onClick={(event) => setChosenDate(date)}
+                  key={date}
+                  className={clsx(
+                    "text-white-dimmed px-3 py-1 rounded",
+                    chosenDate === dateObj ? "bg-yellow" : ""
+                  )}
+                  onClick={(event) => setChosenDate(dateObj)}
                 >
                   {date}
                   <input
@@ -84,14 +86,14 @@ export function SelectTime(): JSX.Element {
             })}
           </div>
         </div>
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
           <div className="grid grid-cols-4">
             {availableTimes.map((time) => (
               <button className="text-white-dimmed px-2 py-1">{time}</button>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
       <button
         type="submit"
