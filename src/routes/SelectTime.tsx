@@ -54,6 +54,7 @@ export async function selectTimeLoader(): Promise<DatesType> {
 
 export function SelectTime(): JSX.Element {
   const [chosenDate, setChosenDate] = useState("");
+  const [chosenTime, setChosenTime] = useState("");
   const dates = useLoaderData() as DatesType;
   return (
     <form
@@ -64,7 +65,7 @@ export function SelectTime(): JSX.Element {
       }}
     >
       <div className="divide-y divide-white-dimmed-heavy flex flex-col gap-6">
-        <div className="space-y-4">
+        <div className="space-y-5">
           <h3 className="font-bold text-sm text-white-dimmed">DATE</h3>
           <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-1">
             {Object.keys(dates).map((ISODate) => {
@@ -87,7 +88,10 @@ export function SelectTime(): JSX.Element {
                     chosenDate === ISODate && "bg-yellow text-dark"
                   )}
                   onClick={(event) => {
-                    if (available) setChosenDate(ISODate);
+                    if (available) {
+                      setChosenTime("");
+                      setChosenDate(ISODate);
+                    }
                   }}
                 >
                   {date}
@@ -95,21 +99,46 @@ export function SelectTime(): JSX.Element {
                     type="radio"
                     name="dateInput"
                     value={ISODate}
-                    className="invisible"
+                    className="hidden"
                   />
                 </label>
               );
             })}
           </div>
         </div>
-        {/* <div className="space-y-4">
-          <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
-          <div className="grid grid-cols-4">
-            {availableTimes.map((time) => (
-              <button className="text-white-dimmed px-2 py-1">{time}</button>
-            ))}
+        {chosenDate && (
+          <div className="space-y-5">
+            <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
+            <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-2">
+              {Object.entries(dates[chosenDate]).map((timeSlot) => {
+                const [ISOTime, bookable] = timeSlot;
+                const dateObj = parseISO(ISOTime);
+                const time = format(dateObj, "HH:mm", { locale: de });
+                return (
+                  <label
+                    key={time}
+                    className={clsx(
+                      "px-2 py-1 rounded text-center",
+                      !bookable ? "text-dark-light" : "text-white-dimmed",
+                      chosenTime === ISOTime && "bg-yellow text-dark"
+                    )}
+                    onClick={(event) => {
+                      if (bookable) setChosenTime(ISOTime);
+                    }}
+                  >
+                    {time}
+                    <input
+                      type="radio"
+                      name="timeInput"
+                      value={ISOTime}
+                      className="hidden"
+                    />
+                  </label>
+                );
+              })}
+            </div>
           </div>
-        </div> */}
+        )}
       </div>
       <button
         type="submit"
