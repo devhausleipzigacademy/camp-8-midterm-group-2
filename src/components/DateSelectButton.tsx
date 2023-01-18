@@ -15,15 +15,10 @@ export function DateSelectButton({
 }: DateSelectButtonProps) {
   return (
     <button
-      // Event handler added
       onClick={onClick}
-      // Disabled State added
       disabled={disabled}
-      // CLSX helps Tailwind understand more complex arguments
       className={clsx(
-        // always below styling
-        "text-center text-[14px] font-medium rounded-lg w-[70px] h-[29px] disabled:text-white-dimmed-heavy disabled:bg-opacity-0",
-        // when selected x, if unselected (default) y
+        "text-center text-[14px] font-medium rounded px-2 py-1 disabled:text-white-dimmed-heavy disabled:bg-opacity-0",
         selected ? "  text-dark-light bg-yellow text" : "text-white-dimmed"
       )}
     >

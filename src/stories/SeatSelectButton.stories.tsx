@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Meta, StoryFn } from "@storybook/react";
 import {
-  DateSelectButton,
-  DateSelectButtonProps,
-} from "../components/DateSelectButton";
+  SeatSelectButton,
+  SeatSelectButtonProps,
+} from "../components/SeatSelectButton";
 
-type NewType = Meta<typeof DateSelectButton>;
+type NewType = Meta<typeof SeatSelectButton>;
 
 export default {
-  title: "Movie /Date Select Button",
-  component: DateSelectButton,
+  title: "Movie /Seat Select Button",
+  component: SeatSelectButton,
   argTypes: {},
 };
 
-const Template: StoryFn<typeof DateSelectButton> = (args) => {
+const Template: StoryFn<typeof SeatSelectButton> = (args) => {
   const [selected, setSelected] = useState(false);
   useEffect(() => {
     setSelected(args.selected);
@@ -26,7 +26,7 @@ const Template: StoryFn<typeof DateSelectButton> = (args) => {
     onClick: () => setSelected((selected) => !selected),
   };
 
-  return <DateSelectButton {...newArgs} />;
+  return <SeatSelectButton {...newArgs} />;
 };
 
 export const Default = Template.bind({});

@@ -1,6 +1,8 @@
 import clsx from "clsx";
+import React from "react";
+import Button from "./Button";
 
-interface SeatSelectButtonProps {
+export interface SeatSelectButtonProps {
   selected: boolean;
   occupied: boolean;
   onClick: (event: React.FormEvent<any>) => void;
@@ -14,11 +16,10 @@ export function SeatSelectButton({
   return (
     <button
       onClick={onClick}
+      disabled={occupied}
       className={clsx(
-        // w and h based on idea that button takes up spoace on a grid
-        "rounded-lg w-full h-full",
-        selected === true && occupied === false ? "bg-yellow" : "bg-dark-light",
-        selected === false && occupied === false ? "bg-white" : "bg-dark-light"
+        "rounded h-[28px] aspect-square disabled:bg-dark-light",
+        selected ? "bg-yellow" : "bg-white"
       )}
     ></button>
   );
