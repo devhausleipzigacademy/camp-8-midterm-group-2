@@ -38,6 +38,14 @@ const routes = [
     name: "Genres",
     path: "/genres",
   },
+  {
+    name: "User",
+    path: "/user",
+  },
+  {
+    name: "Queue",
+    path: "/queue",
+  },
 ];
 
 export function RootLayout() {

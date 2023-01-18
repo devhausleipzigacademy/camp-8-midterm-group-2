@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 
-type props = {
+export type InputProps = {
   type: string;
 };
-export function Input({ type }: props) {
+export function Input({ type }: InputProps) {
   let placeholder: string;
   if (type === "email") {
     placeholder = "your@email.com";
