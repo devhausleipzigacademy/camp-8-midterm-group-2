@@ -10,7 +10,7 @@ type User = {
 //Create a type for your AuthStore that can hold a user and a token, as well as updaters
 type AuthStore = {
     token: string;
-    user: User
+    user: User | null
     setUser: (user: User) => void; //setUser receives an updated user later
     setToken: (tokenResponse: string) => void;
     clear: () => void;
