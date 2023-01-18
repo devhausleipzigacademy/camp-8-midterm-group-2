@@ -50,6 +50,9 @@ export function SelectTime(): JSX.Element {
   const [chosenDate, setChosenDate] = useState("");
   const [chosenTime, setChosenTime] = useState("");
   const dates = useLoaderData() as DatesType;
+  const detailHeaderProps = {
+    title: "Select Time",
+  };
   return (
     <form
       className="flex flex-col justify-between h-full"

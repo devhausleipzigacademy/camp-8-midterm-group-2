@@ -30,7 +30,7 @@ const movieDetailChildren = [
   {
     index: true,
     element: <MovieDetails />,
-    loader: loadMovieDetails,
+    // loader: loadMovieDetails,
   },
   {
     path: "castcrew",
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: ":movieId",
+    path: ":movieid",
     element: <MovieLayout />,
     children: movieDetailChildren,
   },
