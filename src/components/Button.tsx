@@ -3,7 +3,6 @@ import React from "react";
 
 
 interface ButtonProps {
-
   type: "primary" | "secondary";
   height: "default" | "small"
   label: string;
@@ -19,8 +18,6 @@ ButtonProps){
     <button
       type="button"
       className=
-
-
       {clsx(
         'text-center rounded-lg w-full text-primary',
         (type === "primary" && !disabled)? 'bg-yellow text-dark-light' : '',
