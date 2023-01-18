@@ -66,9 +66,11 @@ function MovieDetails(): JSX.Element {
   const movie_category: string = currentData.details.genres[0].name;
   const movie_year: string = currentData.details.release_date;
   const movie_score: number = currentData.details.popularity;
-  const movie_length: {hours: number, minutes: number} | null = {
-    hours: Math.floor(currentData.details.runtime / 60),
-    minutes: currentData.details.runtime % 60,
+  const movie_length: { hours: number; minutes: number } | null = {
+    hours: currentData.details.runtime
+      ? Math.floor(currentData.details.runtime / 60)
+      : 0,
+    minutes: currentData.details.runtime ? currentData.details.runtime % 60 : 0,
   };
 
   const director: string = currentData.director;
@@ -114,25 +116,23 @@ function MovieDetails(): JSX.Element {
             className="pt-0 mb-4 h-16 flex flex-col justify-between"
           >
             <div id="general_details" className="h-3 flex justify-between">
-              <div className="flex flex-row justify-between">
-                <div className="flex flex-row">
-                  <p className="text-white text-description flex-none mr-6">
-                    {movie_year}
-                  </p>
-                  <p className="text-white-dimmed text-description flex-none mr-6">
-                    {movie_category}
-                  </p>
-                  <p className="text-white-dimmed text-description flex-none">
-                  {movie_length.hours + "h "}{movie_length.minutes+"min"}
-                  </p>
-                  <div className="flex grow bg-red"></div>
-                  <p className="text-white-dimmed text-description flex-grow justify-self-end text-right">
-                    <span className="text-green text-right">
-                      {movie_score * 100 + "%  "}
-                    </span>
-                    Score
-                  </p>
-                </div>
+              <div className="flex w-full">
+                <p className="text-white text-description flex-none mr-6">
+                  {movie_year}
+                </p>
+                <p className="text-white-dimmed text-description flex-none mr-6">
+                  {movie_category}
+                </p>
+                <p className="text-white-dimmed text-description flex-none">
+                  {movie_length.hours + "h "}
+                  {movie_length.minutes + "min"}
+                </p>
+                <p className="text-white-dimmed text-description flex-1 text-right">
+                  <span className="text-green text-right">
+                    {movie_score * 100 + "%  "}
+                  </span>
+                  Score
+                </p>
               </div>
             </div>
             <div id="cast_&_crew" className="h-10 flex">
@@ -188,14 +188,13 @@ function MovieDetails(): JSX.Element {
         </div>
       </div>
 
-      <div id="button_wrapper"
-        className="absolute bottom-6 left-5 right-5">
-          <Button
-            variant="primary"
-            height="default"
-            label="Get reservation"
-            onClick={() => navigate(`booking`)}
-          />
+      <div id="button_wrapper" className="absolute bottom-6 left-5 right-5">
+        <Button
+          variant="primary"
+          height="default"
+          label="Get reservation"
+          onClick={() => navigate(`booking`)}
+        />
       </div>
     </div>
   );
