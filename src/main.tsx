@@ -17,18 +17,20 @@ import {
   Queue,
   SelectSeats,
   SelectTime,
+  selectTimeLoader,
   Ticket,
+  upcomingMovieLoader,
   User,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
-import { Movies } from "./routes/Movies";
+import { Movies, MoviesLoader } from "./routes/Movies";
 import NavBar from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
   {
     index: true,
     element: <MovieDetails />,
-    loader: loadMovieDetails,
+    // loader: loadMovieDetails,
   },
   {
     path: "castcrew",
@@ -39,10 +41,9 @@ const movieDetailChildren = [
     element: <BookingLayout />,
     children: [
       {
-        // index ?, asking for confirmation
         index: true,
-        path: "selecttime",
         element: <SelectTime />,
+        loader: selectTimeLoader,
       },
       {
         path: "selectseats",
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: upcomingMovieLoader,
       },
       // {
       //   path: "genres",
@@ -76,6 +78,7 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+        loader: upcomingMovieLoader,
       },
       {
         path: "user",
@@ -88,7 +91,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: ":movieId",
+    path: ":movieid",
     element: <MovieLayout />,
     children: movieDetailChildren,
   },
