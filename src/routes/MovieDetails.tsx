@@ -40,10 +40,12 @@ export async function loadMovieDetails(loaderObj: any) {
       (member) => member.job === "Writer"
     )?.name;
 
+    console.log("TEST" + JSON.stringify(people))
+
     const currentData = {
       details: details,
-      director: director_name,
-      writer: writer_name,
+      director: director_name? director_name : "Unknown Director",
+      writer: writer_name? director_name : "Unknown Writer"
     };
 
     return currentData;
@@ -77,9 +79,6 @@ function MovieDetails(): JSX.Element {
   const writer: string = currentData.writer;
   const movie_synopsis = currentData.details.overview;
   const poster_path: string = posterUrl + currentData.details.poster_path;
-
-  console.log("movie lenght" + movie_length);
-  console.log("movie score" + movie_score);
 
   //content wrapper contains: img, details-wrapper, button
   //page_wrapper will contain Navigation and Content Wrapper
