@@ -18,7 +18,7 @@ export function SeatSelectButton({
       onClick={onClick}
       disabled={occupied}
       className={clsx(
-        "rounded h-[28px] aspect-square disabled:bg-dark-light",
+        "rounded h-7 aspect-square disabled:bg-dark-light",
         selected ? "bg-yellow" : "bg-white"
       )}
     ></button>
