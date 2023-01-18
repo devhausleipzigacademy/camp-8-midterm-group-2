@@ -112,9 +112,9 @@ function MovieDetails(): JSX.Element {
 
           <div
             id="section_one"
-            className="pt-0 mb-4 flex flex-col justify-between"
+            className="pt-0 mb-5 flex flex-col justify-between"
           >
-            <div id="general_details" className="h-3 mb-5 flex justify-between">
+            <div id="general_details" className="mb-5 flex justify-between">
               <div className="flex w-full">
                 <p className="text-white text-description flex-none mr-6">
                   {movie_year}
