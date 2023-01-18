@@ -173,7 +173,7 @@ function MovieDetails(): JSX.Element {
 
           <div className="w-full h-[1px] mb-4 bg-white-dimmed-heavy "></div>
 
-          <div id="section_two" className="h-25">
+          <div id="section_two">
             <h3 className="text-white text-primary mb-3">Synopsis</h3>
 
             <p className="text-white-dimmed font-body mb-1 h-13 synopsis-preview">
