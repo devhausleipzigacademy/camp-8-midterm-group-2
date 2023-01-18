@@ -5,6 +5,7 @@ import { availableTimes } from "../utils/times";
 import { useState } from "react";
 import clsx from "clsx";
 import { de } from "date-fns/locale";
+import { DateSelectButton } from "../components/DateSelectButton";
 
 export async function selectTimeLoader(): Promise<DatesType> {
   const today = new Date();
@@ -73,28 +74,18 @@ export function SelectTime(): JSX.Element {
               );
 
               return (
-                <label
-                  key={date}
-                  className={clsx(
-                    "px-2 py-1 rounded text-center",
-                    !available ? "text-dark-light" : "text-white-dimmed",
-                    chosenDate === ISODate && "bg-yellow text-dark"
-                  )}
+                <DateSelectButton
+                  disabled={!available}
+                  label={date}
                   onClick={(event) => {
+                    event.preventDefault();
                     if (available) {
                       setChosenTime("");
                       setChosenDate(ISODate);
                     }
                   }}
-                >
-                  {date}
-                  <input
-                    type="radio"
-                    name="dateInput"
-                    value={ISODate}
-                    className="hidden"
-                  />
-                </label>
+                  selected={chosenDate === ISODate}
+                />
               );
             })}
           </div>
@@ -106,29 +97,22 @@ export function SelectTime(): JSX.Element {
               <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
               <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-2">
                 {Object.entries(dates[chosenDate]).map((timeSlot) => {
-                  const [ISOTime, bookable] = timeSlot;
+                  const [ISOTime, enabled] = timeSlot;
                   const dateObj = parseISO(ISOTime);
                   const time = format(dateObj, "HH:mm", { locale: de });
                   return (
-                    <label
-                      key={time}
-                      className={clsx(
-                        "px-2 py-1 rounded text-center",
-                        !bookable ? "text-dark-light" : "text-white-dimmed",
-                        chosenTime === ISOTime && "bg-yellow text-dark"
-                      )}
+                    <DateSelectButton
+                      disabled={!enabled.bookable}
+                      label={time}
                       onClick={(event) => {
-                        if (bookable) setChosenTime(ISOTime);
+                        event.preventDefault();
+                        if (!event.currentTarget.disabled) {
+                          setChosenTime(ISOTime);
+                        }
                       }}
-                    >
-                      {time}
-                      <input
-                        type="radio"
-                        name="timeInput"
-                        value={ISOTime}
-                        className="hidden"
-                      />
-                    </label>
+                      selected={chosenTime === ISOTime}
+                      key={time}
+                    />
                   );
                 })}
               </div>
