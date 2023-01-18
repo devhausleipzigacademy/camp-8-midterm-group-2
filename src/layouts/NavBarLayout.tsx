@@ -8,6 +8,10 @@ import {
 } from "@heroicons/react/24/solid";
 
 export default function NavBar() {
+
+  const { token, clear } = useAuthStore();
+  if (!token) return <Navigate to="/login" replace />;
+
   return (
     <div className="bg-dark w-screen h-screen">
       <Outlet />
