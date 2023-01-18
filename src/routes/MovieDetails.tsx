@@ -67,7 +67,7 @@ function MovieDetails(): JSX.Element {
   const movie_name: string = currentData.details.title;
   const movie_category: string = currentData.details.genres[0].name;
   const movie_year: string = currentData.details.release_date;
-  const movie_score: number = currentData.details.popularity;
+  const movie_score: number = ((currentData.details.vote_average)*10);
   const movie_length: { hours: number; minutes: number } | null = {
     hours: currentData.details.runtime
       ? Math.floor(currentData.details.runtime / 60)
@@ -89,7 +89,7 @@ function MovieDetails(): JSX.Element {
 
       <div
         id="content_wrapper"
-        className="h-[469px] fixed top-[75px] mx-[18px] pt-0 mb-6"
+        className="fixed top-[75px] mx-[18px] pt-0 mb-6"
       >
         <div
           id="image_wrapper"
@@ -104,7 +104,7 @@ function MovieDetails(): JSX.Element {
 
         <div
           id="details_wrapper"
-          className="h-[233px] pt-0 mb-12 p-0 flex-row justify-between"
+          className="pt-0 mb-12 p-0 flex-row justify-between"
         >
           <h2 className="mt-0 mb-3 text-xl leading-6 text-white font-bold">
             {movie_name}
@@ -112,9 +112,9 @@ function MovieDetails(): JSX.Element {
 
           <div
             id="section_one"
-            className="pt-0 mb-4 h-16 flex flex-col justify-between"
+            className="pt-0 mb-4 flex flex-col justify-between"
           >
-            <div id="general_details" className="h-3 flex justify-between">
+            <div id="general_details" className="h-3 mb-5 flex justify-between">
               <div className="flex w-full">
                 <p className="text-white text-description flex-none mr-6">
                   {movie_year}
@@ -128,7 +128,7 @@ function MovieDetails(): JSX.Element {
                 </p>
                 <p className="text-white-dimmed text-description flex-1 text-right">
                   <span className="text-green text-right">
-                    {movie_score * 100 + "%  "}
+                    {movie_score + " % "}
                   </span>
                   Score
                 </p>
