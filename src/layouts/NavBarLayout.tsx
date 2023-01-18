@@ -7,7 +7,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid";
 
-export default function NavBar() {
+export function NavBarLayout() {
   return (
     <div className="bg-dark w-screen h-screen flex flex-col">
       <Outlet />

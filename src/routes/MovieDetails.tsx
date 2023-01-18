@@ -1,4 +1,5 @@
 import { Outlet, useLoaderData, useParams } from "react-router-dom";
+import { DetailHeader } from "../components/DetailHeaderLayOut";
 
 type props = {
   params: {
@@ -11,10 +12,14 @@ export async function loadMovieDetails({ params }: props): Promise<string> {
 }
 
 export function MovieDetails(): JSX.Element {
-  const movie: string = useLoaderData();
+  /* const movie: string = useLoaderData(); */
+  const detailHeaderProps = {
+    title: "Movie Details",
+  };
+
   return (
     <div>
-      <h1>{movie}</h1>
+      <DetailHeader {...detailHeaderProps} />
     </div>
   );
 }

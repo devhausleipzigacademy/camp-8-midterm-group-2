@@ -2,6 +2,7 @@ import { DatesType, TimeType } from "../types/times";
 import { add } from "date-fns";
 import { useLoaderData } from "react-router-dom";
 import { availableTimes } from "../utils/times";
+import { DetailHeader } from "../components/DetailHeaderLayOut";
 
 export async function selectTimeLoader(): Promise<DatesType> {
   const today = new Date();
@@ -44,9 +45,12 @@ export async function selectTimeLoader(): Promise<DatesType> {
 
 export function SelectTime(): JSX.Element {
   const dates = useLoaderData() as DatesType;
+    const detailHeaderProps = {
+    title: "Select Time",
+  };
   return (
     <div>
-      <h1>Time</h1>
+      <DetailHeader {...detailHeaderProps} />
     </div>
   );
 }
