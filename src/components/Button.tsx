@@ -6,6 +6,7 @@ export interface ButtonProps
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
+
     variant: "primary" | "secondary";
     height: "default" | "small"
     label: string;
@@ -30,6 +31,8 @@ ButtonProps){
       {label}
     </button>
   );
+
 };
+
 
 export default Button;
