@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
+import { DetailHeader } from "../components/DetailHeaderLayout";
+
 export function CastCrew(): JSX.Element {
-  return (
-    <div>
-      <h1>Cast and Crew</h1>
-    </div>
-  );
+  const detailHeaderProps = {
+    title: "Cast and Crew",
+  };
+  return <DetailHeader {...detailHeaderProps} />;
 }
