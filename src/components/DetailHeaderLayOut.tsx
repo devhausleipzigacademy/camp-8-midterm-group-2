@@ -9,8 +9,7 @@ export function DetailHeader({ title }: props): JSX.Element {
   const navigate = useNavigate();
   return (
     <header
-      className="flex items-center justify-between
-     bg-dark"
+      className="flex items-center justify-between absolute top-8"
     >
       <div onClick={() => navigate(-1)}>
         <ChevronLeftIcon className="self-center h-6 fill-white" />
