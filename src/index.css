@@ -54,3 +54,7 @@
       -webkit-box-orient: vertical;
   }
 }
+
+#root {
+  @apply bg-dark h-[667px] w-[375px] m-0 p-0 fixed
+}
