@@ -8,8 +8,19 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { Credits } from "../types/api";
 
-export async function loadCastAndCrew(res: any): Promise<Credits | undefined> {
-  const movieId = res.params.movieId;
+// await axios
+//   .get(
+//     "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
+//   )
+//   .then(function getCreditsAndCrew(res) {
+//     // handle success
+//     console.log(res);
+//   })
+//   .catch(function (error) {
+//     // handle error
+//     console.log(error);
+//   })
+//   .finally(function () {});
 
   try {
     const credits: Credits = (
