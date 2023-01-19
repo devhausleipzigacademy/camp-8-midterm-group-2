@@ -1,9 +1,7 @@
-import React from "react";
-
-import axios from "axios";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
 import { Cast, Crew, Credits, MovieDetail } from "../types/api";
 import { baseUrl, posterUrl, SECRETKEY } from "../utils/movies2";
+import { loadCrewCast } from "../routes";
 
 type CurrentData = {
   id: number;

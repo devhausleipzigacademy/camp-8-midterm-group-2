@@ -49,28 +49,29 @@ export function CastCrew(): JSX.Element {
       <h1 className="text-title text-center py-5">Cast & Crew</h1>
       <Tab.Group>
         <Tab.List>
-          <div className="flex flex-row content-center justify-between mb-6">
+          <div className="flex flex-row content-center justify-between mb-6 text-center ">
             <Tab
-              onClick={() => setActive(!active)}
-              className={clsx(
-                "text-center text-primary rounded-md w-40 h-6 ",
-                active ? "bg-dark-light text-body opacity-40" : "",
-                !active
-                  ? " bg-white-dimmed text-body text-white border-2 border-white"
-                  : ""
-              )}
+              className={({ selected }) =>
+                clsx(
+                  selected &&
+                    " bg-white-dimmed text-body text-white border-2 border-white w-40 h-6 rounded-md",
+                  !selected &&
+                    " text-primary w-40 h-6 rounded-md bg-dark-light text-body opacity-40"
+                )
+              }
             >
               Cast
             </Tab>
+
             <Tab
-              onClick={() => setActive(!active)}
-              className={clsx(
-                "text-center text-primary rounded-md w-40 h-6 ",
-                !active ? "bg-dark-light text-body opacity-40" : "",
-                active
-                  ? " bg-white-dimmed text-body text-white border-2 border-white"
-                  : ""
-              )}
+              className={({ selected }) =>
+                clsx(
+                  selected &&
+                    "text-center bg-white-dimmed text-body text-white border-2 border-white rounded-md w-40 h-6",
+                  !selected &&
+                    "text-center text-primary rounded-md w-40 h-6 bg-dark-light text-body opacity-40"
+                )
+              }
             >
               Crew
             </Tab>
