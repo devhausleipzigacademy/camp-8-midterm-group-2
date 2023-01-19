@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import { Credits, MovieDetail } from "../types/api";
 import { useState } from "react";
 import { posterUrl } from "../utils/movies";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 type CurrentData = {
   details: MovieDetail;
@@ -83,12 +84,13 @@ function MovieDetails(): JSX.Element {
   //page_wrapper will contain Navigation and Content Wrapper
 
   const MovieDetails = (
-    <div id="page_wrapper" className="screen-default pb-6 fixed m-0 top-0">
-      {/* <DetailHeaderLayout /> */}
+    <div id="page_wrapper" className="w-full h-full m-0 p-0">
+
+      <DetailHeader />
 
       <div
         id="content_wrapper"
-        className="fixed top-[75px] mx-[18px] pt-0 mb-6"
+        className="fixed top-[75px] px-5 py-6"
       >
         <div
           id="image_wrapper"
