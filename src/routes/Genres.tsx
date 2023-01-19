@@ -1,4 +1,4 @@
-import { DetailHeader } from "../components/DetailHeaderLayOut";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 export function Genres(): JSX.Element {
   return (

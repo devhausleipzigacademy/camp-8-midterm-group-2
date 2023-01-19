@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData, useParams } from "react-router-dom";
-import { DetailHeader } from "../components/DetailHeaderLayOut";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 type props = {
   params: {
