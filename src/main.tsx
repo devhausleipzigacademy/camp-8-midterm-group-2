@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useRouteLoaderData,
+} from "react-router-dom";
 import "./index.css";
 import { MovieLayout } from "./layouts/MoviesLayout";
 import {
@@ -10,19 +14,23 @@ import {
   loadMovieDetails,
   Login,
   MovieDetails,
+  Queue,
   SelectSeats,
   SelectTime,
+  selectTimeLoader,
   Ticket,
+  upcomingMovieLoader,
+  User,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
-import { Movies } from "./routes/Movies";
-import { NavBarLayout } from "./layouts/NavBarLayout";
+import { Movies, MoviesLoader } from "./routes/Movies";
+import NavBar from "./layouts/NavBarLayout";
 
 const movieDetailChildren = [
   {
     index: true,
     element: <MovieDetails />,
-    loader: loadMovieDetails,
+    // loader: loadMovieDetails,
   },
   {
     path: "castcrew",
@@ -33,10 +41,9 @@ const movieDetailChildren = [
     element: <BookingLayout />,
     children: [
       {
-        // index ?, asking for confirmation
         index: true,
-        path: "selecttime",
         element: <SelectTime />,
+        loader: selectTimeLoader,
       },
       {
         path: "selectseats",
@@ -57,11 +64,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <NavBarLayout />,
+    element: <NavBar />,
     children: [
       {
         index: true,
         element: <Home />,
+        loader: upcomingMovieLoader,
       },
       // {
       //   path: "genres",
@@ -70,11 +78,20 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+        loader: upcomingMovieLoader,
+      },
+      {
+        path: "user",
+        element: <User />,
+      },
+      {
+        path: "queue",
+        element: <Queue />,
       },
     ],
   },
   {
-    path: ":movieId",
+    path: ":movieid",
     element: <MovieLayout />,
     children: movieDetailChildren,
   },
