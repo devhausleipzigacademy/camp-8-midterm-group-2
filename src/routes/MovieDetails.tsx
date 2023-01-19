@@ -80,7 +80,7 @@ function MovieDetails(): JSX.Element {
     <div id="page_wrapper" className="w-full h-full m-0 p-0">
       <DetailHeader />
 
-      <div id="content_wrapper" className="fixed top-[75px] px-5 py-6">
+      <div id="content_wrapper" className="px-5 py-0">
         <div
           id="image_wrapper"
           className="h-[210px] pt-0 mb-6 p-0 w-full overflow-hidden rounded-lg"
@@ -176,8 +176,7 @@ function MovieDetails(): JSX.Element {
           </div>
         </div>
       </div>
-
-      <div id="button_wrapper" className="absolute bottom-6 left-5 right-5">
+      <div id="button_wrapper" className="">
         <Button
           variant="primary"
           height="default"

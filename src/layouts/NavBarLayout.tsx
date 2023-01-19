@@ -9,7 +9,7 @@ import {
 
 export default function NavBarLayout() {
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="flex flex-col">
       <Outlet />
       <nav className="flex bg-dark items-center justify-evenly text-dark-light h-20 py-5">
         <NavLink
