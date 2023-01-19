@@ -13,30 +13,25 @@ import {
   Home,
   loadMovieDetails,
   Login,
-<<<<<<< HEAD
-=======
   MovieDetails,
   Queue,
->>>>>>> main
   SelectSeats,
   SelectTime,
+  selectTimeLoader,
   Ticket,
+  upcomingMovieLoader,
   User,
 } from "./routes";
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
-<<<<<<< HEAD
-import { NavBarLayout } from "./layouts/NavBarLayout";
-import MovieDetails from "./routes/MovieDetails";
-=======
 import NavBar from "./layouts/NavBarLayout";
->>>>>>> main
+
 
 const movieDetailChildren = [
   {
     index: true,
     element: <MovieDetails />,
-    loader: loadMovieDetails,
+    // loader: loadMovieDetails,
   },
   {
     path: "castcrew",
@@ -47,10 +42,9 @@ const movieDetailChildren = [
     element: <BookingLayout />,
     children: [
       {
-        // index ?, asking for confirmation
         index: true,
-        path: "selecttime",
         element: <SelectTime />,
+        loader: selectTimeLoader,
       },
       {
         path: "selectseats",
@@ -76,6 +70,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: upcomingMovieLoader,
       },
       // {
       //   path: "genres",
@@ -84,6 +79,7 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+        loader: upcomingMovieLoader,
       },
       {
         path: "user",
@@ -96,7 +92,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: ":movieId",
+    path: ":movieid",
     element: <MovieLayout />,
     children: movieDetailChildren,
   },
