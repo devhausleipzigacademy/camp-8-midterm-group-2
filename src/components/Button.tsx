@@ -32,8 +32,4 @@ ButtonProps){
   );
 };
 
-<<<<<<< HEAD
 export default Button;
-=======
-export default Button;
->>>>>>> main
