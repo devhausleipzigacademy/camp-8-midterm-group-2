@@ -1,7 +1,12 @@
+import { DetailHeader } from "../components/DetailHeaderLayout";
+
 export function SelectSeats(): JSX.Element {
+  const detailHeaderProps = {
+    title: "Select Seats",
+  };
   return (
     <div>
-      <h1>Seats</h1>
+      <DetailHeader {...detailHeaderProps} />
     </div>
   );
 }

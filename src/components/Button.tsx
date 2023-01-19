@@ -11,10 +11,9 @@ interface ButtonProps {
 }
 
 function Button({
-  type, height, label, disabled
-}:
+  variant, height, label, disabled, ...props}:
 ButtonProps){
-  const button = (
+  return (
     <button
       type="button"
       className=
@@ -23,19 +22,13 @@ ButtonProps){
         (type === "primary" && !disabled)? 'bg-yellow text-dark-light' : '',
         (type === "primary" && disabled)? 'bg-yellow-dimmed text-dark-light' : '',
         (height === "default")? 'py-[16px]':'pt-[12px] pb-[11px]',
-        (type === "secondary")? 'bg-dark-light text-white':'')}
+        (variant === "secondary")? 'bg-dark-light text-white':'')}
+        {...props}
     >
       {label}
     </button>
   );
-  return button;
+
 };
 
 export default Button;
-
-
-////EXAMPLE HOW TO USE CLSX
-{/* <button className={clsx(classNameOne, { [classNameTwo]: number > 5 })}>
-A sample button
-//LINK my props to css Classes -> we will use it in Button.stories.tsx
-// style={{}} */}
