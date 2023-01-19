@@ -32,6 +32,7 @@ export async function loadCrewCast(loaderObj: any) {
       crew: credits.crew,
     };
 
+    console.log(currentData);
     return currentData;
   } catch (err) {
     console.error(err);

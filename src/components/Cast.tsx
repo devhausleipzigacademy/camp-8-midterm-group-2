@@ -47,12 +47,22 @@ export function Cast(): JSX.Element {
   return (
     <div className="text-white">
       <div className="flex flex-col gap-4">
-        {caststuff.map((castmember) => {
-          if (castmember.profile_path === "") {
-            castmember.profile_path = "";
+        {caststuff.map((castmember, index) => {
+          if (castmember.profile_path === null) {
+            return (
+              <div key={index}>
+                <CastCard
+                  name={castmember.name}
+                  character={castmember.character}
+                  profile_path={
+                    "https://cdn-icons-png.flaticon.com/512/3106/3106921.png"
+                  }
+                />
+              </div>
+            );
           }
           return (
-            <div>
+            <div key={index}>
               <CastCard
                 name={castmember.name}
                 character={castmember.character}

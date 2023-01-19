@@ -51,12 +51,23 @@ export function Crew(): JSX.Element {
   return (
     <div className="text-white">
       <div className="flex flex-col gap-4">
-        {crewstuff.map((crewmember) => {
-          if (crewmember.profile_path === "") {
-            crewmember.profile_path = "";
+        {crewstuff.map((crewmember, index) => {
+          if (crewmember.profile_path === null) {
+            return (
+              <div key={index}>
+                <CrewCard
+                  name={crewmember.name}
+                  job={crewmember.job}
+                  department={crewmember.department}
+                  profile_path={
+                    "https://cdn-icons-png.flaticon.com/512/3106/3106921.png"
+                  }
+                />
+              </div>
+            );
           }
           return (
-            <div>
+            <div key={index}>
               <CrewCard
                 name={crewmember.name}
                 job={crewmember.job}
