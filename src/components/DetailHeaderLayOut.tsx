@@ -9,13 +9,14 @@ export function DetailHeader({ title }: props): JSX.Element {
   const navigate = useNavigate();
   return (
     <header
-      className="flex items-center justify-between absolute top-8"
+      className="w-full absolute top-8 mx-4 flex"
     >
       <div onClick={() => navigate(-1)}>
-        <ChevronLeftIcon className="self-center h-6 fill-white" />
+        <ChevronLeftIcon className="h-6 fill-white" />
       </div>
-      <h1 className="text-title">{title}</h1>
+      <h1 className="text-title absolute inset-y-1/2">{title}</h1>
       <div />
+      <div className="flex-1"/>
     </header>
   );
 }
