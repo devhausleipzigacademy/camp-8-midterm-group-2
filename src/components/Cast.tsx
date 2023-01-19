@@ -1,71 +1,69 @@
-import axios from "axios";
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactFragment,
-  ReactPortal,
-} from "react";
-import { useLoaderData } from "react-router-dom";
-import { Credits } from "../types/api";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
+import { Cast, Crew, Credits, MovieDetail } from "../types/api";
+import { baseUrl, posterUrl, SECRETKEY } from "../utils/movies2";
 
-// await axios
-//   .get(
-//     "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
-//   )
-//   .then(function getCreditsAndCrew(res) {
-//     // handle success
-//     console.log(res);
-//   })
-//   .catch(function (error) {
-//     // handle error
-//     console.log(error);
-//   })
-//   .finally(function () {});
+type CurrentData = {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+  director: string;
+  poster_path: string;
+};
 
-try {
-  const credits: Credits = (
-    await axios.get(
-      `https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
-    )
-  ).data;
-} catch (error) {}
+// create a type for crewcardprops with name job and
 
-export function Cast() {
-  const data = useLoaderData();
+type CastCardProps = {
+  name: string;
+  character: string;
+  profile_path: string;
+};
 
-  axios
-    .get<Credits>(
-      "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
-    )
-    .then((res) => {
-      console.log(res.data);
-      console.log(res.data.crew);
-      console.log(res.data.cast);
-    })
-    .catch((error) => {
-      console.error("Couldn't reach the API");
-    });
+function CastCard({
+  name,
+  character,
+  profile_path,
+}: CastCardProps): JSX.Element {
   return (
-    <div>
-      hi
-      <div></div>
+    <div className="flex items-center gap-5">
+      <img
+        src={profile_path}
+        alt=""
+        className="w-16 h-16 object-contain object-top"
+      />
+      <div className="flex flex-col gap-1">
+        <div className="text-title"> {name} </div>
+        <div className="text-description"> {character}</div>
+      </div>
     </div>
   );
 }
 
-//   const cast = castLoader();
-//   console.log(cast);
-//   return (
-//     <div>
-//       {/* {cast.map((actor: { image: string | undefined; name: string | number | boolean  | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; character: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => (
-//         <div className="flex items-center gap-5">
-//           <img src={actor.image} alt="" className="w-16 h-16" />
-//           <div className="flex flex-col gap-1">
-//             <div className="text-title"> {actor.name} </div>
-//             <div className="text-description"> {actor.character}</div>
-//           </div>
-//         </div> */}
-//       {/* ))} */};
-//     </div>
-//   );
-// }
+export function Cast(): JSX.Element {
+  // const [state, setState] = useState("start");
+  const navigate = useNavigate();
+  const currentData = useLoaderData() as CurrentData;
+  const caststuff = currentData.cast;
+
+  return (
+    <div className="text-white">
+      <div className="flex flex-col gap-4">
+        {caststuff.map((castmember) => {
+          if (castmember.profile_path === "") {
+            castmember.profile_path = "";
+          }
+          return (
+            <div>
+              <CastCard
+                name={castmember.name}
+                character={castmember.character}
+                profile_path={posterUrl + castmember.profile_path}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default Cast;

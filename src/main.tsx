@@ -19,7 +19,7 @@ import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
 
 import NavBar from "./layouts/NavBarLayout";
-import { loadCrew } from "./components/Crew";
+import { loadCrewCast } from "./routes";
 
 const movieDetailChildren = [
   {
@@ -30,7 +30,7 @@ const movieDetailChildren = [
   {
     path: "castcrew",
     element: <CastCrew />,
-    loader: loadCrew,
+    loader: loadCrewCast,
   },
   {
     path: "booking",

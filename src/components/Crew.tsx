@@ -13,37 +13,6 @@ type CurrentData = {
   poster_path: string;
 };
 
-export async function loadCrew(loaderObj: any) {
-  const movieId = loaderObj.params.movieId;
-
-  try {
-    //returns promise; .data takes data
-    const details: MovieDetail = (
-      await axios.get(
-        `https://api.themoviedb.org/3/movie/2?api_key=039ceb136bde381a9652fedddb79e1f1`
-      )
-    ).data;
-
-    //returns promise; .data takes data
-    const credits: Credits = (
-      await axios.get(
-        `https://api.themoviedb.org/3/movie/2/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
-      )
-    ).data;
-
-    const currentData = {
-      details: details,
-      cast: credits.cast,
-      crew: credits.crew,
-    };
-
-    return currentData;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-}
-
 // create a type for crewcardprops with name job and
 
 type CrewCardProps = {

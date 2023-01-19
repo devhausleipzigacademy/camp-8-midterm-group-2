@@ -5,36 +5,47 @@ import { useState } from "react";
 import axios from "axios";
 import { Credits } from "../types/api";
 import { Cast } from "../components/Cast";
+import { MovieDetail } from "../types/api";
+import { SECRETKEY } from "../utils/movies2";
 
-// export function CastCrew(): JSX.Element {
-//   return (
-//     <div className="bg-dark h-full w-screen px-5 scrollbar-hide scrollbar-hide::-webkit-scrollbar">
-//       <div>
-//         <h1 className="text-title text-center py-5">Cast & Crew</h1>
-//       </div>
-//       <div className="flex content-center justify-between mb-6">
-//         <Tabs type={"Selected"} label={"Cast"} {...Tabs} />
-//         <Tabs type={"Available"} label={"Crew"} {...Tabs} />
-//       </div>
-//       <div className="flex flex-col gap-3">
-//         <CastAndCrew
-//           image="https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
-//           name="Juanito"
-//           character="blabla"
-//         />
-//       </div>
-//     </div>
-//   );
+// export async function castLoader() {
+//   try {
+//     const response = await axios.get<Credits>(
+//       "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
+//     );
+//     return response.data;
+//   } catch (error) {
+//     throw new Error("connection Issues");
+//   }
 // }
+export async function loadCrewCast(loaderObj: any) {
+  const movieId = loaderObj.params.movieId;
 
-export async function castLoader() {
   try {
-    const response = await axios.get<Credits>(
-      "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
-    );
-    return response.data;
-  } catch (error) {
-    throw new Error("connection Issues");
+    //returns promise; .data takes data
+    const details: MovieDetail = (
+      await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${SECRETKEY}`
+      )
+    ).data;
+
+    //returns promise; .data takes data
+    const credits: Credits = (
+      await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${SECRETKEY}`
+      )
+    ).data;
+
+    const currentData = {
+      details: details,
+      cast: credits.cast,
+      crew: credits.crew,
+    };
+
+    return currentData;
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 }
 
