@@ -66,7 +66,7 @@ function MovieDetails(): JSX.Element {
   const movie_name: string = currentData.details.title;
   const movie_category: string = currentData.details.genres[0].name;
   const movie_year: string = currentData.details.release_date;
-  const movie_score: number = ((currentData.details.vote_average)*10);
+  const movie_score: number = (Math.ceil((currentData.details.vote_average)*10));
   const movie_length: { hours: number; minutes: number } | null = {
     hours: currentData.details.runtime
       ? Math.floor(currentData.details.runtime / 60)
