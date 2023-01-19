@@ -17,7 +17,6 @@ type CurrentData = {
 export async function loadMovieDetails(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
 
-  console.log(movieId)
   try {
     //returns promise; .data takes data
     const details: MovieDetail = (
@@ -40,8 +39,6 @@ export async function loadMovieDetails(loaderObj: any) {
     const writer_name = people.crew.find(
       (member) => member.job === "Writer"
     )?.name;
-
-    console.log("TEST" + JSON.stringify(people));
 
     const currentData = {
       details: details,
@@ -67,7 +64,7 @@ function MovieDetails(): JSX.Element {
   const movie_name: string = currentData.details.title;
   const movie_category: string = currentData.details.genres[0].name;
   const movie_year: string = currentData.details.release_date;
-  const movie_score: number = (Math.ceil((currentData.details.vote_average)*10));
+  const movie_score: number = Math.ceil(currentData.details.vote_average * 10);
   const movie_length: { hours: number; minutes: number } | null = {
     hours: currentData.details.runtime
       ? Math.floor(currentData.details.runtime / 60)
@@ -80,18 +77,11 @@ function MovieDetails(): JSX.Element {
   const movie_synopsis = currentData.details.overview;
   const poster_path: string = posterUrl + currentData.details.poster_path;
 
-  //content wrapper contains: img, details-wrapper, button
-  //page_wrapper will contain Navigation and Content Wrapper
-
   const MovieDetails = (
     <div id="page_wrapper" className="w-full h-full m-0 p-0">
-
       <DetailHeader />
 
-      <div
-        id="content_wrapper"
-        className="fixed top-[75px] px-5 py-6"
-      >
+      <div id="content_wrapper" className="fixed top-[75px] px-5 py-6">
         <div
           id="image_wrapper"
           className="h-[210px] pt-0 mb-6 p-0 w-full overflow-hidden rounded-lg"
@@ -199,11 +189,7 @@ function MovieDetails(): JSX.Element {
     </div>
   );
 
-  return MovieDetails
+  return MovieDetails;
 }
 
-export default MovieDetails
-
-
-//http://localhost:5173/315162 EXAMPLE URL TO TEST
-//https://api.themoviedb.org/3/movie/315162/credits?api_key=039ceb136bde381a9652fedddb79e1f1
+export default MovieDetails;
