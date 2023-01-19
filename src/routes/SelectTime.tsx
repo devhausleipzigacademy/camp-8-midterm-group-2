@@ -2,7 +2,7 @@ import { DatesType, TimeType } from "../types/times";
 import { add } from "date-fns";
 import { useLoaderData } from "react-router-dom";
 import { availableTimes } from "../utils/times";
-import { DetailHeader } from "../components/DetailHeaderLayOut";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 export async function selectTimeLoader(): Promise<DatesType> {
   const today = new Date();

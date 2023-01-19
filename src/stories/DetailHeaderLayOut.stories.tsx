@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { DetailHeader } from "../components/DetailHeaderLayOut";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 const meta: Meta<typeof DetailHeader> = {
   title: "detailHeaderLayout",

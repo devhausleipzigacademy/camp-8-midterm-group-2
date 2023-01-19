@@ -13,7 +13,6 @@ import {
   Home,
   loadMovieDetails,
   Login,
-  MovieDetails,
   Queue,
   SelectSeats,
   SelectTime,
@@ -25,13 +24,13 @@ import {
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
 import NavBar from "./layouts/NavBarLayout";
-
+import MovieDetails from "./routes/MovieDetails";
 
 const movieDetailChildren = [
   {
     index: true,
     element: <MovieDetails />,
-    // loader: loadMovieDetails,
+    loader: loadMovieDetails,
   },
   {
     path: "castcrew",
@@ -92,7 +91,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: ":movieid",
+    path: ":movieId",
     element: <MovieLayout />,
     children: movieDetailChildren,
   },
