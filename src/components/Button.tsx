@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 
 interface ButtonProps {
-  type: "primary" | "secondary";
+  variant: "primary" | "secondary";
   height: "default" | "small";
   label: string;
   onClick: (event: React.FormEvent<any>) => void;
@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 function Button({
-  type,
+  variant,
   height,
   label,
   disabled = false,
@@ -21,12 +21,12 @@ function Button({
       type="button"
       className={clsx(
         "text-center rounded-lg w-full text-primary",
-        type === "primary" && !disabled ? "bg-yellow text-dark-light" : "",
-        type === "primary" && disabled
+        (variant === "primary" && !disabled) ? "bg-yellow text-dark-light" : "",
+        variant === "primary" && disabled
           ? "bg-yellow-dimmed text-dark-light"
           : "",
         height === "default" ? "py-[16px]" : "pt-[12px] pb-[11px]",
-        type === "secondary" ? "bg-dark-light text-white" : ""
+        variant === "secondary" ? "bg-dark-light text-white" : ""
       )}
       {...props}
     >
