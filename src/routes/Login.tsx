@@ -8,43 +8,34 @@ function testAPI(email: string, password: string) {
     if (password === exampleUser.password) {
       return true;
     }
-
   return false;
 }
 
-export function Login({}) {
+export function Login() {
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        const result = testAPI(emailState, passwordState);
-        console.log(result);
-      }}
-      className="flex flex-col justify-between gap-8 bg-dark h-screen px-5 py-8"
-    >
+    <form className="flex flex-col justify-between gap-8 bg-dark h-screen px-5 py-8">
       <div className="flex flex-col gap-3">
         <h1 className="text-title">Welcome to Cine-Scape</h1>
         <p className="text-description">
           You need to login to be able to make reservations <br /> and add
           movies to your watchlist.
         </p>
-        <Input type="email" state={emailState} setState={setEmailState} />
+        <Input type="email" onChange={() => setEmailState(emailState)} />
         <Input
           type="password"
-          state={passwordState}
-          setState={setPasswordState}
+          onChange={() => setPasswordState(passwordState)}
         />
       </div>
       <div className="flex ">
         <Button
-          type="primary"
+          variant="primary"
           height="small"
           label="Login"
           onClick={(event) => {}}
-          disabled={false}
+          type="submit"
         />
       </div>
     </form>

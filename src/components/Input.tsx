@@ -1,19 +1,17 @@
-import { useRef, useState } from "react";
+import { InputHTMLAttributes, SetStateAction, useRef, useState } from "react";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
+import { Update } from "vite/types/hmrPayload";
 
-export type InputProps = {
-  type: string;
-  state?: string;
-};
+type InputProps = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
-const [state, setState] = useState("");
-function update(input: string) {
-  setState(input);
-}
-
-export function Input({ type }: InputProps) {
+export function Input({ ...props }: InputProps) {
   let placeholder: string;
-  if (type === "email") {
+  props.className =
+    "bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full";
+  if (props.type === "email") {
     placeholder = "your@email.com";
   } else {
     placeholder = "enter your password";
@@ -21,17 +19,12 @@ export function Input({ type }: InputProps) {
 
   return (
     <label className="focus-within:border-white-dimmed-heavy flex items-center gap-3 bg-dark-light border-2 rounded-md border-dark-light py-3 px-5 w-full">
-      {type === "email" ? (
+      {props.type === "email" ? (
         <EnvelopeIcon className="w-6 aspect-square text-white-dimmed" />
       ) : (
         <LockClosedIcon className="w-6 aspect-square text-white-dimmed" />
       )}
-      <input
-        onChange={update}
-        type={type}
-        className="bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full"
-        placeholder={placeholder}
-      />
+      <input {...props} />
     </label>
   );
 }
