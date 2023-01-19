@@ -91,4 +91,3 @@ export function CastCrew(): JSX.Element {
       </Tab.Group>
     </div>
   );
-}

@@ -7,35 +7,34 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid";
 
-
-export default function NavBar() {
+export default function NavBarLayout() {
   return (
-    <div className="bg-dark w-screen h-screen">
+    <div className="bg-dark w-screen h-screen flex flex-col">
       <Outlet />
-      <nav className="flex content-center justify-evenly text-dark-light ">
+      <nav className="flex items-center justify-evenly text-dark-light h-20 py-5">
         <NavLink
           to="/"
           className={({ isActive }) => clsx(isActive && "text-white")}
         >
-          <HomeIcon className="w-5 h-5 m-5"></HomeIcon>
+          <HomeIcon className="w-5 h-5"></HomeIcon>
         </NavLink>
         <NavLink
           to="/movies"
           className={({ isActive }) => clsx(isActive && "text-white")}
         >
-          <FilmIcon className="w-5 h-5 m-5"></FilmIcon>
+          <FilmIcon className="w-5 h-5"></FilmIcon>
         </NavLink>
         <NavLink
           to="/queue"
           className={({ isActive }) => clsx(isActive && "text-white")}
         >
-          <QueueListIcon className="w-5 h-5 m-5" />
+          <QueueListIcon className="w-5 h-5" />
         </NavLink>
         <NavLink
           to="/user"
           className={({ isActive }) => clsx(isActive && "text-white")}
         >
-          <UserIcon className="w-5 h-5 m-5" />
+          <UserIcon className="w-5 h-5" />
         </NavLink>
       </nav>
     </div>
