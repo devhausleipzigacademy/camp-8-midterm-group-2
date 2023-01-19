@@ -55,7 +55,6 @@ export function CastCrew(): JSX.Element {
     <div>
       <DetailHeader {...detailHeaderProps} />
       <div className="bg-dark h-full w-screen px-5 scrollbar-hide scrollbar-hide::-webkit-scrollbar">
-        <h1 className="text-title text-center py-5">Cast & Crew</h1>
         <Tab.Group>
           <Tab.List>
             <div className="flex flex-row content-center justify-between mb-6 text-center ">
