@@ -1,13 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 
 export type InputProps = {
   type: string;
   state?: string;
-  setState?: any;
 };
 
-export function Input({ state, setState, type }: InputProps) {
+const [state, setState] = useState("");
+function update(input: string) {
+  setState(input);
+}
+
+export function Input({ type }: InputProps) {
   let placeholder: string;
   if (type === "email") {
     placeholder = "your@email.com";
@@ -23,9 +27,7 @@ export function Input({ state, setState, type }: InputProps) {
         <LockClosedIcon className="w-6 aspect-square text-white-dimmed" />
       )}
       <input
-        onChange={(event) => {
-          setState(event.target.value);
-        }}
+        onChange={update}
         type={type}
         className="bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full"
         placeholder={placeholder}
