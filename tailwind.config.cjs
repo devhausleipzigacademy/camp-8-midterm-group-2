@@ -23,7 +23,8 @@ module.exports = {
       green: "#22C55E",
       none: "00FFFFFF",
     },
-    extend: {},
+    extend: {
+    },
   },
   plugins: [require("@tailwindcss/line-clamp")],
-};
+}
