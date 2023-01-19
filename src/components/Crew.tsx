@@ -104,36 +104,6 @@ export function Crew(): JSX.Element {
   );
 }
 
-// export function Crew(): JSX.Element {
-//   const { crew, poster_path } = useLoaderData() as CurrentData;
-
-//   const posterPath: string = posterUrl + poster_path;
-
-//   const Crew = (
-//     <div>
-//       <img
-//         alt=""
-//         className="object-cover relative top-[-40%]"
-//         src={poster_path}
-//       ></img>
-//       <div className="flex flex-col">
-//         <div className="text-white">
-//           {crew.map((crewMember) => {
-//             return crewMember.name;
-//           })}
-//         </div>
-//         <div className="text-white">
-//           {crew.map((crewMember) => {
-//             return crewMember.job + " " + crewMember.name;
-//           })}
-//         </div>
-//       </div>
-//     </div>
-//   );
-
-//   return Crew;
-// }
-
 export default Crew;
 
 //http://localhost:5173/315162 EXAMPLE URL TO TEST
