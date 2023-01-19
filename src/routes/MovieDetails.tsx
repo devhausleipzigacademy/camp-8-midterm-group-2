@@ -1,5 +1,4 @@
 //for issues see gitHub comment
-
 import axios from "axios";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
 import Button from "../components/Button";
@@ -17,6 +16,7 @@ type CurrentData = {
 export async function loadMovieDetails(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
 
+  console.log(movieId)
   try {
     //returns promise; .data takes data
     const details: MovieDetail = (
@@ -51,7 +51,6 @@ export async function loadMovieDetails(loaderObj: any) {
     return currentData;
   } catch (err) {
     console.error(err);
-    return null;
   }
 }
 
