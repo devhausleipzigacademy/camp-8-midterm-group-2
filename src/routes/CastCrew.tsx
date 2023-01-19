@@ -8,16 +8,6 @@ import { Cast } from "../components/Cast";
 import { MovieDetail } from "../types/api";
 import { SECRETKEY } from "../utils/movies2";
 
-// export async function castLoader() {
-//   try {
-//     const response = await axios.get<Credits>(
-//       "https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1"
-//     );
-//     return response.data;
-//   } catch (error) {
-//     throw new Error("connection Issues");
-//   }
-// }
 export async function loadCrewCast(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
 
