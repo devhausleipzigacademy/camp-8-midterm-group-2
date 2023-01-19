@@ -1,6 +1,5 @@
-//for issues see gitHub comment
 import axios from "axios";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom"; //what for Outlet
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { Credits, MovieDetail } from "../types/api";
 import { useState } from "react";
