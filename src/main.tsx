@@ -1,15 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { MovieLayout } from "./layouts/MoviesLayout";
 import {
   CastCrew,
-  Genres,
   Home,
   loadMovieDetails,
   Login,
@@ -24,7 +19,7 @@ import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
 
 import NavBar from "./layouts/NavBarLayout";
-import { loadCastAndCrew } from "./components/Cast";
+import { loadCrew } from "./components/Crew";
 
 const movieDetailChildren = [
   {
@@ -35,7 +30,7 @@ const movieDetailChildren = [
   {
     path: "castcrew",
     element: <CastCrew />,
-    loader: loadCastAndCrew,
+    loader: loadCrew,
   },
   {
     path: "booking",

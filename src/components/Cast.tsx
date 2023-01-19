@@ -22,17 +22,13 @@ import { Credits } from "../types/api";
 //   })
 //   .finally(function () {});
 
-  try {
-    const credits: Credits = (
-      await axios.get(
-        `https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
-      )
-    ).data;
-
-    return credits;
-  } catch (error) {}
-}
-console.log(loadCastAndCrew);
+try {
+  const credits: Credits = (
+    await axios.get(
+      `https://api.themoviedb.org/3/movie/22/credits?api_key=039ceb136bde381a9652fedddb79e1f1`
+    )
+  ).data;
+} catch (error) {}
 
 export function Cast() {
   const data = useLoaderData();
