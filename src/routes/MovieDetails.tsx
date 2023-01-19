@@ -148,7 +148,7 @@ function MovieDetails(): JSX.Element {
                 </div>
               </div>
 
-              <div id="right" className="h-10 flex-1">
+              <div id="right" className="h-10 flex-1 pl-5">
                 <Button
                   variant={"primary"}
                   height={"small"}
