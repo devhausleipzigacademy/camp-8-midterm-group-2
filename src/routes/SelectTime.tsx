@@ -66,7 +66,7 @@ export function SelectTime(): JSX.Element {
       <div className="flex flex-col gap-6">
         <div className="space-y-5">
           <h3 className="font-bold text-sm text-white-dimmed">DATE</h3>
-          <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-1">
+          <div className="grid grid-cols-4 grid-rows-4 gap-y-2 gap-x-1">
             {Object.keys(dates).map((ISODate) => {
               //
               const dateObj = parseISO(ISODate);
@@ -100,7 +100,7 @@ export function SelectTime(): JSX.Element {
             <div className="bg-white-dimmed-heavy h-[1px]"></div>
             <div className="space-y-5">
               <h3 className="font-bold text-sm text-white-dimmed">TIME</h3>
-              <div className="grid grid-cols-4 grid-rows-[2rem_2rem_2rem_2rem] gap-y-2 gap-x-2">
+              <div className="grid grid-cols-4 grid-rows-4 gap-y-2 gap-x-2">
                 {Object.entries(dates[chosenDate]).map((timeSlot) => {
                   const [ISOTime, enabled] = timeSlot;
                   const dateObj = parseISO(ISOTime);
