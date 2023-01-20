@@ -154,7 +154,10 @@ function MovieDetails(): JSX.Element {
                   height={"small"}
                   label={"Cast & Crew"}
                   onClick={() => {
-                    () => navigate(`castcrew`);
+                    () => {
+                      console.log("hello!");
+                      navigate(`/${movieId}/castcrew`);
+                    };
                   }}
                 />
               </div>
