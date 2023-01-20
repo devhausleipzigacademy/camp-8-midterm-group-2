@@ -1,9 +1,8 @@
 import { DatesType, TimeType } from "../types/times";
 import { add, format, parseISO } from "date-fns";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { availableTimes } from "../utils/times";
 import { useState } from "react";
-import clsx from "clsx";
 import { de } from "date-fns/locale";
 import { DateSelectButton } from "../components/DateSelectButton";
 import { DetailHeader } from "../components/DetailHeaderLayout";
@@ -51,15 +50,17 @@ export function SelectTime(): JSX.Element {
   const [chosenDate, setChosenDate] = useState("");
   const [chosenTime, setChosenTime] = useState("");
   const dates = useLoaderData() as DatesType;
-  const detailHeaderProps = {
-    title: "Select Time",
-  };
+  const movieId = useLocation().pathname.split("/")[1];
+  const navigate = useNavigate();
   return (
     <form
       className="flex flex-col justify-between h-full"
       onSubmit={(event) => {
         event.preventDefault();
-        // Navigate to seats selection when it is done
+        if (chosenDate && chosenTime) {
+          const targetLocation = `${movieId}/booking/selectseats`;
+          navigate(targetLocation);
+        }
       }}
     >
       <div className="flex flex-col gap-6">
