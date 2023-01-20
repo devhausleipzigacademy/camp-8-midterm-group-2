@@ -6,7 +6,7 @@
 
 @layer components {
   .screen-default {
-    @apply bg-dark h-[667px] w-[375px] m-0 p-0 fixed;
+    @apply bg-dark h-screen w-screen m-0 p-0 fixed;
   }
   .text-title {
     font-weight: 700;
@@ -46,15 +46,11 @@
     scrollbar-width: none;
   }
   .synopsis-preview {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* number of lines to show */
-              line-clamp: 2;
-      -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
-}
-
-#root {
-  @apply bg-dark h-[667px] w-[375px] m-0 p-0 fixed
 }
