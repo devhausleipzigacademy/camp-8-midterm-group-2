@@ -13,8 +13,7 @@ export function CheckoutPanel() {
 
   return (
     <div>
-      <div className="h-px divide-y my-8 divide-white"></div>
-      <div className="border-solid border-white-dimmed-heavy h-[1px] w-[335px]"></div>
+      <div className="bg-white-dimmed-heavy h-[1px]"></div>
 
       {/* wrapper for whole of the bottom half */}
       <div className="justify-between">
