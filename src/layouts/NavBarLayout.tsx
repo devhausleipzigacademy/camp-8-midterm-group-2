@@ -9,9 +9,11 @@ import {
 
 export default function NavBarLayout() {
   return (
-    <div className="flex flex-col justify-between">
-      <Outlet />
-      <nav className="flex bg-dark items-center justify-evenly text-dark-light h-20 py-5">
+    <div className="flex flex-col justify-between h-full">
+      <div className="h-5/6">
+        <Outlet />
+      </div>
+      <nav className="flex bg-dark items-center justify-evenly text-dark-light h-1/6   py-5">
         <NavLink
           to="/"
           className={({ isActive }) => clsx(isActive && "text-white")}
