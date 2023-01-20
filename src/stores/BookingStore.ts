@@ -2,7 +2,7 @@ import create from "zustand"
 import { persist } from 'zustand/middleware'
 
 type SeatStore = {
-  seatsChosen: string[] | []
+  seatsChosen: string[]
   setSeatsChosen: (seats: string[]) => void
   clear: () => void
 }
