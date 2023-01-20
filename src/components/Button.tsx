@@ -1,23 +1,19 @@
 import clsx from "clsx";
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
-export interface ButtonProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+export type ButtonProps = {
   variant: "primary" | "secondary";
   height: "default" | "small";
   label: string;
-  disabled?: true;
+  disabled?: boolean;
   onClick: () => void;
-}
+};
 
 function Button({
   variant,
   height,
   label,
-  disabled,
+  disabled = false,
   onClick,
   ...props
 }: ButtonProps) {
