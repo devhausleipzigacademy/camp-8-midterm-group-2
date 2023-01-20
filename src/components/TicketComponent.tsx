@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import Barcode from "react-barcode";
 import { Navigate } from "react-router-dom";
 import Button from "./Button";
 
@@ -35,11 +36,15 @@ export function TicketComponent(): JSX.Element {
           </div>
         </div>
         <div className="flex justify-center">
-          <img
-            src="src/assets/dev/barCode.png"
-            alt=""
-            className="h-20 w-56 py-3"
-          />
+          <Barcode
+            width={1.725}
+            height={36}
+            displayValue={true}
+            lineColor="white"
+            background=""
+            value="7485937485948375"
+            fontSize={12}
+          ></Barcode>
         </div>
       </div>
       <Button
