@@ -173,7 +173,10 @@ function MovieDetails(): JSX.Element {
               {movie_synopsis}
             </p>
 
-            <a href="url" className="text-yellow font-body underline">
+            <a
+              href={`https://www.themoviedb.org/movie/${movieId}`}
+              className="text-yellow font-body underline"
+            >
               Read more
             </a>
           </div>
