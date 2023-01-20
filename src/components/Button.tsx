@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 function Button({
-  type,
+  variant,
   height,
   label,
   disabled = false,
@@ -21,12 +21,12 @@ function Button({
       type="button"
       className={clsx(
         "text-center rounded-lg w-full text-primary",
-        type === "primary" && !disabled ? "bg-yellow text-dark-light" : "",
-        type === "primary" && disabled
+        variant === "primary" && !disabled ? "bg-yellow text-dark-light" : "",
+        variant === "primary" && disabled
           ? "bg-yellow-dimmed text-dark-light"
           : "",
         height === "default" ? "py-[16px]" : "pt-[12px] pb-[11px]",
-        type === "secondary" ? "bg-dark-light text-white" : ""
+        variant === "secondary" ? "bg-dark-light text-white" : ""
       )}
       {...props}
     >
