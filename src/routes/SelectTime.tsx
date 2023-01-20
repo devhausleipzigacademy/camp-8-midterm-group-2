@@ -6,6 +6,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { de } from "date-fns/locale";
 import { DateSelectButton } from "../components/DateSelectButton";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 export async function selectTimeLoader(): Promise<DatesType> {
   const today = new Date();
