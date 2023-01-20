@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { DetailHeader } from "../components/DetailHeaderLayOut";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 export function CastCrew(): JSX.Element {
   const detailHeaderProps = {
