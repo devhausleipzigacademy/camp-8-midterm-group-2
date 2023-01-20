@@ -21,7 +21,7 @@ function Button({
       type="button"
       className={clsx(
         "text-center rounded-lg w-full text-primary",
-        (variant === "primary" && !disabled) ? "bg-yellow text-dark-light" : "",
+        variant === "primary" && !disabled ? "bg-yellow text-dark-light" : "",
         variant === "primary" && disabled
           ? "bg-yellow-dimmed text-dark-light"
           : "",
