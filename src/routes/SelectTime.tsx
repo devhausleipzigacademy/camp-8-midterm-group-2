@@ -58,7 +58,7 @@ export function SelectTime(): JSX.Element {
       onSubmit={(event) => {
         event.preventDefault();
         if (chosenDate && chosenTime) {
-          const targetLocation = `${movieId}/booking/selectseats`;
+          const targetLocation = `/${movieId}/booking/selectseats`;
           navigate(targetLocation);
         }
       }}
