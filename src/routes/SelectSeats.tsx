@@ -1,4 +1,5 @@
 import { DetailHeader } from "../components/DetailHeaderLayout";
+import { SeatingLegend } from "../components/SeatingLegend";
 
 export function SelectSeats(): JSX.Element {
   const detailHeaderProps = {
@@ -7,6 +8,7 @@ export function SelectSeats(): JSX.Element {
   return (
     <div>
       <DetailHeader {...detailHeaderProps} />
+      <SeatingLegend />
     </div>
   );
 }
