@@ -13,8 +13,7 @@ export function DetailHeader({ title }: props): JSX.Element {
         <ChevronLeftIcon className="self-center ml-1 h-6 fill-white" />
       </div>
       <h1 className="text-title">{title}</h1>
-      <div className="w-6 h-6"/>
-
+      <div className="w-6 h-6" />
     </header>
   );
 }
