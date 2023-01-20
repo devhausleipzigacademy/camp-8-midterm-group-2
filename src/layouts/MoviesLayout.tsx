@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { DetailHeader } from "../components/DetailHeaderLayOut";
+import { DetailHeader } from "../components/DetailHeaderLayout";
 
 export function MovieLayout() {
   return (
-    <div>
+    <div className="bg-dark px-5 pt-8 pb-6 h-screen text-white">
       <Outlet />
     </div>
   );

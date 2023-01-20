@@ -9,7 +9,6 @@ import { MovieDetail } from "../types/api";
 import { SECRETKEY } from "../utils/movies2";
 import { useNavigate } from "react-router-dom";
 
-import { DetailHeader } from "../components/DetailHeaderLayOut";
 
 export async function loadCrewCast(loaderObj: any) {
   const movieId = loaderObj.params.movieId;
