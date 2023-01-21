@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 
 interface ButtonProps {
-  type: "primary" | "secondary";
+  variant: "primary" | "secondary";
   height: "default" | "small";
   label: string;
   onClick: (event: React.FormEvent<any>) => void;
