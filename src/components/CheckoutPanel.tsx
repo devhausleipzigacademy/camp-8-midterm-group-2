@@ -3,34 +3,26 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { SeatSelectButton } from "./SeatSelectButton";
 import { Transition } from "@headlessui/react";
-
-export type Seats = {
-  type: string;
-};
+import { useSeatStore } from "../stores/BookingStore";
 
 export type CheckoutPanelProps = {
-  seats: Seats[];
-  totalAmount: number;
-  click: () => void;
+  seatsChosen: [];
+  /*   totalAmount: number;
+  click: () => void; */
 };
 
-export function CheckoutPanel() {
+export function CheckoutPanel({ seatsChosen }: CheckoutPanelProps) {
   const navigate = useNavigate();
+  /*   const { seatsChosen } = useSeatStore(); */
+
+  console.log(seatsChosen);
+
+  
 
   /* const totalAmount =  */
 
   return (
     <div>
-      <Transition
-        show={seats.length > 0}
-        enter="transition-opacity duration-75"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      ></Transition>
-
       <div className="bg-dark-light rounded-3xl pt-7">
         {/* wrapper within background */}
         <div className="px-5 pb-6 ">
@@ -80,7 +72,7 @@ export function CheckoutPanel() {
                 <p className="font-bold text-[20px] text-white">$43.55</p>
               </div>
               <Button
-                variant={seats.length > 0 ? "primary" : "secondary"}
+                variant="primary"
                 height="default"
                 label={"Book Tickets"}
                 onClick={() => {
