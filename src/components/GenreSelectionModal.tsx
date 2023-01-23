@@ -9,16 +9,19 @@ import Button from "./Button";
 
 type selectedStateType = string[];
 
-export function GenreSelectionModal() {
+export function GenreSelectionModal({ isOpen, setIsOpen }) {
   const [selected, setSelected] = useState<selectedStateType>([]);
-  const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-      <Dialog.Panel>
-        <div className="flex flex-col justify-between">
+    <Dialog
+      open={isOpen}
+      onClose={() => setIsOpen(false)}
+      className="fixed top-0 left-0 z-50 bg-dark px-5 h-screen w-screen"
+    >
+      <Dialog.Panel className="h-full w-full">
+        <div className="flex flex-col justify-between w-full h-full">
           <DetailHeader title="Genres" />
-          <div className="grid grid-cols-4 gap-x-9 gap-y-9">
+          <div className="grid grid-cols-4 gap-x-9 gap-y-6">
             {Object.keys(genres).map((genre) => {
               return (
                 <a
@@ -47,7 +50,7 @@ export function GenreSelectionModal() {
             })}
           </div>
 
-          <div>
+          <div className="space-y-3 h-min pb-6">
             <div className="font-bold text-xs text-white-dimmed flex gap-1">
               <p className="text-white">{selected.length}</p>
               <p className=""> Genres selected</p>
