@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
-export type ButtonProps = {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "primary" | "secondary";
   height: "default" | "small";
   label: string;
   disabled?: boolean;
-  onClick: () => void;
-};
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
 function Button({
   variant,
@@ -22,7 +22,7 @@ function Button({
       type="button"
       onClick={onClick}
       className={clsx(
-        "text-center rounded-lg w-full text-primary",
+        "text-center rounded-lg w-full text-primary px-2",
         variant === "primary" && !disabled ? "bg-yellow text-dark-light" : "",
         variant === "primary" && disabled
           ? "bg-yellow-dimmed text-dark-light"

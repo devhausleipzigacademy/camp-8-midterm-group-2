@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 // Link below helps with filling in suggestions to the search input field
 // https://5d9774839a6eff00203f5cbf-przshcqifp.chromatic.com/?path=/story/input-textinput-default-suggestion--default-suggestion
 
-export const SearchInput = () => {
+export const SearchInput = ({ type, ...props }: any) => {
   const [value, setValue] = useState("");
   const onChange = (event: ChangeEvent<HTMLInputElement>) =>
     setValue(event.currentTarget.value);
@@ -17,6 +17,7 @@ export const SearchInput = () => {
         className="bg-dark-light focus:outline-none text-white placeholder:text-white-dimmed w-full"
         placeholder={"Search"}
         onChange={onChange}
+        {...props}
       />
     </label>
   );
