@@ -5,13 +5,12 @@ import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import clsx from "clsx";
 
-type props = {
-  open: boolean;
-};
-type selectedStateType = [] | string[];
-export function GenreSelectionModal({ open = false }: props) {
-  const [isOpen, setIsOpen] = useState(open);
+type selectedStateType = string[];
+
+export function GenreSelectionModal() {
   const [selected, setSelected] = useState<selectedStateType>([]);
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <Dialog.Panel>
