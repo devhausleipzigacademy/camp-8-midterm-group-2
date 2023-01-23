@@ -1,42 +1,55 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-//Create a User type that has a username and a avatarUrl
-type User = {
-    username: string;
-    avatarUrl: string;
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  username: string;
+  avatarurl: string;
 }
 
-//Create a type for your AuthStore that can hold a user and a token, as well as updaters
+export const exampleDB: Array<User> = [
+  {
+    id: "1",
+    email: "default@gmail.com",
+    password: "1234abcd",
+    username: "first_user2020",
+    avatarurl:
+      "https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/examples",
+  },
+];
+
 type AuthStore = {
-    token: string;
-    user: User | null
-    setUser: (user: User) => void; //setUser receives an updated user later
-    setToken: (tokenResponse: string) => void;
-    clear: () => void;
-  };
+  id: string;
+  email: string;
+  token: string;
+  setId: (id: string) => void;
+  setToken: (tokenResponse: string) => void;
+  clear: () => void;
+};
 
-//implement an initialState
 const initialState = {
-    token: "",
-    user: {
-        username: "",
-        avatarUrl: "",
-    },
-}
+  id: "",
+  email: "",
+  password: "",
+  username: "",
+  token: "",
+  avatarurl: "",
+};
 
-//implement the store (state values and setters)
 export const useAuthStore = create<AuthStore>()(
-    persist(
-    //what does set do exactly
-      (set) => ({
-        ...initialState,
-        setUser: (user) => set({ user }),
-        setToken: (token) => set({ token }),
-        clear: () => set({ ...initialState }),
-      }),
-      {
-        name: "user-auth",
-      }
-    )
-  );
+  persist(
+    (set) => ({
+      id: "",
+      token: "",
+      email: "",
+      setId: (idInput: string) => set({ id: idInput }),
+      setToken: (tokenResponse: string) => set({ token: tokenResponse }),
+      clear: () => set({ ...initialState }),
+    }),
+    {
+      name: "blog-auth",
+    }
+  )
+);
