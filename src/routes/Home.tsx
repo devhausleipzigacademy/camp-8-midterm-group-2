@@ -19,6 +19,7 @@ export function Home(): JSX.Element {
   const upcomingMovies = useLoaderData() as Movie[];
 
   return (
+
     <div className="bg-dark flex-1 flex flex-col justify-evenly gap-4 pt-8 overflow-y-scroll scrollbar-hide">
       <div className="px-5">
         <UserInfo userName="USER" userImg="" />

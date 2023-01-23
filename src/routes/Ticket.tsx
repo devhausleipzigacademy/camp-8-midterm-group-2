@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { TicketComponent, TicketProps } from "../components/TicketComponent";
 
 const ticketInfo: TicketProps = {
@@ -7,9 +8,16 @@ const ticketInfo: TicketProps = {
   price: "",
   seats: [],
 };
+=======
+import { DetailHeader } from "../components/DetailHeaderLayout";
+>>>>>>> main
 
 export function Ticket(): JSX.Element {
+  const detailHeaderProps = {
+    title: "Ticket",
+  };
   return (
+<<<<<<< HEAD
     <div className="bg-dark h-screen  pt-8 px-5">
       <TicketComponent
         title={"Violent Night"}
@@ -19,6 +27,10 @@ export function Ticket(): JSX.Element {
         seats={["C-3", "C-5", "A-4"]}
       />
       ;
+=======
+    <div>
+      <DetailHeader {...detailHeaderProps} />
+>>>>>>> main
     </div>
   );
 }
