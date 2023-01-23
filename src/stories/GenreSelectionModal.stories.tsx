@@ -1,4 +1,3 @@
-import react from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { GenreSelectionModal } from "../components/GenreSelectionModal";
 import "../index.css";
