@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Button from "../components/Button";
 import { Input } from "../components/Input";
+import { useAuthStore } from "../stores/AuthStore";
 
 type User = {
   email: string;
@@ -24,43 +25,24 @@ function testAPI(email: string, password: string) {
 }
 
 export function Login(): JSX.Element {
-  const [emailState, setEmailState] = useState("");
-  const [passwordState, setPasswordState] = useState("");
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    testAPI(emailState, passwordState);
-  };
+  const { token } = useAuthStore();
+  if (token) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
-    <form
-      className="flex flex-col justify-between gap-8 bg-dark h-screen w-screen px-5 py-8"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex flex-col justify-between gap-8 bg-dark h-screen w-screen px-5 py-8">
       <div className="flex flex-col gap-3">
         <h1 className="text-title">Welcome to Cine-Scape</h1>
         <p className="text-description">
           You need to login to be able to make reservations <br /> and add
           movies to your watchlist.
         </p>
-        <Input
-          className="max-width"
-          type="email"
-          onChange={() => setEmailState(emailState)}
-        />
-        <Input
-          className="max-width"
-          type="password"
-          onChange={() => setPasswordState(passwordState)}
-        />
+        <Input name="email" className="max-width" type="email" />
+        <Input name="password" className="max-width" type="password" />
       </div>
       <div className="flex ">
-        <Button
-          variant="primary"
-          height="small"
-          label="Login"
-          onClick={(event) => {}}
-          type="submit"
-        />
+        <Button variant="primary" height="small" label="Login" type="submit" />
       </div>
     </form>
   );
