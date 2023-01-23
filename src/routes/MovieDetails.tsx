@@ -76,7 +76,7 @@ function MovieDetails(): JSX.Element {
   const movie_synopsis = currentData.details.overview;
   const poster_path: string = posterUrl + currentData.details.poster_path;
 
-  const MovieDetails = (
+  return (
     <div id="page_wrapper" className="w-full h-full m-0 p-0">
       <DetailHeader />
 
@@ -87,7 +87,7 @@ function MovieDetails(): JSX.Element {
         >
           <img
             alt={`movie poster for ${movie_name}`}
-            className="object-cover relative top-[-40%]"
+            className="object-contain w-full relative -translate-y-[140px]"
             src={poster_path}
           ></img>
         </div>
@@ -192,8 +192,6 @@ function MovieDetails(): JSX.Element {
       </div>
     </div>
   );
-
-  return MovieDetails;
 }
 
 export default MovieDetails;

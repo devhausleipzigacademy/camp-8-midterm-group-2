@@ -34,7 +34,7 @@ export function Login() {
           variant="primary"
           height="small"
           label="Login"
-          onClick={(event) => {}}
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) => {}}
           type="submit"
         />
       </div>
