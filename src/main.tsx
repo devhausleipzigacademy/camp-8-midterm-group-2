@@ -1,15 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { MovieLayout } from "./layouts/MoviesLayout";
 import {
   CastCrew,
-  Genres,
   Home,
   loadMovieDetails,
   Login,
@@ -24,7 +19,8 @@ import {
 import { BookingLayout } from "./layouts/BookingLayout";
 import { Movies } from "./routes/Movies";
 import NavBar from "./layouts/NavBarLayout";
-import MovieDetails from "./routes/MovieDetails";
+
+
 
 const movieDetailChildren = [
   {
@@ -35,6 +31,7 @@ const movieDetailChildren = [
   {
     path: "castcrew",
     element: <CastCrew />,
+    loader: loadCrewCast,
   },
   {
     path: "booking",
@@ -91,7 +88,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: ":movieId",
+
     element: <MovieLayout />,
     children: movieDetailChildren,
   },
