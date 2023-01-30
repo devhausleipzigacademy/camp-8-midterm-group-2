@@ -1,0 +1,31 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  identifier String   @id @default(uuid())
+  tickets    Seat[]
+}
+
+model Showing {
+  movieId String
+  dateTime DateTime
+  seats Seat[]
+
+  @@id([movieId, dateTime], map: "identifier")
+}
+
+model Seat {
+  identifier String @id @default(uuid())
+  location String
+  seatIn Showing @relation(fields: [movieId, dateTime], references: [movieId, dateTime])
+  movieId String
+  dateTime DateTime
+  reservedBy User? @relation(fields: [userId], references: [identifier])
+  userId String
+}
