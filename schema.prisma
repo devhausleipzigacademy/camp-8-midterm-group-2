@@ -12,8 +12,7 @@ model User {
   saltAndHash String
   name       String
   email      String @unique
-  avatarUrl  String
-  password   String
+  avatarUrl  String?
   liked      String[]
   bookings   Booking[]
 }

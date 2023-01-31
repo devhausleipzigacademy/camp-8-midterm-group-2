@@ -55,39 +55,46 @@ async function init() {
     }
   });
 
-  // fastify.get("/auth/login", async (request, reply) => {
-  //    try { const userData = models.postTokenBodyModel.parse(request.body)
+  fastify.get("/auth/login", async (request, reply) => {
+    try {
+      const userData = models.postTokenBodyModel.parse(request.body);
 
-  //     const user = await prisma.user.findUnique({
-  //       where: { email: userData.email }
-  //     })
-  //     if(!user) {
-  //       reply.status(401).send("Either email or password is wrong.")
-  //       return
-  //     }
+      const user = await prisma.user.findUnique({
+        where: { email: userData.email },
+      });
+      if (!user) {
+        reply.status(401).send("Either email or password is wrong.");
+        return;
+      }
 
-  //     await bcrypt.compare(userData.password, user.saltAndHash)
+      await bcrypt.compare(userData.password, user.saltAndHash);
 
-  //     const token = jwt.sign({
-  //        user_id: user.identifier,
-  //        email: user.email
-  //     } as TokenPayload, secretKey!, { expiresIn: "24h" })
+      const token = jwt.sign(
+        {
+          user_id: user.identifier,
+          email: user.email,
+        } as TokenPayload,
+        secretKey!,
+        { expiresIn: "24h" }
+      );
 
-  //     return token;
-  // } catch (error) {
-  //   if (error instanceof ZodError) {
-  //     reply.status(422).send(JSON.stringify(error));
-  //     return
-  //   }
-  //   if(
-  //     error instanceof jwt.JsonWebTokenError ||
-  //     error instanceof jwt.NotBeforeError ||
-  //     error instanceof jwt.NotBeforeError
-  //     ) {
-  //   console.log(error)
-  //   reply.status(401).send("Either email or password is wrong.");
-  //   return }
-  // }})
+      return token;
+    } catch (error) {
+      if (error instanceof ZodError) {
+        reply.status(422).send(JSON.stringify(error));
+        return;
+      }
+      if (
+        error instanceof jwt.JsonWebTokenError ||
+        error instanceof jwt.NotBeforeError ||
+        error instanceof jwt.NotBeforeError
+      ) {
+        console.log(error);
+        reply.status(401).send("Either email or password is wrong.");
+        return;
+      }
+    }
+  });
 
   // fastify.get(
   //   "/movie/:movieId/showings",

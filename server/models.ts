@@ -26,6 +26,7 @@ const patchShowingParamsModel = z.object({
 const patchUserBodyModel = z.object({ movieId: z.string() });
 
 const asyncPostUserBodyModel = z.object({
+  avatarUrl: z.optional(z.string()),
   name: z.string(),
   email: z.string().email(),
   password: z.string().min(8),
@@ -46,4 +47,5 @@ export default {
   patchShowingParamsModel,
   patchUserBodyModel,
   updateShowingModel,
+  postTokenBodyModel,
 };
