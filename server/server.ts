@@ -33,23 +33,27 @@ async function init() {
   fastify.get("/hello", async (request, reply) => {
     reply.send("hello");
   });
-  // fastify.post("/auth/register", async (request, reply) => {
-  //   try {
-  //   const userData = await models.asyncPostUserBodyModel.parseAsync(request.body);
+  fastify.post("/auth/register", async (request, reply) => {
+    try {
+      const userData = await models.asyncPostUserBodyModel.parseAsync(
+        request.body
+      );
 
-  //   const user = await prisma.user.create({
-  //     data: {..._.omit(userData,["password"]),
-  //   saltAndHash: await bcrypt.hash(userData.password, 10)}
-  //   })
-  //   reply.status(201)
-  // } catch (error) {
-  //   if (error instanceof ZodError) {
-  //     reply.status(422).send(JSON.stringify(error));
-  //   }
-  //   console.log(error)
-  //   reply.status(500).send("Soomething went wrong!")
-  // }
-  // })
+      const user = await prisma.user.create({
+        data: {
+          ..._.omit(userData, ["password"]),
+          saltAndHash: await bcrypt.hash(userData.password, 10),
+        },
+      });
+      reply.status(201);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        reply.status(422).send(JSON.stringify(error));
+      }
+      console.log(error);
+      reply.status(500).send("Soomething went wrong!");
+    }
+  });
 
   // fastify.get("/auth/login", async (request, reply) => {
   //    try { const userData = models.postTokenBodyModel.parse(request.body)

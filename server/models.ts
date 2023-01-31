@@ -4,9 +4,7 @@ import { string } from "zod";
 const showingQueryModel = z.object({
   dateTime: z.optional(
     string().refine((val) => {
-      try {
-        Date.parse(val);
-      } catch (err) {
+      if (Number.isNaN(Date.parse(val))) {
         return false;
       }
       return true;
@@ -22,7 +20,7 @@ const noReturnData = z.undefined();
 
 const patchShowingParamsModel = z.object({
   movieId: z.string(),
-  datetime: z.string(),
+  dateTime: z.string(),
 });
 
 const patchUserBodyModel = z.object({ movieId: z.string() });
