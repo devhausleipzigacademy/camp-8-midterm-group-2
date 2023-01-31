@@ -8,24 +8,38 @@ generator client {
 }
 
 model User {
-  identifier String   @id @default(uuid())
+  identifier String    @id @default(uuid())
+  saltAndHash String
+  name       String
+  email      String @unique
+  avatarUrl  String
+  password   String
+  liked      String[]
+  bookings   Booking[]
+}
+
+model Booking {
+  identifier String @id @default(uuid())
   tickets    Seat[]
+  reservedBy User?  @relation(fields: [userIdentifier], references: [identifier])
+  userIdentifier String?
 }
 
 model Showing {
-  movieId String
+  movieId  String
   dateTime DateTime
-  seats Seat[]
+  seats    Seat[]
 
   @@id([movieId, dateTime], map: "identifier")
 }
 
 model Seat {
-  identifier String @id @default(uuid())
-  location String
-  seatIn Showing @relation(fields: [movieId, dateTime], references: [movieId, dateTime])
-  movieId String
-  dateTime DateTime
-  reservedBy User? @relation(fields: [userId], references: [identifier])
-  userId String
+  identifier        String   @id @default(uuid())
+  location          String
+  seatIn            Showing  @relation(fields: [movieId, dateTime], references: [movieId, dateTime])
+  movieId           String
+  dateTime          DateTime
+  userId            String
+  Booking           Booking? @relation(fields: [bookingIdentifier], references: [identifier])
+  bookingIdentifier String?
 }
