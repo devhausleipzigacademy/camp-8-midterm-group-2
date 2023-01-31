@@ -8,7 +8,7 @@ const showingQueryModel = z.object({
       return false;
     }
     return true;
-  }),
+  })),
 });
 
 const showingParamModel = z.object({
