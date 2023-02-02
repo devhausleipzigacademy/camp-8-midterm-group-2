@@ -1,3 +1,4 @@
+import { CheckoutPanel } from "../components/CheckoutPanel";
 import { DetailHeader } from "../components/DetailHeaderLayout";
 import { SeatingLegend } from "../components/SeatingLegend";
 
@@ -9,6 +10,13 @@ export function SelectSeats(): JSX.Element {
     <div>
       <DetailHeader {...detailHeaderProps} />
       <SeatingLegend />
+      <CheckoutPanel
+        seatsChosen={[]}
+        click={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+      ‚
     </div>
   );
 }

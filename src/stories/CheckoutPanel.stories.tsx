@@ -1,17 +1,42 @@
-import react from "react";
-import { Meta, StoryObj } from "@storybook/react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
-import { CheckoutPanel } from "../components/CheckoutPanel";
+import { Meta, StoryFn } from "@storybook/react";
+import {
+  CheckoutPanel,
+  CheckoutPanelProps,
+  tempSeatsData,
+} from "../components/CheckoutPanel";
 
-const meta: Meta<typeof CheckoutPanel> = {
-  title: "Movie/CheckoutPanel",
+// try to use this data to make a mock component in the story
+// put tempdata into useState and onclick of story checkboxes, update state
+
+type NewType = Meta<typeof CheckoutPanel>;
+
+export default {
+  title: "Movie /Checkout Panel",
   component: CheckoutPanel,
+  argTypes: {
+    seatsChosen: {
+      options: tempSeatsData,
+      control: { type: "checkbox" },
+    },
+  },
 };
 
-export default meta;
+const Template: StoryFn<typeof CheckoutPanel> = (args) => {
+  const [tempSeatsData, setTempSeatsData] = useState<string[]>([]);
+  useEffect(() => {
+    setTempSeatsData(args.seatsChosen);
+  }, [args]);
 
-type Story = StoryObj<typeof CheckoutPanel>;
+  const newArgs = {
+    ...args,
+    tempSeatsData: tempSeatsData,
+    // onClick: () => setSeatsChosen(),
+  };
 
-export const Default: Story = {
-  args: {},
+  return <CheckoutPanel {...newArgs} />;
 };
+
+export const Default = Template.bind({});
+Default.args = {};
