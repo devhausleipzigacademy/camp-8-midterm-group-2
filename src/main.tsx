@@ -90,6 +90,8 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  // Suggestion from Franz to add movieId as a child of movies
   {
     path: ":movieId",
     element: <MovieLayout />,

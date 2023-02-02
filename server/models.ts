@@ -13,6 +13,7 @@ const showingQueryModel = z.object({
 });
 
 const showingParamModel = z.object({
+  dateTime: z.string(),
   movieId: z.string(),
 });
 

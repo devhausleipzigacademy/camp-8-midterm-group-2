@@ -33,6 +33,7 @@ async function init() {
   fastify.get("/hello", async (request, reply) => {
     reply.send("hello");
   });
+
   fastify.post("/auth/register", async (request, reply) => {
     try {
       const userData = await models.asyncPostUserBodyModel.parseAsync(
@@ -96,60 +97,48 @@ async function init() {
     }
   });
 
-  // fastify.get(
-  //   "/movie/:movieId/showings",
-  //   {
-  //       operationId:
-  //       querystring: $ref(`showingQueryModel`),
-  //       params: $ref(`showingParamsModel`),
-  //       reply:
-  //   },
-  //   async (request, reply: any) => {
-  //     const { movieId } = models.showingParamModel.parse(request.params);
-  //     const { dateTime } = models.showingParamModel.parse(request.query);
+  fastify.get("/movie/showing/:movieId", async (request, reply: any) => {
+    const { movieId } = models.showingParamModel.parse(request.params);
+    const { dateTime } = models.showingParamModel.parse(request.query);
 
-  //     if (!Boolean(dateTime)) {
-  //       return await prisma.showing.findMany({
-  //         where: {
-  //           movieId: movieId,
-  //           include: {
-  //             seats: true,
-  //           },
-  //         },
-  //       });
-  //     } else {
-  //       return prisma.showing.findUnique({
-  //         where: {
-  //           movieId_dateTime: {
-  //             movieId,
-  //             dateTime,
-  //           },
-  //         },
-  //       });
-  //       if (!Boolean(showing)) {
-  //         reply.status(404).send("Showing does not exist");
-  //         return;
-  //       }
-  //       return showing;
-  //     }
+    if (!Boolean(dateTime)) {
+      return await prisma.showing.findMany({
+        where: {
+          movieId: movieId,
+        },
+      });
+    } else {
+      return prisma.showing.findUnique({
+        where: {
+          movieId_dateTime: {
+            movieId,
+            dateTime,
+          },
+        },
+        include: {
+          seats: true,
+        },
+      });
+      //   if (!Boolean(showing)) {
+      //     reply.status(404).send("Showing does not exist");
+      //     return;
+      //   }
+      //   return showing;
+      // }
 
-  //     return pokemon.map((pokemon: any) => {
-  //       return pokemon.name;
-  //     });
-  //   }
-  // );
+      // return pokemon.map((pokemon: any) => {
+      //   return pokemon.name;
+      // });
+    }
+  });
 
-  // fastify.zod.patch(
+  // fastify.patch(
   //   "movie/:movieId/showing/:datetime",
-  //   { operationId: "bookedSeatsInShowing",
-  //     params: "patchShowingParamsModel",
-  //     body: "updateShowingBodyModel"
-  // },
   //   //@ts-ignore
-  //   async (request) => {
+  //   async (request, reply) => {
   //     try {
-  //     const {movieId} = models.patchShowingParamsModel(request.params)
-  //     const { showingId, datetime } = models.updateShowingModel.parse(request.query)  ;
+  //     const {movieId, dateTime} = models.patchShowingParamsModel(request.params)
+  //     const { showingId } = models.updateShowingModel.parse(request.query)  ;
   //     const seatIds = request.body
 
   //     const exampleUserId = "7dee16a9-79aa-4a46-a923-65e62ad59665";
@@ -157,7 +146,7 @@ async function init() {
   //     prisma.seat.updateMany({
 
   //         where: {
-  //           seatIn { AND: [{ datetime: new Date(datetime) }, { movieId }]}
+  //           seatIn { AND: [{ dateTime: new Date(dateTime) }, { movieId }]}
   //           OR: seatIds.map((seatId) => {
   //             return { identifier: seatId};
   //           })
@@ -169,12 +158,12 @@ async function init() {
   //     } catch (error) {
   //       if( error instanceof ZodError ) {
   //       reply.status(422).send(error)
-  //       return}
+  //       return
   //     }
   //     console.log(error)
   //     reply.status(500.send(error))
   //     }
-  //     }
+  //   }
   // );
 
   // fastify.patch("/user/:userId", async (request, reply) => {
