@@ -48,4 +48,6 @@ export default {
   patchShowingParamsModel,
   patchUserBodyModel,
   updateShowingModel,
+  postTokenBodyModel,
+  showingQueryModel,
 };

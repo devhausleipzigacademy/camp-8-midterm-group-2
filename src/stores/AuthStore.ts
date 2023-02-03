@@ -43,7 +43,7 @@ type AuthStore = {
   user: modelUser;
   token: TokenResponse;
   setUser: (user: modelUser) => void;
-  setToken: (tokenResponse: string) => void;
+  setToken: (token: TokenResponse) => void;
   clear: () => void;
 };
 
@@ -64,12 +64,12 @@ export const useAuthStore = create<AuthStore>()(
         liked: [null],
         bookings: [null],
       } as modelUser,
-      setToken: (token_placeholder: TokenResponse) => set({ token: token_placeholder }),
-      setUser: (userFromDB: modelUser) => set({user: userFromDB}),
+      setToken: (tokenNewValue: TokenResponse) => set({ token: tokenNewValue }),
+      setUser: (userNewValue: modelUser) => set({user: userNewValue}),
       clear: () => set({ ...initialState }),
     }),
     {
-      name: "blog-auth",
+      name: "current-token",
     }
   )
 );
