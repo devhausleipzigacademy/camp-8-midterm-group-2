@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { Input } from "../components/Input";
-import { exampleDB, useAuthStore } from "../stores/AuthStore";
+import { useAuthStore } from "../stores/AuthStore";
 
 export function Login(): JSX.Element {
 

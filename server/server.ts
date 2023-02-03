@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
 import dotenv from "dotenv";
+import { TokenResponse } from "../src/stores/AuthStore"
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ async function init() {
   const fastify = Fastify({ logger: true });
 
   fastify.register(cors, { origin: ["*"] });
+
   //TEST:
   // fastify.get("/hello", async (request, reply) => {
   //   reply.send("hello");
@@ -67,7 +69,6 @@ async function init() {
       //compare login password to DB-entry
       await bcrypt.compare(loginData.password, currentUser.saltAndHash);
 
-      //how to build a type from this?
       const token: TokenResponse = jwt.sign(
         {
           user_id: currentUser.identifier,
@@ -213,6 +214,8 @@ async function init() {
   //   })
   //  })
 
+
+  //what does this do?
   await fastify.listen({ port: 3000, host: "127.0.0.1" });
 }
 try {

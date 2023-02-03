@@ -8,28 +8,29 @@ export type TokenResponse = {
   user_email: string | null;
 };
 
-//Type for FakeUser in DB
-export interface FakeUser {
-  id: string;
-  email: string;
-  password: string;
-  username: string;
-  avatarurl: string;
-}
+// //Type for FakeUser in DB
+// export interface FakeUser {
+//   id: string;
+//   email: string;
+//   password: string;
+//   username: string;
+//   avatarurl: string;
+// }
 
-//Fake-UserDB
-export const exampleDB: Array<FakeUser> = [
-  {
-    id: "1",
-    email: "default@gmail.com",
-    password: "1234abcd",
-    username: "first_user2020",
-    avatarurl:
-      "https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/examples",
-  },
-];
+// //Fake-UserDB
+// export const exampleDB: Array<FakeUser> = [
+//   {
+//     id: "1",
+//     email: "default@gmail.com",
+//     password: "1234abcd",
+//     username: "first_user2020",
+//     avatarurl:
+//       "https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/examples",
+//   },
+// ];
+
 //corresponds to schema.prisma, without saltAndHash
-interface modelUser {
+export interface modelUser {
   identifier: string | null,
   // saltAndHash: string,
   name: string | null,
@@ -39,7 +40,7 @@ interface modelUser {
   bookings: Array<Object> | Array<null>,
 }
 
-type AuthStore = {
+export type AuthStore = {
   user: modelUser;
   token: TokenResponse;
   setUser: (user: modelUser) => void;
