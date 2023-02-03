@@ -1,5 +1,6 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Navigate } from "react-router-dom";
 import clsx from "clsx";
+import { useAuthStore } from "../stores/AuthStore";
 
 const routes = [
   {
@@ -49,9 +50,11 @@ const routes = [
 ];
 
 export function RootLayout() {
+  const { token } = useAuthStore();
+  if (!token) return <Navigate to="/login" replace />;
   return (
     <div>
       <Outlet />
     </div>
-  );
+  )
 }

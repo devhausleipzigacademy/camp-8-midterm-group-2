@@ -1,56 +1,106 @@
-import { useState } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { Input } from "../components/Input";
 import { exampleDB, useAuthStore } from "../stores/AuthStore";
 
-export function Login() {
+export function Login(): JSX.Element {
 
-  const [emailInput, setEmail] = useState(""); //for Component
-  const [password, setPassword] = useState(""); //for Component
+  const { setToken, setUser } = useAuthStore();
 
-  const { token, setToken } = useAuthStore();
-  const { setId } = useAuthStore();
+  // const [ email, setEmail ] = useState("")
+  // const [ password, setPassword ] = useState("")
+  //// ---> similar to:
+  const [formFields, setFormFields] = useState({ inputEmail: "", inputPassword: "" });
 
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const currentUser = exampleDB.find(
-      (element) => element.email === emailInput
-    );
-    if (currentUser !== undefined && currentUser.password === password) {
-      setToken("test-token");
-      setId(currentUser.id);
+  async function loginCall() {
+
+    const response = await axios.post("http://127.0.0.1:3000/login", {
+      email: formFields.inputEmail,
+      password: formFields.inputPassword as string,
+    });
+
+    const token = response.data.token;
+    const user = response.data.user;
+
+    setToken(token);
+    setUser(user);
+
+    if (token) {
       navigate("/");
     }
-    setError("Incorrect Credentials");
   }
 
-  if (token) return <Navigate to="/" replace />;
+  //can use later to add a registration-option:
+  // let [loginOrRegister, changeLoginOrRegister] = useState("signin")
+  // const changeAuthMode = () => {
+  //   changeLoginOrRegister(loginOrRegister === "signin" ? "signup" : "signin")
+  // } {}
+
+  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    loginCall();
+  }
+
+  let error = "";
   return (
-    <form className="flex flex-col justify-between gap-8 bg-dark h-screen px-5 py-8">
+    <form
+      // conSubmit={checkIfMatch}
+      className="flex flex-col justify-between gap-8 h-screen px-5 py-8"
+      onSubmit={(e) => {
+        handleLogin(e);
+      }}
+    >
       <div className="flex flex-col gap-3">
         <h1 className="text-title">Welcome to Cine-Scape</h1>
-        <p className="text-description">
-          You need to login to be able to make reservations <br /> and add
-          movies to your watchlist.
-        </p>
-        <Input type="email" onChange={(event) => setEmail(event.target.value)} />
+        <p className="text-red text-description">{error}</p>
+        <Input
+          type="email"
+          value={formFields.inputEmail}
+          onChange={(e) =>
+            setFormFields(
+              //when react calls the callback function of useState it will pass THE PREVIOUS value as argument.
+              //It will give this value to whatever placeholder-name we've choosen, in our care prevVal
+              (prevVal) => {
+                return { ...prevVal, email: e.target.value };
+              }
+            )
+          }
+          name="email"
+          placeholder="your Email goes here"
+          required
+        />
         <Input
           type="password"
-          onChange={(event) => setPassword(event.target.value)}
+          value={formFields.inputPassword}
+          onChange={(e) =>
+            setFormFields((prevVal) => {
+              return { ...prevVal, password: e.target.value };
+            })
+          }
+          name="password"
+          placeholder="Please enter Your password here"
+          required
         />
       </div>
-      <div className="flex ">
+      <div className="flex flex-col gap-3">
         <Button
           variant="primary"
           height="small"
           label="Login"
-          onClick={() => {handleSubmit}}
+          onClick={() => {}}
           type="submit"
         />
+        {/* <Button
+          variant="secondary"
+          height="small"
+          label="Register"
+          onClick={()=>{}}
+          type="submit"
+        /> */}
       </div>
     </form>
   );

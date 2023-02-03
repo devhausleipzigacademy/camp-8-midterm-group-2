@@ -1,7 +1,8 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-export interface User {
+//Type for FakeUser in DB
+export interface FakeUser {
   id: string;
   email: string;
   password: string;
@@ -9,7 +10,8 @@ export interface User {
   avatarurl: string;
 }
 
-export const exampleDB: Array<User> = [
+//Fake-UserDB
+export const exampleDB: Array<FakeUser> = [
   {
     id: "1",
     email: "default@gmail.com",
@@ -19,33 +21,44 @@ export const exampleDB: Array<User> = [
       "https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/examples",
   },
 ];
+//corresponds to schema.prisma, without saltAndHash
+interface modelUser {
+  identifier: string | null,
+  // saltAndHash: string,
+  name: string | null,
+  email: string | null,
+  avatarUrl?: string | null,
+  liked: Array<String> | Array<null>,
+  bookings: Array<Object> | Array<null>,
+}
 
 type AuthStore = {
-  id: string;
-  email: string;
+  user: modelUser;
   token: string;
-  setId: (id: string) => void;
+  setUser: (user: modelUser) => void;
   setToken: (tokenResponse: string) => void;
   clear: () => void;
 };
 
 const initialState = {
-  id: "",
-  email: "",
-  password: "",
-  username: "",
-  token: "",
-  avatarurl: "",
+  user: {} as modelUser,
+  token: undefined,
 };
 
+//https://pub.dev/documentation/nhost_sdk/latest/nhost_sdk/AuthStore-class.html
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
-      id: "",
       token: "",
-      email: "",
-      setId: (idInput: string) => set({ id: idInput }),
+      user: {
+        identifier: null,
+        name: null,
+        email: null,
+        liked: [null],
+        bookings: [null],
+      } as modelUser,
       setToken: (tokenResponse: string) => set({ token: tokenResponse }),
+      setUser: (userFromDB: modelUser) => set({user: userFromDB}),
       clear: () => set({ ...initialState }),
     }),
     {
