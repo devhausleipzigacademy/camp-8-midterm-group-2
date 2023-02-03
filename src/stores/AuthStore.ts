@@ -1,5 +1,12 @@
+import { ServerIcon } from "@heroicons/react/20/solid";
 import create from "zustand";
 import { persist } from "zustand/middleware";
+
+//Type for Token
+export type TokenResponse = {
+  user_id: string | null;
+  user_email: string | null;
+};
 
 //Type for FakeUser in DB
 export interface FakeUser {
@@ -34,7 +41,7 @@ interface modelUser {
 
 type AuthStore = {
   user: modelUser;
-  token: string;
+  token: TokenResponse;
   setUser: (user: modelUser) => void;
   setToken: (tokenResponse: string) => void;
   clear: () => void;
@@ -49,7 +56,7 @@ const initialState = {
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
-      token: "",
+      token: {user_id: null, user_email: null},
       user: {
         identifier: null,
         name: null,
@@ -57,7 +64,7 @@ export const useAuthStore = create<AuthStore>()(
         liked: [null],
         bookings: [null],
       } as modelUser,
-      setToken: (tokenResponse: string) => set({ token: tokenResponse }),
+      setToken: (token_placeholder: TokenResponse) => set({ token: token_placeholder }),
       setUser: (userFromDB: modelUser) => set({user: userFromDB}),
       clear: () => set({ ...initialState }),
     }),
