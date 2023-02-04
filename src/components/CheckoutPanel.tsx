@@ -8,56 +8,9 @@ import { useSeatStore } from "../stores/BookingStore";
 export type CheckoutPanelProps = {
   // Pass in prop of Seats Chosen from BookingStore
   seatsChosen: string[];
-
+  show: boolean;
   click: () => void;
 };
-
-export const tempSeatsData = [
-  "A-1",
-  "A-2",
-  "A-3",
-  "A-4",
-  "A-5",
-  "A-6",
-  "B-1",
-  "B-2",
-  "B-3",
-  "B-4",
-  "B-5",
-  "B-6",
-  "B-7",
-  "B-8",
-  "C-1",
-  "C-2",
-  "C-3",
-  "C-4",
-  "C-5",
-  "C-6",
-  "C-7",
-  "C-8",
-  "D-1",
-  "D-2",
-  "D-3",
-  "D-4",
-  "D-5",
-  "D-6",
-  "D-7",
-  "D-8",
-  "E-1",
-  "E-2",
-  "E-3",
-  "E-4",
-  "E-5",
-  "E-6",
-  "E-7",
-  "E-8",
-  "F-1",
-  "F-2",
-  "F-3",
-  "F-4",
-  "F-5",
-  "F-6",
-];
 
 const pricesCategory: Record<string, number> = {
   front: 12.95,
@@ -65,8 +18,11 @@ const pricesCategory: Record<string, number> = {
   back: 16.95,
 };
 
-// tempSeatsData will be seatsChosen
-export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
+export function CheckoutPanel({
+  seatsChosen,
+  show,
+  click,
+}: CheckoutPanelProps) {
   // For Button at the bottom to navigate to ticket
   const navigate = useNavigate();
   // Creates state of quantities, sets initial values for each section of seats
@@ -78,47 +34,29 @@ export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
 
   // Call a function when state (here setQuantities) changes
   useEffect(() => {
-    const frontRowSeats = tempSeatsData.filter(
+    const frontRowSeats = seatsChosen.filter(
       (seat) => seat.startsWith("A") || seat.startsWith("B")
     );
-    const backRowSeats = tempSeatsData.filter(
+    const backRowSeats = seatsChosen.filter(
       (seat) => seat.startsWith("E") || seat.startsWith("F")
     );
     setQuantities({
       front: frontRowSeats.length,
       back: backRowSeats.length,
-      middle: tempSeatsData.length - frontRowSeats.length - backRowSeats.length,
+      middle: seatsChosen.length - frontRowSeats.length - backRowSeats.length,
     });
-  }, [tempSeatsData]);
-
-  useEffect(() => {
-    console.log(quantities);
-  }, [quantities]);
-
-  /* const totalAmount =  */
-
-  /*   const buttonOptions = Object.keys(genres);
-
-
-  const meta: Meta<typeof GenreButton> = {
-    title: "Movie/GenreButton",
-    component: GenreButton,
-    argTypes: {
-      genre: {
-        options: buttonOptions,
-        control: { type: "radio" },
-      },
-    },
-  };
-  export default meta; */
+  }, [seatsChosen]);
 
   return (
     <Transition
-      /* show={seatsChosen.length > 0} */
-      show={true}
-      className="bg-dark-light rounded-3xl pt-7 px-5 pb-6 "
-      enter="transition transform translate-y duration-75"
+      show={seatsChosen.length > 0}
+      // Below present just for storybook
+      /* show={show} */
+      className="bg-dark-light rounded-3xl pt-7 px-5 pb-6"
+      enter="transition transform translate-y duration-[500ms]"
+      leave="transition transform translate-x duration-[500ms]"
       enterFrom="translate-y-60"
+      leaveFrom="translate-x-60"
     >
       <div>
         {/* wrapper for quantity and category */}
@@ -135,7 +73,11 @@ export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
               <div className="flex gap-x-1">
                 {/* interacting with state and price Category Object */}
                 <p className="text-description text-white">
-                  ${quantities.front * pricesCategory.front}
+                  $
+                  {(
+                    Math.round(quantities.front * pricesCategory.front * 100) /
+                    100
+                  ).toFixed(2)}
                 </p>
                 <p className="text-description text-white-dimmed">/ each</p>
               </div>
@@ -152,7 +94,12 @@ export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
               </div>
               <div className="flex gap-x-1">
                 <p className="text-description text-white">
-                  ${quantities.middle * pricesCategory.middle}
+                  $
+                  {(
+                    Math.round(
+                      quantities.middle * pricesCategory.middle * 100
+                    ) / 100
+                  ).toFixed(2)}
                 </p>
                 <p className="text-description text-white-dimmed">/ each</p>
               </div>
@@ -169,7 +116,11 @@ export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
               </div>
               <div className="flex gap-x-1">
                 <p className="text-description text-white">
-                  ${quantities.back * pricesCategory.back}
+                  $
+                  {(
+                    Math.round(quantities.back * pricesCategory.back * 100) /
+                    100
+                  ).toFixed(2)}
                 </p>
                 <p className="text-description text-white-dimmed">/ each</p>
               </div>
@@ -186,9 +137,14 @@ export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
               <p className="text-description">Total Price</p>
               <p className="font-bold text-[20px] text-white">
                 $
-                {quantities.front * pricesCategory.front +
-                  quantities.middle * pricesCategory.middle +
-                  quantities.back * pricesCategory.back}
+                {(
+                  Math.round(
+                    (quantities.front * pricesCategory.front +
+                      quantities.middle * pricesCategory.middle +
+                      quantities.back * pricesCategory.back) *
+                      100
+                  ) / 100
+                ).toFixed(2)}
               </p>
             </div>
             <Button
@@ -196,7 +152,7 @@ export function CheckoutPanel({ tempSeatsData, click }: CheckoutPanelProps) {
               height="default"
               label={"Book Tickets"}
               onClick={() => {
-                () => navigate(`ticket`);
+                click();
               }}
             />
           </div>
