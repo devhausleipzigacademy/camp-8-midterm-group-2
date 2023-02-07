@@ -14,12 +14,13 @@ import { TokenResponse } from "../src/stores/AuthStore"
 
 dotenv.config();
 
-const secretKey = process.env["SECRET_KEY"];
+declare module "fastify" {
+  interface FastifyInstance {
+    readonly zod: FastifyZod<typeof models>;
+  }
+}
 
-type TokenPayload = {
-  user_id: string;
-  email: string;
-};
+const secretKey = process.env["SECRET_KEY"];
 
 export const prisma = new PrismaClient();
 

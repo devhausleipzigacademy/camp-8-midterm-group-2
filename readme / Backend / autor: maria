@@ -85,3 +85,10 @@ To create a db-Structure run in Terminal
 ```prisma db push```
 
 Define Endpoints (explanation will follow)
+
+Create a Dockerfile like he does:
+https://youtu.be/i7ABlHngi1Q
+
+Run in Your terminal
+```docker build . -t 7.2.'kino-app'```
+replace 7.2.```'kino-app'``` by your own name

@@ -19,7 +19,7 @@ export function Login(): JSX.Element {
 
     const response = await axios.post("http://127.0.0.1:3000/auth/login", {
       //request-Body:
-      email: formFields.inputEmail,
+      email: formFields.inputEmail as string,
       password: formFields.inputPassword as string,
     });
 
