@@ -1,42 +1,76 @@
+import { ServerIcon } from "@heroicons/react/20/solid";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-//Create a User type that has a username and a avatarUrl
-type User = {
-    username: string;
-    avatarUrl: string;
+//Type for Token
+export type TokenResponse = {
+  user_id: string | null;
+  user_email: string | null;
+};
+
+// //Type for FakeUser in DB
+// export interface FakeUser {
+//   id: string;
+//   email: string;
+//   password: string;
+//   username: string;
+//   avatarurl: string;
+// }
+
+// //Fake-UserDB
+// export const exampleDB: Array<FakeUser> = [
+//   {
+//     id: "1",
+//     email: "default@gmail.com",
+//     password: "1234abcd",
+//     username: "first_user2020",
+//     avatarurl:
+//       "https://docs.readyplayer.me/ready-player-me/avatars/2d-avatars/examples",
+//   },
+// ];
+
+//corresponds to schema.prisma, without saltAndHash
+export interface modelUser {
+  identifier: string | null,
+  // saltAndHash: string,
+  name: string | null,
+  email: string | null,
+  avatarUrl?: string | null,
+  liked: Array<String> | Array<null>,
+  bookings: Array<Object> | Array<null>,
 }
 
-//Create a type for your AuthStore that can hold a user and a token, as well as updaters
-type AuthStore = {
-    token: string;
-    user: User | null
-    setUser: (user: User) => void; //setUser receives an updated user later
-    setToken: (tokenResponse: string) => void;
-    clear: () => void;
-  };
+export type AuthStore = {
+  user: modelUser;
+  token: TokenResponse;
+  setUser: (user: modelUser) => void;
+  setToken: (token: TokenResponse) => void;
+  clear: () => void;
+};
 
-//implement an initialState
 const initialState = {
-    token: "",
-    user: {
-        username: "",
-        avatarUrl: "",
-    },
-}
+  user: {} as modelUser,
+  token: undefined,
+};
 
-//implement the store (state values and setters)
+//https://pub.dev/documentation/nhost_sdk/latest/nhost_sdk/AuthStore-class.html
 export const useAuthStore = create<AuthStore>()(
-    persist(
-    //what does set do exactly
-      (set) => ({
-        ...initialState,
-        setUser: (user) => set({ user }),
-        setToken: (token) => set({ token }),
-        clear: () => set({ ...initialState }),
-      }),
-      {
-        name: "user-auth",
-      }
-    )
-  );
+  persist(
+    (set) => ({
+      token: {user_id: null, user_email: null},
+      user: {
+        identifier: null,
+        name: null,
+        email: null,
+        liked: [null],
+        bookings: [null],
+      } as modelUser,
+      setToken: (tokenNewValue: TokenResponse) => set({ token: tokenNewValue }),
+      setUser: (userNewValue: modelUser) => set({user: userNewValue}),
+      clear: () => set({ ...initialState }),
+    }),
+    {
+      name: "current-token",
+    }
+  )
+);
