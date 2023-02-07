@@ -42,7 +42,6 @@ POSTGRES_DB=main
 DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public&connect_timeout=300
 ```
 
-
 3. Create and run or run Docker Container in Terminal:
 a. `docker compose up` to create and run local db on docker.
 b. `docker compose run` to run if its already existing.
@@ -112,7 +111,7 @@ POSTGRES_PASSWORD=unsafeLocalPassword0!`
 ->  Postgres SQL expects us to set it, will use default values otherwise
 
 `POSTGRES_HOST=localhost
-POSTGRES_PORT=5433`
+POSTGRES_PORT=5432`
 
 ->  This is the port we defined in docker-compose.yml
 `POSTGRES_DB=main`
