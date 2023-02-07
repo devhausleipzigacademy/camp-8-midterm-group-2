@@ -1,0 +1,87 @@
+This is our understanding of what we are doing so far:
+This instructions are for a project, where pnpm is already installed.
+
+Terminal:
+
+```pnpm install fastify
+pnpm install prisma
+pnpm install zod
+pnpm install @fastify/cors
+pnpm install fastify-zod```
+
+create the file *docker-compose.yml* in our project-folder and...
+...copy paste  into this file:
+
+```version: "3.8"
+
+volumes:
+  pgsql-datata:
+
+services:
+  postgresql:
+    image: postgres:latest
+    restart: unless-stopped
+    container_name: pgsql-cinema
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: volume
+        source: pgsql-datata
+        target: /var/lib/postgresql/data```
+
+*What does docker-compose.yml do? *
+defines container will be run later, when we give the terminal command ```docker compose up```
+
+create file *.env* in root folder
+copy paste into this file:
+
+```
+POSTGRES_USER=local_admin
+POSTGRES_PASSWORD=unsafeLocalPassword0!
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=main
+
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public&connect_timeout=300```
+
+*what does .env do?:*
+contains keys, password etc. ("environment variables") should always be mentioned in gitIgnore
+
+Terminal:
+```docker compose up```
+to create *and* run local db on docker.
+Optional, to run the cb, if its already existing
+```docker compose run```
+
+Now create a file for fastify instance called *server.ts* in a Folder called *server* (the latter You create in our project folder).
+Copypaste:
+
+```declare module "fastify" {
+  interface FastifyInstance {
+    readonly zod: FastifyZod<typeof models>;
+  }
+}
+
+const prisma = new PrismaClient();```
+
+Now create a *schema.prisma*-file in *prisma*-Folder, that You created in the project folder.
+Copypaste:
+
+
+```datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}```
+
+**Define schemas suitable for Your purpose**
+
+To create a db-Structure run in Terminal
+```prisma db push```
+
+Define Endpoints (explanation will follow)
