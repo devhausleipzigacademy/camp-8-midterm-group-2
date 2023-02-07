@@ -1,6 +1,6 @@
 FROM node:latest
-RUN mkdr /root_folder/src
 WORKDIR /root_folder
+RUN mkdr /root_folder/src
 COPY package.json .
 RUN npm install
 COPY . .

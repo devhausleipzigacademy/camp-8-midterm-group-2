@@ -14,15 +14,12 @@ import { TokenResponse } from "../src/stores/AuthStore"
 
 dotenv.config();
 
-declare module "fastify" {
-  interface FastifyInstance {
-    readonly zod: FastifyZod<typeof models>;
-  }
-}
-
 const secretKey = process.env["SECRET_KEY"];
 
 export const prisma = new PrismaClient();
+
+//node reads init() /server.ts)
+//node executes `export const prisma = new PrismaClient()` too
 
 async function init() {
   // const { schemas, $ref } = buildJsonSchemas(models);
@@ -57,6 +54,7 @@ async function init() {
 
   //LOG
   fastify.post("/auth/login", async (request, reply) => {
+    //prisma setup defines where the function will look up the DB (Enrviornment file)
     try {
 
       //bind login-Data from Request

@@ -1,9 +1,7 @@
-POST http://localhost:3000/
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "name": "Scyther",
-    "hp": 100,
-    "attribute1": "grass",
-    "attribute2": "insect"
+    "email": "default@gmal.com",
+    "password": "jkahjakjsds1122"
 }
