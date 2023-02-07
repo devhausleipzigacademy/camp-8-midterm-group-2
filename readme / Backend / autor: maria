@@ -77,11 +77,36 @@ generator client {
 6. Define schemas suitable for Your purpose in schema.prisma
 
 7. To create the db-Structure according to the schema.prisma-File (if not done yet) run in Terminal
-prisma db push
-How does this setup work?
+`prisma db push`
+
+8. To run the local server:
+`npm run server`
+
+9. To test the setup create a test.http file and copy-paste:
+
+```POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "default@gmal.com",
+    "password": "jkahjakjsds1122"
+}```
+
+10. TO RESET via Terminal:
+
+```
+docker compose down
+docker volume prune
+docker compose up -d
+npx prisma db push
+npm run server
+```
 
 
-In package.json we should already have:
+HOW DOES THIS SETUP WORK?
+
+
+I. In package.json we should already have:
 
 ```
 "scripts": {
@@ -94,7 +119,7 @@ In package.json we should already have:
 ->  ...we need this to make our setting (vite for Frontend) and backend (node) compatible, node is a JS interpreter
 
 
-What does docker-compose.yml do?
+II. What does docker-compose.yml do?
 
 Defines container that we run, when we give the terminal command
 `docker compose up`
@@ -102,7 +127,7 @@ or
 `docker compose run`
 
 
-What does .env do?
+III. What does .env do?
 
 .env contains keys, password etc. ("environment variables") (should always be mentioned in gitIgnore).
 
@@ -115,7 +140,6 @@ POSTGRES_PORT=5432`
 
 ->  This is the port we defined in docker-compose.yml
 `POSTGRES_DB=main`
-
 
 `DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public&connect_timeout=300`
 ->  This is a path to reach out to our DB. Browsers don't understand postgresql, we can use it with any program (db viewers) like Prisma do.
