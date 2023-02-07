@@ -12,11 +12,12 @@ export function Login(): JSX.Element {
   // const [ email, setEmail ] = useState("")
   // const [ password, setPassword ] = useState("")
   //// ---> similar to:
-  const [formFields, setFormFields] = useState({ inputEmail: "", inputPassword: "" });
+  const [formFields, setFormFields] = useState({ inputEmail: "", inputPassword: "" }); //inputEmail an inputPassword will be taken out from the form
   const navigate = useNavigate();
+
   async function loginCall() {
 
-    const response = await axios.post("http://127.0.0.1:3000/login", {
+    const response = await axios.post("http://127.0.0.1:3000/auth/login", {
       //request-Body:
       email: formFields.inputEmail,
       password: formFields.inputPassword as string,
