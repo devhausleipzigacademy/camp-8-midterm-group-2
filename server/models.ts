@@ -27,11 +27,11 @@ const patchShowingParamsModel = z.object({
 
 const patchUserBodyModel = z.object({ movieId: z.string() });
 
-const asyncPostUserBodyModel = z.object({
-  name: z.string(),
+const newUserBodyModel = z.object({
+  name: z.ostring(),
   email: z.string().email(),
   password: z.string().min(8),
-  saltAndHash: z.string(),
+  // saltAndHash: z.string(),
 });
 
 const postTokenBodyModel = z.object({
@@ -44,7 +44,7 @@ const updateShowingModel = z.array;
 export default {
   showingParamModel,
   noReturnData,
-  asyncPostUserBodyModel,
+  newUserBodyModel,
   patchShowingParamsModel,
   patchUserBodyModel,
   updateShowingModel,

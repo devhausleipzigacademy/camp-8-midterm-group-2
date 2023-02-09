@@ -36,17 +36,17 @@ async function init() {
 
   fastify.post("/auth/register", async (request, reply) => {
     try {
-      const newUserData = await models.asyncPostUserBodyModel.parseAsync(
+      const newUserData = await models.newUserBodyModel.parseAsync(
         request.body
       );
 
-      const newUser = await prisma.user.create({data:
-        {
+      //WHERE IS ZOD HERE
+      const newUser = await prisma.user.create({
+        data: {
           ..._.omit(newUserData, ["password"]),
           saltAndHash: await bcrypt.hash(newUserData.password, 10),
-        }
+        },
       });
-
       reply.status(201);
     } catch (error) {
       if (error instanceof ZodError) {
