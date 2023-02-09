@@ -10,10 +10,10 @@ generator client {
 model User {
   identifier String    @id @default(uuid())
   saltAndHash String
-  name       String
   email      String @unique
-  avatarUrl  String
-  password   String
+  name       String?
+  avatarUrl  String?
+  password   String?
   liked      String[]
   bookings   Booking[]
 }
