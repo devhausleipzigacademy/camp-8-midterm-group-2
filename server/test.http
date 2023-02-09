@@ -3,5 +3,14 @@ Content-Type: application/json
 
 {
     "email": "default@gmal.com",
-    "password": "jkahjakjsds1122"
+    "password": "1234567890"
+}
+
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email": "default@gmal.com",
+    "password": "1234567890"
 }

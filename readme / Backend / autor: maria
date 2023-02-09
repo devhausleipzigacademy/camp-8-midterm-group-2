@@ -43,8 +43,8 @@ DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}
 ```
 
 3. Create and run or run Docker Container in Terminal:
-a. `docker compose up` to create and run local db on docker.
-b. `docker compose run` to run if its already existing.
+`docker compose up`
+
 
 4. Now create a file for fastify instance called server.ts in a Folder called server (the latter You create in our project folder).
 Copypaste:
@@ -72,7 +72,6 @@ generator client {
   provider = "prisma-client-js"
 }
 ```
-
 
 6. Define schemas suitable for Your purpose in schema.prisma
 

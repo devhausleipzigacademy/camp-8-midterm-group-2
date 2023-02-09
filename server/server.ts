@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
 
 import dotenv from "dotenv";
-import { TokenResponse } from "../src/stores/AuthStore"
+import { TokenResponse } from "../src/stores/AuthStore";
 
 dotenv.config();
 
@@ -34,29 +34,32 @@ async function init() {
   //   reply.send("hello");
   // });
 
-  // fastify.post("/auth/register", async (request, reply) => {
-  //   try {
-  //   const userData = await models.asyncPostUserBodyModel.parseAsync(request.body);
+  fastify.post("/auth/register", async (request, reply) => {
+    try {
+      const newUserData = await models.asyncPostUserBodyModel.parseAsync(
+        request.body
+      );
 
-  //   const user = await prisma.user.create({
-  //     data: {..._.omit(userData,["password"]),
-  //   saltAndHash: await bcrypt.hash(userData.password, 10)}
-  //   })
-  //   reply.status(201)
-  // } catch (error) {
-  //   if (error instanceof ZodError) {
-  //     reply.status(422).send(JSON.stringify(error));
-  //   }
-  //   console.log(error)
-  //   reply.status(500).send("Soomething went wrong!")
-  // }
-  // })
+      const newUser = await prisma.user.create({
+        data: {
+          ..._.omit(newUserData, ["password"]),
+          saltAndHash: await bcrypt.hash(newUserData.password, 10),
+        },
+      });
+      reply.status(201);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        reply.status(422).send(JSON.stringify(error));
+      }
+      console.log(error);
+      reply.status(500).send("Soomething went wrong!");
+    }
+  });
 
   //LOG
   fastify.post("/auth/login", async (request, reply) => {
     //prisma setup defines where the function will look up the DB (Enrviornment file)
     try {
-
       //bind login-Data from Request
       const loginData = models.postTokenBodyModel.parse(request.body); //making it fit the model
 
@@ -74,19 +77,22 @@ async function init() {
       //compare login password to DB-entry
       //https://github.com/kelektiv/node.bcrypt.js
       //did we define rules for salt and hash anywhere?
-      const match = await bcrypt.compare(loginData.password, currentUser.saltAndHash);
+      const match = await bcrypt.compare(
+        loginData.password,
+        currentUser.saltAndHash
+      );
 
       if (match) {
         const token = jwt.sign(
-        {
-          user_id: currentUser.identifier,
-          user_email: currentUser.email,
-        } as TokenResponse,
-        secretKey!, //what is this?
-        { expiresIn: "24h" }
-      );
-      return token}
-
+          {
+            user_id: currentUser.identifier,
+            user_email: currentUser.email,
+          } as TokenResponse,
+          secretKey!, //what is this?
+          { expiresIn: "24h" }
+        );
+        return token;
+      }
     } catch (error) {
       if (error instanceof ZodError) {
         reply.status(422).send(JSON.stringify(error));
