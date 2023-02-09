@@ -40,12 +40,13 @@ async function init() {
         request.body
       );
 
-      const newUser = await prisma.user.create({
-        data: {
+      const newUser = await prisma.user.create({data:
+        {
           ..._.omit(newUserData, ["password"]),
           saltAndHash: await bcrypt.hash(newUserData.password, 10),
-        },
+        }
       });
+
       reply.status(201);
     } catch (error) {
       if (error instanceof ZodError) {
