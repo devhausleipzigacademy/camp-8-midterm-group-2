@@ -9,7 +9,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
 
-import dotenv from "dotenv";
+import dotenv, { config } from "dotenv";
 import { TokenResponse } from "../src/stores/AuthStore";
 
 dotenv.config();
@@ -30,9 +30,9 @@ async function init() {
   fastify.register(cors, { origin: ["*"] });
 
   //TEST:
-  // fastify.get("/hello", async (request, reply) => {
-  //   reply.send("hello");
-  // });
+  fastify.get("/hello", async (request, reply) => {
+    reply.send("hello");
+  });
 
   fastify.post("/auth/register", async (request, reply) => {
     try {
@@ -57,20 +57,32 @@ async function init() {
     }
   });
 
-  //LOG
-  fastify.post("/auth/login", async (request, reply) => {
-    //prisma setup defines where the function will look up the DB (Enrviornment file)
+  //LOG-IN
+  fastify.post("/login", { config: { Headers: { "Content-Type": "application/json" } } },
+   async (request, reply) => {
+
+    //it's prisma setup defines where the function will look up the DB (Enrviornment file)
+
+
+
     try {
       //bind login-Data from Request
       const loginData = models.postTokenBodyModel.parse(request.body); //making it fit the model
+      reply.send("line 71" + loginData)
 
       //find user with a fitting email
       const currentUser = await prisma.user.findUnique({
         where: { email: loginData.email }, //has to match the columns in prisma
       });
 
+      if(currentUser) {
+        console.log("line 77")
+        console.log(currentUser)
+      }
+
       //return an Error if no match or no user registered --> how to use it for setError in Login.tsx?
       if (!currentUser) {
+        console.log("Either email or password are wrong.")
         reply.status(401).send("Either email or password are wrong.");
         return;
       }
@@ -92,26 +104,27 @@ async function init() {
           secretKey!, //what is this?
           { expiresIn: "24h" }
         );
+
         return token;
       }
     } catch (error) {
-      if (error instanceof ZodError) {
-        reply.status(422).send(JSON.stringify(error));
-        return;
-      }
-      if (
-        error instanceof jwt.JsonWebTokenError ||
-        error instanceof jwt.NotBeforeError ||
-        error instanceof jwt.NotBeforeError
-      ) {
-        console.log(error);
-        reply.status(401).send("Either email or password is wrong.");
-        return;
-      }
+      // if (error instanceof ZodError) {
+      //   reply.status(422).send(JSON.stringify(error));
+      //   return;
+      // }
+      // if (
+      //   error instanceof jwt.JsonWebTokenError ||
+      //   error instanceof jwt.NotBeforeError ||
+      //   error instanceof jwt.NotBeforeError
+      // ) {
+      //   console.log(error);
+      //   reply.status(401).send("Either email or password is wrong.");
+      //   return;
+      // }
     }
   });
   //what does this do?
-  await fastify.listen({ port: 3000, host: "127.0.0.1" });
+  await fastify.listen({ port: 3000 });
 }
 try {
   init();
