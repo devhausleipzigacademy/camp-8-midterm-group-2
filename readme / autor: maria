@@ -142,3 +142,7 @@ POSTGRES_PORT=5432`
 
 `DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public&connect_timeout=300`
 ->  This is a path to reach out to our DB. Browsers don't understand postgresql, we can use it with any program (db viewers) like Prisma do.
+
+
+HTTP Errors Documentation:
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses
