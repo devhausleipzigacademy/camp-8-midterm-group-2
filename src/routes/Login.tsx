@@ -6,21 +6,20 @@ import { Input } from "../components/Input";
 import { useAuthStore } from "../stores/AuthStore";
 
 export function Login(): JSX.Element {
-
   const { setToken, setUser } = useAuthStore();
 
   // const [ email, setEmail ] = useState("")
   // const [ password, setPassword ] = useState("")
   //// ---> similar to:
-  const [formFields, setFormFields] = useState({ inputEmail: "", inputPassword: "" }); //inputEmail an inputPassword will be taken out from the form
+  const [formFields, setFormFields] = useState({ email: "", password: "" }); //inputEmail an inputPassword will be taken out from the form
   const navigate = useNavigate();
 
   async function loginCall() {
 
     const response = await axios.post("http://127.0.0.1:3000/auth/login", {
       //request-Body:
-      email: formFields.inputEmail as string,
-      password: formFields.inputPassword as string,
+      email: formFields.email as string,
+      password: formFields.password as string,
     });
 
     const token = response.data.token;
@@ -59,7 +58,7 @@ export function Login(): JSX.Element {
         <p className="text-red text-description">{error}</p>
         <Input
           type="email"
-          value={formFields.inputEmail}
+          value={formFields.email}
           onChange={(e) =>
             setFormFields(
               //when react calls the callback function of useState it will pass THE PREVIOUS value as argument.
@@ -75,7 +74,7 @@ export function Login(): JSX.Element {
         />
         <Input
           type="password"
-          value={formFields.inputPassword}
+          value={formFields.password}
           onChange={(e) =>
             setFormFields((prevVal) => {
               return { ...prevVal, password: e.target.value };
