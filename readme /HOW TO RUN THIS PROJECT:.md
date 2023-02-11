@@ -11,3 +11,14 @@ npm run server
 
 4. To run prisma browser-interface (optional):
 npx prisma studio
+
+
+TO RESET docker server via Terminal:
+
+```
+docker compose down
+docker volume prune
+docker compose up -d
+npx prisma db push
+npm run server
+```
