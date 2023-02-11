@@ -1,8 +1,8 @@
-import { PrismaClient, unauthorizedUser, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import Fastify from "fastify";
-import cors from "@fastify/cors";
+import cors from "@fastify/cors"; //to allow replies by an origin different from the request-origin
 import models from "./models";
-import { FastifyZod, buildJsonSchemas, register } from "fastify-zod";
+// import { FastifyZod, buildJsonSchemas, register } from "fastify-zod";
 import _ from "lodash";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -12,23 +12,22 @@ import dotenv, { config } from "dotenv";
 import { TokenResponse } from "../src/stores/AuthStore";
 
 dotenv.config();
-
-const secretKey = process.env["SECRET_KEY"];
-
 export const prisma = new PrismaClient();
+const secretKey = process.env["SECRET_KEY"];
 
 //node reads init() /server.ts)
 //node executes `export const prisma = new PrismaClient()` too
 
-
 //Prisma setup defines where the function will look up the DB (Enrviornment file)
 async function init() {
+
   // const { schemas, $ref } = buildJsonSchemas(models);
 
   // Require the framework and instantiate it
   const fastify = Fastify({ logger: true });
-
-  fastify.register(cors, { origin: ["*"] });
+  await fastify.register(cors, {
+  // put your options here
+})
 
   //TEST:
   // fastify.get("/hello", async (request, reply) => {
@@ -36,13 +35,13 @@ async function init() {
   // });
 
   //Zwischenspeicher
-  let currentUser: unauthorizedUser = {
-    // identifier: null,
-    email: null,
-    // name: null,
-    // password: null,
-    saltAndHash: null,
-  }
+  // let currentUser: unauthorizedUser = {
+  //   // identifier: null,
+  //   email: null,
+  //   // name: null,
+  //   // password: null,
+  //   saltAndHash: null,
+  // }
 
   //Zwischenspeicher
   let match = false
@@ -72,7 +71,7 @@ async function init() {
 
   //LOG-IN
   fastify.post(
-    "/login",
+    "/auth/login",
     { config: { Headers: { "Content-Type": "application/json" } } },
     async (request, reply) => {
 
@@ -121,24 +120,24 @@ async function init() {
 
 
       } catch (error) {
-        // if (error instanceof ZodError) {
-        //   reply.status(422).send(JSON.stringify(error));
-        //   return;
-        // }
-        // if (
-        //   error instanceof jwt.JsonWebTokenError ||
-        //   error instanceof jwt.NotBeforeError ||
-        //   error instanceof jwt.NotBeforeError
-        // ) {
-        //   console.log(error);
-        //   reply.status(401).send("Either email or password is wrong.");
-        //   return;
-        // }
+        if (error instanceof ZodError) {
+          reply.status(422).send(JSON.stringify(error));
+          return;
+        }
+        if (
+          error instanceof jwt.JsonWebTokenError ||
+          error instanceof jwt.NotBeforeError ||
+          error instanceof jwt.NotBeforeError
+        ) {
+          console.log(error);
+          reply.status(401).send("Either email or password is wrong.");
+          return;
+        }
       }
     }
   );
   //what does this do?
-  await fastify.listen({ port: 3000 });
+  await fastify.listen({ port: 3000,  });
 }
 try {
   init();
