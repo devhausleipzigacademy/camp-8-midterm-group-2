@@ -16,14 +16,20 @@ export function Login(): JSX.Element {
 
   async function loginCall() {
 
+    //formFields: correct,
     const response = await axios.post("http://localhost:3000/auth/login", {
       //request-Body:
       email: formFields.email as string,
       password: formFields.password as string,
-    });
+    }).then((res) => res.data);
 
-    const token = response.data.token;
-    const user = response.data.user;
+    console.log("response" + response)
+
+    const token = response.token;
+    const user = response.user;
+
+    console.log(response.token, response.user)
+    //response: something comes back, but token and user are undefined
 
     setToken(token);
     setUser(user);

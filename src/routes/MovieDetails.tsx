@@ -158,8 +158,7 @@ function MovieDetails(): JSX.Element {
                       console.log("hello!");
                       navigate(`/${movieId}/castcrew`);
                     };
-                  }}
-                />
+                  } } disabled={false}                />
               </div>
             </div>
           </div>
@@ -187,8 +186,7 @@ function MovieDetails(): JSX.Element {
           variant="primary"
           height="default"
           label="Get reservation"
-          onClick={() => navigate(`booking`)}
-        />
+          onClick={() => navigate(`booking`)} disabled={false}        />
       </div>
     </div>
   );

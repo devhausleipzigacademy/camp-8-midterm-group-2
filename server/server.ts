@@ -29,21 +29,6 @@ async function init() {
   // put your options here
 })
 
-  //TEST:
-  // fastify.get("/hello", async (request, reply) => {
-  //   reply.send("hello");
-  // });
-
-  //Zwischenspeicher
-  // let currentUser: unauthorizedUser = {
-  //   // identifier: null,
-  //   email: null,
-  //   // name: null,
-  //   // password: null,
-  //   saltAndHash: null,
-  // }
-
-  //Zwischenspeicher
   let match = false
 
   fastify.post("/auth/register", async (request, reply) => {
@@ -72,7 +57,7 @@ async function init() {
   //LOG-IN
   fastify.post(
     "/auth/login",
-    { config: { Headers: { "Content-Type": "application/json" } } },
+    { config: { Headers: { "Content-Type": "application/json" } } }, //what is this for again, Ned?
     async (request, reply) => {
 
       try {
@@ -91,8 +76,6 @@ async function init() {
 
         if (user) {
 
-        // reply.send("HEEEY user found, checking saltAndHash");
-
         //bcrypt compare login password to DB-entry
         //https://github.com/kelektiv/node.bcrypt.js
         //did we define rules for salt and hash anywhere?
@@ -110,29 +93,16 @@ async function init() {
             secretKey!, //what is this?
             { expiresIn: "24h" }
           );
-
-          return token;
+          reply.status(202).send({user, token}); // mehrere values in Object packen (calides JSON, alles im Array, oder alles ins Object), <---- shorthand für user:user, token:token
         }
 
         //How to use it for setError in Login.tsx?
         else {reply.status(401).send("Either email or password are wrong.")}
       }
 
-
       } catch (error) {
-        if (error instanceof ZodError) {
-          reply.status(422).send(JSON.stringify(error));
-          return;
-        }
-        if (
-          error instanceof jwt.JsonWebTokenError ||
-          error instanceof jwt.NotBeforeError ||
-          error instanceof jwt.NotBeforeError
-        ) {
-          console.log(error);
-          reply.status(401).send("Either email or password is wrong.");
-          return;
-        }
+        console.log(Error)
+        reply.send(error)
       }
     }
   );
@@ -142,6 +112,7 @@ async function init() {
 try {
   init();
 } catch (err) {
-  // fastify.log.error(err);
+  //produced Error:
+  // Fastify.log.error(err);
   process.exit(1);
 }
